@@ -52,6 +52,6 @@ The games will be divide to team members as follows:
 
 ## Communication/Meeting Plan
 
-We will mainly be using Slack for communication. This channel has already been set up. We will also be communicating by creating Issues on GitHub to keep track of bugs and set deadlines for milestones the need to be completed. This also allows for separate discussion threads to be created under each issue, keeping the communication more organized.
+We will mainly be using Slack for communication. This channel has already been set up. We will also be communicating by creating Issues on GitHub to keep track of bugs and set deadlines for milestones that need to be completed. This also allows for separate discussion threads to be created under each issue, keeping the communication more organized.
 
 We plan to work mostly remotely on this project. We will touch base with eachother every class session and will organize personal meetings on a case-by-case basis.
