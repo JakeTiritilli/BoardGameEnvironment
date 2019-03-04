@@ -30,13 +30,13 @@ The games will be divide to team members as follows:
 
 ## Major Expected Components of System
 
-### Component 1
+### UML diagram describing the basic architecture
 
-### Component 2
+### Implementation of the model of the board game environment
 
-### Component 3
+### Implementation of the GUI of the board game environment
 
-...
+### Implementation of the model/GUI for each of the four board games
 
 
 ## Intermediate Deadlines/Milestones
@@ -52,6 +52,8 @@ The games will be divide to team members as follows:
 
 ## Communication/Meeting Plan
 
-We will mainly be using Slack for communication. This channel has already been set up. We will also be communicating by creating Issues on GitHub to keep track of bugs and set deadlines for milestones that need to be completed. This also allows for separate discussion threads to be created under each issue, keeping the communication more organized.
+We will mainly be using Slack for communication. This channel has already been set up.
+
+We will also be communicating by creating Issues on GitHub to keep track of bugs and set deadlines for milestones that need to be completed. This also allows for separate discussion threads to be created under each issue, keeping the communication more organized. The progress of these issues is facilitated through the use of a GitHub Project which has three columns, with issues/other notes being able to be moved across columns. These columns are "To Do," "In Progress," and "Done." This will help the team in being able to visualize what still needs to be completed and artciculate all of the required tasks.
 
 We plan to work mostly remotely on this project. We will touch base with eachother every class session and will organize personal meetings on a case-by-case basis.
