@@ -11,6 +11,14 @@ Informatics 122 (Winter 2019) Final Project
 
 - Battleship
 
+## Getting Started
+
+*Add instructions on how to run program here.*
+
+## Documentation
+
+*Add any further documentation here.*
+
 ## Team
 
 - Jacob Tiritilli
