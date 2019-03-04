@@ -5,7 +5,7 @@
 
 ### Board Game Environment
 
-The entire team is going to work together on creating the underlying board game environment before starting to create individual games. The work on this will be split up as follows:
+The entire team is going to work together on creating the underlying board game environment before starting to create individual games. The system will be designed using the MVC pattern. The work on this will be split up as follows:
 
 - 
 
@@ -13,7 +13,7 @@ The entire team is going to work together on creating the underlying board game 
 
 - 
 
-#### 4 Plug-in Board Games
+### 4 Plug-in Board Games
 
 This is a team of 7 people. This work will be divided by having appoximately two people work on each board game. Since there is not an even number of people, two people each will work on three of the boards, while one person will work solo on the fourth game. The game that is done by the person working solo will be the easiest game to implement (most likely Tic-Tac-Toc).
 
