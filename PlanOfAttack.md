@@ -43,11 +43,11 @@ The games will be divide to team members as follows:
 
 Deadlines will be organzied through the use of a GitHub Project which will organize the process of Issue completion and display the progress.
 
-### Deadline 1
+- **Deadline 1:**
 
-### Deadline 2
+- **Deadline 2:**
 
-### Deadline 3
+- **Deadline 3:**
 
 ...
 
