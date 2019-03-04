@@ -5,7 +5,7 @@
 
 ### Board Game Environment
 
-The entire team is going to work together on creating the underlying board game environment before starting to create individual games. This work on this will be split up as follows:
+The entire team is going to work together on creating the underlying board game environment before starting to create individual games. The work on this will be split up as follows:
 
 - 
 
@@ -19,7 +19,7 @@ This is a team of 7 people. This work will be divided by having appoximately two
 
 The games will be divide to team members as follows:
 
-- Tic-Tac-Toe: **???**
+- Tic-Tac-Toe: **Jacob Tiritilli**
 
 - Checkers: **???** & **???**
 
@@ -52,6 +52,6 @@ The games will be divide to team members as follows:
 
 ## Communication/Meeting Plan
 
-We will mainly be using Slack for communication. This channel has already been set up.
+We will mainly be using Slack for communication. This channel has already been set up. We will also be communicating by creating Issues on GitHub to keep track of bugs and set deadlines for milestones the need to be completed. This also allows for separate discussion threads to be created under each issue, keeping the communication more organized.
 
-...
+We plan to work mostly remotely on this project. We will touch base with eachother every class session and will organize personal meetings on a case-by-case basis.
