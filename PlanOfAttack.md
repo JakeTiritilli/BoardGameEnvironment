@@ -41,15 +41,17 @@ The games will be divide to team members as follows:
 
 ## Intermediate Deadlines/Milestones
 
-Deadlines will be organzied through the use of a GitHub Project which will organize the process of Issue completion and display the progress.
+Deadlines will be organzied through the use of a GitHub Project which will organize the process of Issue completion and display the progress of each Issue.
 
-- **Deadline 1:**
+- **March 5:** Finish organizing "plan of attack" and solidifying group roles. Continue working on and hopefully finish the UML class diagram describing the basic architecture of the board game environment.
 
-- **Deadline 2:**
+- **March 7:** UML diagram should be complete (although subject to modifications) and implementation of the back-end of the board game environment should be underway.
 
-- **Deadline 3:**
+- **March 12:** Complete a working implementation of the back-end of the board game environment and begin working on the GUI for the environment that will host the various games.
 
-...
+- **March 14:** Continue refining board environment. Implementation of the board game evironment's GUI to host the games should be complete, although refinements can be made to better incorporate the individual board games. Work on the individual board games should have begun.
+
+- **March 19:** Complete implementation of all of the four individual board games and their respective GUIs. Test entire application. Update UML diagram to reflect the final design.
 
 
 ## Communication/Meeting Plan
