@@ -30,13 +30,13 @@ The games will be divide to team members as follows:
 
 ## Major Expected Components of System
 
-### UML diagram describing the basic architecture
+- UML diagram describing the basic architecture
 
-### Implementation of the model of the board game environment
+- Implementation of the model of the board game environment
 
-### Implementation of the GUI of the board game environment
+- Implementation of the GUI of the board game environment
 
-### Implementation of the model/GUI for each of the four board games
+- Implementation of the model/GUI for each of the four board games
 
 
 ## Intermediate Deadlines/Milestones
