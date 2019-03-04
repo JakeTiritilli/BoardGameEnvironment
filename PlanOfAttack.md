@@ -22,9 +22,9 @@ The games will be divide to team members as follows:
 
 - Tic-Tac-Toe: **Jacob Tiritilli**
 
-- Checkers: **Jason Alaya** & **???**
+- Checkers: **???** & **???**
 
-- Chess: **???** & **???**
+- Chess: **Jason Alaya** & **???**
 
 - Battleship: **???** & **???**
 
