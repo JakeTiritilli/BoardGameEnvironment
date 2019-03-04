@@ -15,11 +15,11 @@ The entire team is going to work together on creating the underlying board game 
 
 ### 4 Plug-in Board Games
 
-This is a team of 7 people. This work will be divided by having appoximately two people work on each board game. Since there is not an even number of people, two people each will work on three of the boards, while one person will work solo on the fourth game. The game that is done by the person working solo will be the easiest game to implement (most likely Tic-Tac-Toc).
+This is a team of 7 people. This work will be divided by having appoximately two people work on each board game. Since there is not an even number of people, two people each will work on three of the boards, while one person will work solo on the fourth game. The game that is done by the person working solo will be the easiest game to implement (most likely Tic-Tac-Toe).
 
 The games will be divide to team members as follows:
 
-- Tic-Tac-Toe: **Jacob Tiritilli**
+- Tic-Tac-Toe: **Jacob Tiritilli?**
 
 - Checkers: **???** & **???**
 
@@ -40,6 +40,8 @@ The games will be divide to team members as follows:
 
 
 ## Intermediate Deadlines/Milestones
+
+Deadlines will be organzied through the use of a GitHub Project which will organize the process of Issue completion and display the progress.
 
 ### Deadline 1
 
