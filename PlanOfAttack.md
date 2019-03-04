@@ -57,8 +57,8 @@ Deadlines will be organzied through the use of a GitHub Project which will organ
 
 ## Communication/Meeting Plan
 
-We will mainly be using Slack for communication. This channel has already been set up.
+We will be using Slack for general communication. This channel has already been set up.
 
-We will also be communicating by creating Issues on GitHub to keep track of bugs and set deadlines for milestones that need to be completed. This also allows for separate discussion threads to be created under each issue, keeping the communication more organized. The progress of these issues is facilitated through the use of a GitHub Project which has three columns, with issues/other notes being able to be moved across columns. These columns are "To Do," "In Progress," and "Done." This will help the team in being able to visualize what still needs to be completed and artciculate all of the required tasks.
+We will also be communicating by creating Issues on GitHub to keep track of bugs and set deadlines for milestones that need to be completed. This allows for separate discussion threads to be created under each issue, keeping the communication more organized. The progress of these issues is facilitated through the use of a GitHub Project which has three columns, with issues/other notes being able to be moved across columns. These columns are "To Do," "In Progress," and "Done." This will help the team in being able to visualize what still needs to be completed and allow for an easy articulation of all of the required tasks.
 
 We plan to work mostly remotely on this project. We will touch base with eachother every class session and will organize personal meetings on a case-by-case basis.
