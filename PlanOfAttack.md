@@ -19,7 +19,7 @@ This is a team of 7 people. This work will be divided by having appoximately two
 
 The games will be divide to team members as follows:
 
-- Tic-Tac-Toe: **Jacob Tiritilli?**
+- Tic-Tac-Toe: **Jacob Tiritilli**
 
 - Checkers: **Jason Alaya** & **???**
 
