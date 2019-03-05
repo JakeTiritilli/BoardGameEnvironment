@@ -1,4 +1,4 @@
-package app;
+package application;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -10,7 +10,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("/view.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/views/Main.fxml"));
         primaryStage.setTitle("Board Game Environment");
         primaryStage.setScene(new Scene(root, 700, 700));
         primaryStage.show();
