@@ -8,11 +8,11 @@ The development of this application will be managed through the use of Git and G
 
 The entire team is going to work together on creating the underlying board game environment before starting to create individual games. The system will be designed using the MVC pattern. The work on this will be split up as follows:
 
-- 
+- Create UI for main menu and navigation
 
-- 
+- Create general game boards and a UI that allows for swapping out different boards for various games
 
-- 
+- Create a back-end that serves as a framework for building board games by providing general functionality that is useful to many different types of board games
 
 ### 4 Plug-in Board Games
 
