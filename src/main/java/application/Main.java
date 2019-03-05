@@ -1,5 +1,6 @@
 package application;
 
+import javafx.geometry.Pos;
 import javafx.scene.layout.StackPane;
 import utility.DynamicGameboard;
 
@@ -19,7 +20,9 @@ public class Main extends Application {
         //Adding dynamic table to the root pane
         //Can change the size of the table based on the parameter in the
         //createDynamicGameboard() method
-        root.getChildren().add(DynamicGameboard.createDynamicGameboard(7));
+        StackPane gameboard = DynamicGameboard.createDynamicGameboard(8);
+        StackPane.setAlignment(gameboard, Pos.CENTER);
+        root.getChildren().add(gameboard);
 
         //Setting up stage and shows it
         primaryStage.setTitle("Board Game Environment");

@@ -42,11 +42,20 @@ public class DynamicGameboard {
 
 
         //Create each cell and add it to the grid pane
-        for(int i = 0; i < rows; i++) {
-            for(int j = 0; j < rows; j++) {
+        for(int i = 0; i < rows; i++) { //row
+            for(int j = 0; j < rows; j++) { //column
                 Pane gameboardCell = new Pane();
                 gameboardCell.setPrefSize(50,50); //Size of each cell
+
+                //Set checker cell styling
                 gameboardCell.setStyle(borderStyleString);
+                if ((j + i) % 2 == 0 ) {
+                    gameboardCell.setStyle("-fx-background-color: white;");
+                }
+                else {
+                    gameboardCell.setStyle("-fx-background-color: black;");
+                }
+
                 gameboardTable.add(gameboardCell, j, i); // (child, columnIndex, rowIndex)
             }
         }
