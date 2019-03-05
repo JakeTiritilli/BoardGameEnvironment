@@ -1,6 +1,8 @@
 package application;
 
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import utility.DynamicGameboard;
 
@@ -14,20 +16,45 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        //Declaring type as Pane instead of Parent in order to access getChildren() method
-        StackPane root = FXMLLoader.load(getClass().getResource("/views/Main.fxml"));
+        Parent root = initRootPane();
 
-        //Adding dynamic table to the root pane
-        //Can change the size of the table based on the parameter in the
-        //createDynamicGameboard() method
+        // Setting up stage and shows it
+        primaryStage.setTitle("Board Game Environment");
+        primaryStage.setResizable(false);
+        primaryStage.setScene(new Scene(root, 1000, 700));
+        primaryStage.show();
+    }
+
+    /*
+    Initializes the root Pane which will be the parent for other components.
+     */
+    private AnchorPane initRootPane() throws Exception {
+        // Init root Pane and gameboard Pane.
+        AnchorPane root = FXMLLoader.load(getClass().getResource("/views/Main.fxml"));
+        StackPane gameboardPane = initGameboardPane();
+
+        // Gets the gameboardWidget StackPane found in Main.fxml and adds the gameboardPane to it.
+        // The gameboardWidget Pane is just an empty container until you add gameboardPane to it.
+        Pane gameboardWidget = (Pane) root.lookup("#gameboardWidget");
+        gameboardWidget.getChildren().add(gameboardPane);
+
+        return root;
+    }
+
+    /*
+    Initializes the gameboard Pane which holds the checkerboard as well as game info.
+     */
+    private StackPane initGameboardPane() throws Exception {
+        StackPane gameboardPane = FXMLLoader.load(getClass().getResource("/views/Gameboard.fxml"));
+
+        // You can change the size of the table based on the parameter in the
+        // createDynamicGameboard() method.
         StackPane gameboard = DynamicGameboard.createDynamicGameboard(8);
         StackPane.setAlignment(gameboard, Pos.CENTER);
-        root.getChildren().add(gameboard);
+        gameboardPane.setStyle("-fx-background-color: lightgray");
+        gameboardPane.getChildren().add(gameboard);
 
-        //Setting up stage and shows it
-        primaryStage.setTitle("Board Game Environment");
-        primaryStage.setScene(new Scene(root, 700, 700));
-        primaryStage.show();
+        return gameboardPane;
     }
 
 

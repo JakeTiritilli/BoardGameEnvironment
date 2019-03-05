@@ -63,6 +63,9 @@ public class DynamicGameboard {
         return gameboardTable;
     }
 
+    /*
+    This is a utility function that can be used to retrieve the Pane at the position row,column.
+     */
     public static Pane getComponentAtCell(int row, int column, GridPane gameboard) {
         // Makes sure that the position is valid
         try {
