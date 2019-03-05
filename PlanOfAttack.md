@@ -24,7 +24,7 @@ The games will be divide to team members as follows:
 
 - Checkers: **???** & **???**
 
-- Chess: **Jason Alaya** & **???**
+- Chess: **Jason Alaya** & **Thu Nguyen**
 
 - Battleship: **Matt Leong** & **???**
 
