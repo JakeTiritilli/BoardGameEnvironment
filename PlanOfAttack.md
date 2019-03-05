@@ -26,7 +26,7 @@ The games will be divide to team members as follows:
 
 - Chess: **Jason Alaya** & **???**
 
-- Battleship: **???** & **???**
+- Battleship: **Matt Leong** & **???**
 
 
 ## Major Expected Components of System
