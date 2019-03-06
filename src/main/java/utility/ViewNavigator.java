@@ -2,12 +2,28 @@ package utility;
 
 import java.io.IOException;
 
+import edu.uci.ics.in4matic.View.ViewNavigator;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+
+/**
+ * 
+ * 	// Set stage only needs to be called once for the view navigator
+ *    to be called from the main class or entrance 
+		ViewNavigator.setStage(primaryStage);
+
+       this how other classes call it load new sences 
+       // first param the title of the scence 
+       // second param  the scene to load 
+		ViewNavigator.loadScene("Welcome to TravelAid", ViewNavigator.Welcome_SCENE);
+	}
+ *
+ */
 public class ViewNavigator 
 {
+	
 	// Define xml files name here to load 
 	public static final String Welcome_SCENE = "WelcomeScene.fxml";
 	
