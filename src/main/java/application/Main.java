@@ -32,11 +32,15 @@ public class Main extends Application {
         // Init root Pane and gameboard Pane.
         AnchorPane root = FXMLLoader.load(getClass().getResource("/views/Main.fxml"));
         StackPane gameboardPane = initGameboardPane();
+        AnchorPane menuPane = initMenuPane();
 
-        // Gets the gameboardWidget StackPane found in Main.fxml and adds the gameboardPane to it.
-        // The gameboardWidget Pane is just an empty container until you add gameboardPane to it.
+        // Gets the gameboardWidget Pane found in Main.fxml and adds the gameboardPane to it.
         Pane gameboardWidget = (Pane) root.lookup("#gameboardWidget");
         gameboardWidget.getChildren().add(gameboardPane);
+
+        // Gets the gameMenuWidget Pane found in Main.fxml and adds the menu Pane to it.
+        Pane gameMenuWidget = (Pane) root.lookup("#gameMenuWidget");
+        gameMenuWidget.getChildren().add(menuPane);
 
         return root;
     }
@@ -55,6 +59,11 @@ public class Main extends Application {
         gameboardPane.getChildren().add(gameboard);
 
         return gameboardPane;
+    }
+
+    private AnchorPane initMenuPane() throws Exception {
+        AnchorPane menuPane = FXMLLoader.load(getClass().getResource("/views/GameMenu.fxml"));
+        return menuPane;
     }
 
 
