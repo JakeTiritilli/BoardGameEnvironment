@@ -1,6 +1,6 @@
 # Plan of Attack
 
-The development of this application will be managed through the use of Git and GitHub. We have decided that we will be using the Intellij IDEA IDE as our primary development environment. The program will be written in Java 8 and will use the JavaFX platform for creating the GUI.
+The development of this application will be managed through the use of Git and GitHub. The program will be written in Java 8 and will use the JavaFX platform for creating the GUI.
 
 ## Division of Work
 
