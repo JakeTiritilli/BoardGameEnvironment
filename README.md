@@ -7,9 +7,9 @@ Informatics 122 (Winter 2019) Final Project
 
 - Checkers
 
-- Chess
+- Memory
 
-- Battleship
+- Othello
 
 ## Getting Started
 

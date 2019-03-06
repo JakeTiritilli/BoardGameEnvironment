@@ -1,7 +1,6 @@
 package application.utility;
 
 import checkers.utility.DynamicGameboard;
-import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.layout.AnchorPane;
