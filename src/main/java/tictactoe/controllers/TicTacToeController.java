@@ -11,31 +11,30 @@ import tictactoe.utility.*;
 
 /**
  * Represents the contoller for the Tic Tac Toe game
- * in the MVC patter. Acts as the intermidiary between the
+ * in the MVC pattern. Acts as the intermediary between the
  * FXML view and the {@code TicTacToe} model. Contains various
  * actions that are executed when an event is triggerd
- * in the view, and outlets for controlling objects in the view.
+ * in the view, and outlets for manipulating objects in the view.
  * 
  * @author Jacob Tiritilli
  */
-public class Controller {
+public class TicTacToeController {
 
-    // Holds the Tic Tac Toe game. Pass in player "X" as
+    // Holds the Tic Tac Toe game. Passes in player "X" as
     // the starting player, but this option may be given
     // to the user at a later point.
-    private TicTacToe game = new TicTacToe(Player.X);
+    private TicTacToe game = new TicTacToe(TicTacToePlayer.X);
 
-    // Outlet associate with label in view that will
+    // Outlet associated with the label in the view that will
     // display the status of the game.
     public Label statusLabel;
 
-    @FXML
     // Outlet collection of all of the labels that act
     // as cells on the game board in the
     // view.
+    @FXML
     private List<Label> cellList;
 
-    @FXML
     /**
      * Automatically called by the system when the FXML is loaded.
      * Performs initial setup by setting the value of the status label
@@ -44,6 +43,7 @@ public class Controller {
      * passed both the number of the cell and a reference to that cell's
      * label.
      */
+    @FXML
     protected void initialize() {
         for (int i = 0; i < cellList.size(); i++) {
             final int cellNum = i;
@@ -55,14 +55,14 @@ public class Controller {
     }
 
     /**
-     * Event handler that is executed when a given cell on a game board
+     * Event handler that is executed when a given cell on the game board
      * is clicked. It informs the model of the move and updates the view.
      * @param cellNum the number of the cell that was clicked (0-9)
      * @param label a reference to the label of the clicked cell so that it
      * can be updated with the appropriate player
      */
     private void cellPressed(int cellNum, Label label) {
-        Player currentPlayer = game.getCurrentPlayer();
+        TicTacToePlayer currentPlayer = game.getCurrentPlayer();
         
         // If move was invalid, then exit early.
         if (!game.makeMove(cellNum)) { return; }
@@ -83,7 +83,7 @@ public class Controller {
      * clear the board and status label.
      */
     public void startNewGame(ActionEvent actionEvent) {
-        game = new TicTacToe(Player.X);
+        game = new TicTacToe(TicTacToePlayer.X);
         statusLabel.setText("Turn: " + game.getCurrentPlayer().toString());
         
         for (Label cell: cellList) {

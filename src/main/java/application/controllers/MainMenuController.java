@@ -22,11 +22,11 @@ public class MainMenuController {
         contentWidgetPane.getChildren().add(checkerboardPane);
     }
 
-    public void loadOthelloContent() {
+    public void loadOthelloContent() throws Exception {
         //Load Othello here
     }
 
-    public void loadMemoryContent() {
+    public void loadMemoryContent() throws Exception {
         //Load Memory Here
     }
 

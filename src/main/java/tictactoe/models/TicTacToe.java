@@ -10,11 +10,11 @@ import tictactoe.utility.*;
  */
 public class TicTacToe {
 
-    private Player currentPlayer;
+    private TicTacToePlayer currentPlayer;
 
-    // Fixed size game board of Player enums (eithere X or O).
+    // Fixed size game board of TicTacToePlayer enums (either X or O).
     // A value of `null` means that the cell is open.
-    private Player[] gameBoard = new Player[9];
+    private TicTacToePlayer[] gameBoard = new TicTacToePlayer[9];
 
     /**
      * Constructs a new TicTacToe object and sets the
@@ -23,7 +23,7 @@ public class TicTacToe {
      * @param firstPlayer represents the player that will start
      * the game (either X or O).
      */
-    public TicTacToe(Player firstPlayer) {
+    public TicTacToe(TicTacToePlayer firstPlayer) {
         currentPlayer = firstPlayer;
     }
 
@@ -31,7 +31,7 @@ public class TicTacToe {
      * Returns the current player at any time in the game state.
      * @return the player whose turn it currently is (either X or O).
      */
-    public Player getCurrentPlayer() {
+    public TicTacToePlayer getCurrentPlayer() {
         return currentPlayer;
     }
 
@@ -39,12 +39,12 @@ public class TicTacToe {
      * Makes a move on the game board at a given position.
      * @param boardPosition the position on the board to move into (0-9)
      * @return true if the cell is valid (i.e., on the board and not occupied)
-     * and the games is not over; otherwise, false.
+     * and the game is not over; otherwise, false.
      */
     public boolean makeMove(int boardPosition) {
         if (!gameWon() && gameBoard[boardPosition] == null) {
             gameBoard[boardPosition] = currentPlayer;
-            currentPlayer = (currentPlayer == Player.X) ? Player.O : Player.X;
+            currentPlayer = (currentPlayer == TicTacToePlayer.X) ? TicTacToePlayer.O : TicTacToePlayer.X;
             return true;
         }
         return false;
@@ -64,10 +64,10 @@ public class TicTacToe {
      * Checks whether the board is completley full or not
      * (i.e., whether there are no open cells).
      * @return true if none of the cells in the game board
-     * or null; otherwise, false.
+     * are null; otherwise, false.
      */
     public boolean boardIsFull() {
-        for (Player slot: gameBoard) {
+        for (TicTacToePlayer slot: gameBoard) {
             if (slot == null) {
                 return false;
             }

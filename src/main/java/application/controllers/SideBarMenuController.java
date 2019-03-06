@@ -21,6 +21,14 @@ public class SideBarMenuController {
         contentWidgetPane.getChildren().add(checkerboardPane);
     }
 
+    public void loadOthelloContent() throws Exception {
+        //Load Othello here
+    }
+
+    public void loadMemoryContent() throws Exception {
+        //Load Memory Here
+    }
+
     public void loadTictactoeContent() throws Exception{
         Pane contentWidgetPane = ViewGrabber.getContentWidgetPane(sideBarMenuAnchorPane);
         contentWidgetPane.getChildren().clear();

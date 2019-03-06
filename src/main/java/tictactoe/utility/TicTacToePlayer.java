@@ -8,6 +8,6 @@ package tictactoe.utility;
  * 
  * @author Jacob Tiritilli
  */
-public enum Player {
+public enum TicTacToePlayer {
     X, O
 }

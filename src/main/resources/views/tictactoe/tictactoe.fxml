@@ -12,7 +12,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="600.0" stylesheets="styles.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tictactoe.controllers.Controller">
+<AnchorPane prefHeight="600.0" prefWidth="600.0" stylesheets="styles.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tictactoe.controllers.TicTacToeController">
    <children>
       <Button layoutX="271.0" layoutY="559.0" mnemonicParsing="false" onAction="#startNewGame" text="New Game" />
       <Label layoutX="247.0" layoutY="14.0" text="Tic Tac Toe" textFill="#1fc61c">
