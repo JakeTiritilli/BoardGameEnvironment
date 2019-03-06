@@ -4,6 +4,8 @@ import checkers.utility.DynamicGameboard;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -31,16 +33,18 @@ public class ViewInitializer {
 
     /*
     Initializes the gameboard Pane which holds the checkerboard as well as game info.
+    It requires an object in order to use the getClass() method and a scene to grab the checkerboardContainerWidget
      */
-    public static StackPane initGameboardPane(Object object) throws Exception {
-        StackPane gameboardPane = FXMLLoader.load(object.getClass().getResource("/views/checkers/Checkerboard.fxml"));
+    public static AnchorPane initGameboardPane(Object object) throws Exception {
+        AnchorPane gameboardPane = FXMLLoader.load(object.getClass().getResource("/views/checkers/Checkerboard.fxml"));
 
         // You can change the size of the table based on the parameter in the
         // createDynamicGameboard() method.
         StackPane gameboard = DynamicGameboard.createDynamicGameboard(8);
         StackPane.setAlignment(gameboard, Pos.CENTER);
         gameboardPane.setStyle("-fx-background-color: lightgray");
-        gameboardPane.getChildren().add(gameboard);
+        StackPane checkerboardContainerWidget = (StackPane) gameboardPane.getChildren().get(1);
+        checkerboardContainerWidget.getChildren().add(gameboard);
 
         return gameboardPane;
     }

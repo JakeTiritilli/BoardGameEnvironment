@@ -15,7 +15,7 @@ public class SideBarMenuController {
     private AnchorPane sideBarMenuAnchorPane;
 
     public void loadCheckersContent() throws Exception {
-        StackPane checkerboardPane = ViewInitializer.initGameboardPane(this);
+        AnchorPane checkerboardPane = ViewInitializer.initGameboardPane(this);
         Pane contentWidgetPane = ViewGrabber.getContentWidgetPane(sideBarMenuAnchorPane);
         contentWidgetPane.getChildren().clear();
         contentWidgetPane.getChildren().add(checkerboardPane);

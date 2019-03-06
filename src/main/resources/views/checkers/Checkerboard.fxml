@@ -1,19 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<StackPane alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label text="Checkers" textAlignment="CENTER">
+      <Label alignment="CENTER" layoutX="220.0" layoutY="42.0" prefHeight="47.0" prefWidth="310.0" text="Checkers" textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="48.0" />
          </font>
-         <StackPane.margin>
-            <Insets top="50.0" />
-         </StackPane.margin>
+      </Label>
+      <StackPane layoutX="92.0" layoutY="112.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="439.0" prefWidth="567.0" />
+      <Label alignment="CENTER" layoutX="22.0" layoutY="551.0" prefHeight="24.0" prefWidth="96.0" text="Red Player">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="108.0" fitWidth="108.0" layoutX="16.0" layoutY="578.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/user.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="108.0" fitWidth="108.0" layoutX="614.0" layoutY="578.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/user.png" />
+         </image>
+      </ImageView>
+      <Label alignment="CENTER" layoutX="603.0" layoutY="551.0" prefHeight="27.0" prefWidth="131.0" text="Black Player">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
       </Label>
    </children>
-</StackPane>
+</AnchorPane>

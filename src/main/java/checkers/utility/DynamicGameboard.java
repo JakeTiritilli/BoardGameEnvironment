@@ -20,8 +20,17 @@ public class DynamicGameboard {
     /*
     Returns a StackPane container that holds the GridPane gameboard.
      */
-    public static StackPane createDynamicGameboard(int rows) {
+    public static StackPane createDynamicGameboard(int rows){
         StackPane gameboardContainer = new StackPane();
+
+        GridPane checkerboard = generateTable(rows);
+        try {
+            checkerboard = generateCheckerPieces(checkerboard);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
 
         // Add the generated table to the container and make the container shrink to size of child table
         gameboardContainer.getChildren().add(generateTable(rows));
@@ -36,8 +45,8 @@ public class DynamicGameboard {
     private static GridPane generateTable(int rows) {
         // Styling string for cells and container
         String borderStyleString = "-fx-border-style: solid;" +
-                " -fx-border-color: black;" +
-                " -fx-border-width: 1px 1px 1px 1px;";
+                " -fx-border-color: gray;" +
+                " -fx-border-width: 3px 3px 3px 3px;";
 
         GridPane gameboardTable = new GridPane();
         gameboardTable.setStyle(borderStyleString);
@@ -46,16 +55,15 @@ public class DynamicGameboard {
         // Create each cell and add it to the grid pane
         for(int i = 0; i < rows; i++) { //row
             for(int j = 0; j < rows; j++) { //column
-                Pane gameboardCell = new Pane();
+                StackPane gameboardCell = new StackPane();
                 gameboardCell.setPrefSize(50,50); //Size of each cell
 
                 //Set checker cell styling
-                gameboardCell.setStyle(borderStyleString);
                 if ((j + i) % 2 == 0 ) {
-                    gameboardCell.setStyle("-fx-background-color: white;");
+                    gameboardCell.setStyle("-fx-background-color: red;" + borderStyleString);
                 }
                 else {
-                    gameboardCell.setStyle("-fx-background-color: black;");
+                    gameboardCell.setStyle("-fx-background-color: black;" + borderStyleString);
                 }
 
                 gameboardTable.add(gameboardCell, j, i); // (child, columnIndex, rowIndex)
@@ -66,9 +74,24 @@ public class DynamicGameboard {
     }
 
     /*
+    Takes the generated checkerboard and places the appropriate checker pieces in the appropriate color cell
+     */
+    public static GridPane generateCheckerPieces(GridPane checkerboard) throws Exception{
+        for(int i = 0; i < getNumberOfRows(checkerboard); i++) {
+            for(int j = 0; j < getNumberOfColumns(checkerboard); j++) {
+                StackPane cell = getComponentAtCell(i, j, checkerboard);
+                if (getCellBackgroundColor(cell) == "black") {
+                    placePieceInCell(i, j, cell);
+                }
+            }
+        }
+        return null;
+    }
+
+    /*
     This is a utility function that can be used to retrieve the Pane at the position row,column.
      */
-    public static Pane getComponentAtCell(int row, int column, GridPane gameboard) {
+    public static StackPane getComponentAtCell(int row, int column, GridPane gameboard) {
         // Makes sure that the position is valid
         try {
             checkPositionOnGridpane(row, column, gameboard);
@@ -80,7 +103,7 @@ public class DynamicGameboard {
 
         for (Node cell: gameboard.getChildren()) {
             if (GridPane.getRowIndex(cell) == row && GridPane.getColumnIndex(cell) == column) {
-                return (Pane) cell;
+                return (StackPane) cell;
             }
         }
         // If for some reason the cell isn't found even after the previous checks
@@ -121,5 +144,23 @@ public class DynamicGameboard {
                     ") is not in the bounds of Gameboard Dimensions (rows: " +
                     gameboardRows + ", columns: " + gameboardColumns + ").");
         }
+    }
+
+    /*
+    Gets the background color of the cell.
+     */
+    private static String getCellBackgroundColor(StackPane cell) {
+        String cellStyle = cell.getStyle();
+        if (!cellStyle.contains("red")) {
+            return "black";
+        }
+        return "red";
+    }
+
+    /*
+    Places a checker piece on the board with the appropriate color depending on board position.
+     */
+    private static void placePieceInCell(int row, int column, StackPane cell) {
+        //Implentation
     }
 }

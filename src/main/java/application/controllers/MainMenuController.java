@@ -16,7 +16,7 @@ public class MainMenuController {
     private AnchorPane mainMenuAnchorPane;
 
     public void loadCheckersContent() throws Exception{
-        StackPane checkerboardPane = ViewInitializer.initGameboardPane(this);
+        AnchorPane checkerboardPane = ViewInitializer.initGameboardPane(this);
         Pane contentWidgetPane = ViewGrabber.getContentWidgetPane(mainMenuAnchorPane);
         contentWidgetPane.getChildren().clear();
         contentWidgetPane.getChildren().add(checkerboardPane);

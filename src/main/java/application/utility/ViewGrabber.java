@@ -14,4 +14,10 @@ public class ViewGrabber {
         Pane contentWidgetPane = (Pane) scene.lookup("#mainContentWidget");
         return contentWidgetPane;
     }
+
+//    public static Pane getCheckerboardWidgetPane(Node node) {
+//        Scene scene = node.getScene();
+//        Pane checkerboardWidgetPane = (Pane) scene.lookup("#checkerboardContainerWidget");
+//        return checkerboardWidgetPane;
+//    }
 }
