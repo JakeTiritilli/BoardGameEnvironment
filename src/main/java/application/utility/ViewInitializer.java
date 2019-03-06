@@ -11,7 +11,7 @@ import javafx.scene.layout.StackPane;
 public class ViewInitializer {
     /*
     Initializes the root Pane which will be the parent for other components.
-     */
+    */
     public static AnchorPane initRootPane(Object object) throws Exception {
         // Init Panes that will be inserted into the main window
         AnchorPane root = FXMLLoader.load(object.getClass().getResource("/views/application/MainWindow.fxml"));
@@ -31,7 +31,7 @@ public class ViewInitializer {
 
     /*
     Initializes the gameboard Pane which holds the checkerboard as well as game info.
-     */
+    */
     public static StackPane initGameboardPane(Object object) throws Exception {
         StackPane gameboardPane = FXMLLoader.load(object.getClass().getResource("/views/checkers/Checkerboard.fxml"));
 
@@ -50,9 +50,25 @@ public class ViewInitializer {
         return tictactoPane;
     }
 
+    /*************************************************************************************************
+    THIS IS JUST A METHOD STUB FOR THE CODE TO COMPILE. UPDATE ONCE MEMORY IMPLEMENTATION IS COMPLETE.
+    *************************************************************************************************/
+    public static Pane initMemoryPane(Object object) throws Exception {
+        Pane memoryPane = FXMLLoader.load(object.getClass().getResource("/views/memory/Memory.fxml"));
+        return memoryPane;
+    }
+
+    /*************************************************************************************************
+    THIS IS JUST A METHOD STUB FOR THE CODE TO COMPILE. UPDATE ONCE OTHELLO IMPLEMENTATION IS COMPLETE.
+    *************************************************************************************************/
+    public static Pane initOthelloPane(Object object) throws Exception {
+        Pane othelloPane = FXMLLoader.load(object.getClass().getResource("/views/othello/Othello.fxml"));
+        return othelloPane;
+    }
+
     /*
     Initializes the sidebar menu Pane which holds the buttons for games and functions.
-     */
+    */
     private static AnchorPane initSideBarMenuPane(Object object) throws Exception {
         AnchorPane sideBarMenuPane = FXMLLoader.load(object.getClass().getResource("/views/application/SideBarMenu.fxml"));
         return sideBarMenuPane;
