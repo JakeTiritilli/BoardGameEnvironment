@@ -15,7 +15,7 @@ public class MainMenuController {
     @FXML
     private AnchorPane mainMenuAnchorPane;
 
-    public void loadCheckersContent() throws Exception{
+    public void loadCheckersContent() throws Exception {
         StackPane checkerboardPane = ViewInitializer.initGameboardPane(this);
         Pane contentWidgetPane = ViewGrabber.getContentWidgetPane(mainMenuAnchorPane);
         contentWidgetPane.getChildren().clear();
@@ -30,7 +30,10 @@ public class MainMenuController {
         //Load Memory Here
     }
 
-    public void loadTictactoeContent() {
-        //Load Tic-Tac-Toe here
+    public void loadTictactoeContent() throws Exception {
+        Pane contentWidgetPane = ViewGrabber.getContentWidgetPane(mainMenuAnchorPane);
+        contentWidgetPane.getChildren().clear();
+        AnchorPane tictactoePane = ViewInitializer.initTicTacToePane(this);
+        contentWidgetPane.getChildren().add(tictactoePane);
     }
 }

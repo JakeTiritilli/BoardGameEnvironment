@@ -45,6 +45,11 @@ public class ViewInitializer {
         return gameboardPane;
     }
 
+    public static AnchorPane initTicTacToePane(Object object) throws Exception {
+        AnchorPane tictactoPane = FXMLLoader.load(object.getClass().getResource("/views/tictactoe/TicTacToe.fxml"));
+        return tictactoPane;
+    }
+
     /*
     Initializes the sidebar menu Pane which holds the buttons for games and functions.
      */

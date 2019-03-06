@@ -17,7 +17,7 @@ Author: Jason Alaya
  *    to be called from the main class or entrance 
 		ViewNavigator.setStage(primaryStage);
 
-       this how other classes call it load new sences 
+       this how other classes call it load new scene 
        // first param the title of the scence 
        // second param  the scene to load 
 		ViewNavigator.loadScene("Welcome to TravelAid", ViewNavigator.Welcome_SCENE);

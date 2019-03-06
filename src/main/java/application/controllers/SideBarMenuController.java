@@ -21,6 +21,13 @@ public class SideBarMenuController {
         contentWidgetPane.getChildren().add(checkerboardPane);
     }
 
+    public void loadTictactoeContent() throws Exception{
+        Pane contentWidgetPane = ViewGrabber.getContentWidgetPane(sideBarMenuAnchorPane);
+        contentWidgetPane.getChildren().clear();
+        AnchorPane tictactoePane = ViewInitializer.initTicTacToePane(this);
+        contentWidgetPane.getChildren().add(tictactoePane);
+    }
+
     public void loadMainMenuContent() throws Exception {
         AnchorPane mainMenuPane = ViewInitializer.initMainMenuPane(this);
         Pane contentWidgetPane = ViewGrabber.getContentWidgetPane(sideBarMenuAnchorPane);
