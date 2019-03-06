@@ -1,4 +1,4 @@
-package utility;
+package checkers.utility;
 
 import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
@@ -9,6 +9,8 @@ import javafx.scene.layout.StackPane;
 import java.lang.reflect.Method;
 
 /*
+Author: Tyler Vu
+
 Purpose:
 This file will dynamically create a gameboard grid. This is needed because different
 games may require different gameboard sizes.

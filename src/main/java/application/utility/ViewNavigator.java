@@ -1,12 +1,15 @@
-package utility;
+package application.utility;
 
 import java.io.IOException;
 
-import edu.uci.ics.in4matic.View.ViewNavigator;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/*
+Author: Jason Alaya
+ */
 
 /**
  * 
@@ -42,7 +45,7 @@ public class ViewNavigator
 		try 
 		{
 			mainStage.setTitle(title);
-			Scene scene = new Scene(FXMLLoader.load(ViewNavigator.class.getResource(sceneFXML)));
+			Scene scene = new Scene((Parent)FXMLLoader.load(ViewNavigator.class.getResource(sceneFXML)));
 			mainStage.setScene(scene);
 			mainStage.show();
 		} 

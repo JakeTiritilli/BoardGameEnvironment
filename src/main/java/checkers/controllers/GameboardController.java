@@ -1,4 +1,4 @@
-package controllers;
+package checkers.controllers;
 
 public class GameboardController {
 }
