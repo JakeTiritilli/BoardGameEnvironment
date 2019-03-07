@@ -3,22 +3,22 @@ package application.controllers;
 import application.utility.ViewGrabber;
 import application.utility.ViewInitializer;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-public class SideBarMenuController {
-
+public class SideBarMenuController extends MenuController {
     @FXML
     private AnchorPane sideBarMenuAnchorPane;
 
-    public void loadCheckersContent() throws Exception {
-        StackPane checkerboardPane = ViewInitializer.initGameboardPane(this);
-        Pane contentWidgetPane = ViewGrabber.getContentWidgetPane(sideBarMenuAnchorPane);
-        contentWidgetPane.getChildren().clear();
-        contentWidgetPane.getChildren().add(checkerboardPane);
+    /**
+     * Called automatically by the system and
+     * intializes the menu anchor pane in
+     * {@code MenuController}.
+     */
+    @FXML
+    protected void initialize() {
+        menuAnchorPane = sideBarMenuAnchorPane;
     }
 
     public void loadMainMenuContent() throws Exception {

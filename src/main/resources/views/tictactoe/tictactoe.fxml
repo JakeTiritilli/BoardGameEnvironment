@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="600.0" stylesheets="/css/tictactoe/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tictactoe.controllers.TicTacToeController">
+   <children>
+      <Button layoutX="271.0" layoutY="559.0" mnemonicParsing="false" onAction="#startNewGame" text="New Game" />
+      <Label layoutX="247.0" layoutY="14.0" text="Tic Tac Toe" textFill="#1fc61c">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="statusLabel" alignment="CENTER" layoutX="162.0" layoutY="76.0" prefHeight="23.0" prefWidth="305.0" textFill="#ee2020">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Line endX="300.0" layoutX="150.0" layoutY="360.0" strokeWidth="5.0" />
+      <Line endX="300.0" layoutX="150.0" layoutY="260.0" strokeWidth="5.0" />
+      <Line endX="300.0" layoutX="100.0" layoutY="310.0" rotate="90.0" strokeWidth="5.0" />
+      <Line endX="300.0" layoutX="200.0" layoutY="310.0" rotate="90.0" strokeWidth="5.0" />
+      <Label fx:id="cell4" alignment="CENTER" layoutX="148.0" layoutY="263.0" prefHeight="94.0" prefWidth="99.0" text="" textAlignment="CENTER">
+         <font>
+            <Font size="48.0" />
+         </font>
+      </Label>
+      <Label fx:id="cell7" alignment="CENTER" layoutX="148.0" layoutY="363.0" prefHeight="94.0" prefWidth="99.0" text="" textAlignment="CENTER">
+         <font>
+            <Font size="48.0" />
+         </font>
+      </Label>
+      <Label fx:id="cell1" alignment="CENTER" layoutX="148.0" layoutY="164.0" prefHeight="94.0" prefWidth="99.0" text="" textAlignment="CENTER">
+         <font>
+            <Font size="48.0" />
+         </font>
+      </Label>
+      <Label fx:id="cell2" alignment="CENTER" layoutX="251.0" layoutY="164.0" prefHeight="94.0" prefWidth="99.0" text="" textAlignment="CENTER">
+         <font>
+            <Font size="48.0" />
+         </font>
+      </Label>
+      <Label fx:id="cell5" alignment="CENTER" layoutX="251.0" layoutY="263.0" prefHeight="94.0" prefWidth="99.0" text="" textAlignment="CENTER">
+         <font>
+            <Font size="48.0" />
+         </font>
+      </Label>
+      <Label fx:id="cell8" alignment="CENTER" layoutX="251.0" layoutY="363.0" prefHeight="94.0" prefWidth="99.0" text="" textAlignment="CENTER">
+         <font>
+            <Font size="48.0" />
+         </font>
+      </Label>
+      <Label fx:id="cell3" alignment="CENTER" layoutX="353.0" layoutY="164.0" prefHeight="94.0" prefWidth="99.0" text="" textAlignment="CENTER">
+         <font>
+            <Font size="48.0" />
+         </font>
+      </Label>
+      <Label fx:id="cell6" alignment="CENTER" layoutX="353.0" layoutY="263.0" prefHeight="94.0" prefWidth="99.0" text="" textAlignment="CENTER">
+         <font>
+            <Font size="48.0" />
+         </font>
+      </Label>
+      <Label fx:id="cell9" alignment="CENTER" layoutX="353.0" layoutY="363.0" prefHeight="94.0" prefWidth="99.0" text="" textAlignment="CENTER">
+         <font>
+            <Font size="48.0" />
+         </font>
+      </Label>
+       <fx:define>
+           <ArrayList fx:id="cellList" >
+               <fx:reference source="cell1"/>
+               <fx:reference source="cell2"/>
+               <fx:reference source="cell3"/>
+               <fx:reference source="cell4"/>
+               <fx:reference source="cell5"/>
+               <fx:reference source="cell6"/>
+               <fx:reference source="cell7"/>
+               <fx:reference source="cell8"/>
+               <fx:reference source="cell9"/>
+           </ArrayList>
+       </fx:define>
+   </children>
+</AnchorPane>
