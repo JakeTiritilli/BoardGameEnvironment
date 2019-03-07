@@ -1,36 +1,23 @@
 package application.controllers;
 
-import application.utility.ViewGrabber;
-import application.utility.ViewInitializer;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 
-public class MainMenuController {
+public class MainMenuController extends MenuController {
     @FXML
     private Button checkersPlayerButton;
+
     @FXML
     private AnchorPane mainMenuAnchorPane;
 
-    public void loadCheckersContent() throws Exception{
-        AnchorPane checkerboardPane = ViewInitializer.initGameboardPane(this);
-        Pane contentWidgetPane = ViewGrabber.getContentWidgetPane(mainMenuAnchorPane);
-        contentWidgetPane.getChildren().clear();
-        contentWidgetPane.getChildren().add(checkerboardPane);
-    }
-
-    public void loadOthelloContent() {
-        //Load Othello here
-    }
-
-    public void loadMemoryContent() {
-        //Load Memory Here
-    }
-
-    public void loadTictactoeContent() {
-        //Load Tic-Tac-Toe here
+    /**
+     * Called automatically by the system and
+     * intializes the menu anchor pane in
+     * {@code MenuController}.
+     */
+    @FXML
+    protected void initialize() {
+        menuAnchorPane = mainMenuAnchorPane;
     }
 }

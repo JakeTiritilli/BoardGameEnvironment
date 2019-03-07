@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="sideBarMenuAnchorPane" prefHeight="750.0" prefWidth="290.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.SideBarMenuController">
+<AnchorPane fx:id="sideBarMenuAnchorPane" prefHeight="750.0" prefWidth="290.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.SideBarMenuController">
    <children>
       <Button fx:id="checkersButton" layoutX="20.0" layoutY="79.0" mnemonicParsing="false" onAction="#loadCheckersContent" prefHeight="41.0" prefWidth="250.0" text="Checkers">
          <font>
@@ -38,7 +42,7 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="tictactoeButton" disable="true" layoutX="20.0" layoutY="244.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="250.0" text="Tic-Tac-Toe">
+      <Button fx:id="tictactoeButton" layoutX="20.0" layoutY="244.0" mnemonicParsing="false" onAction="#loadTictactoeContent" prefHeight="41.0" prefWidth="250.0" text="Tic-Tac-Toe">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
