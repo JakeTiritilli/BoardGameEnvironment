@@ -8,17 +8,20 @@ import javafx.scene.layout.StackPane;
 
 import java.lang.reflect.Method;
 
-/*
-Author: Tyler Vu
-
-Purpose:
-This file will dynamically create a gameboard grid. This is needed because different
-games may require different gameboard sizes.
+/**
+ * The purpose of this class is to generate a dynamic gameboard based on an int input.
+ * The checkered gameboard will come back encapsulated in a StackPane.
+ *
+ * @author Tyler Vu
  */
 
 public class DynamicGameboard {
-    /*
-    Returns a StackPane container that holds the GridPane gameboard.
+
+    /**
+     * Creates a dynamic gameboard with a variable dimension size that can be inserted into a view.
+     * @param rows this will define the dimensions of the dynamically generated board. (e.g. rows = 5 = 5x5 board)
+     * @return StackPane this StackPane JavaFx object will encapsulate the checkered gameboard. It can then be
+     * inserted into a view.
      */
     public static StackPane createDynamicGameboard(int rows){
         StackPane gameboardContainer = new StackPane();
@@ -38,9 +41,11 @@ public class DynamicGameboard {
         return gameboardContainer;
     }
 
-    /*
-    Creates a table based on the number of rows. This is assuming that the length
-    and width of the table are going to be equal.
+    /**
+     * Generates the checkered gameboard in the form of a GridPane. Each Cell within the GridPane
+     * is a StackPane.
+     * @param rows the dimension of the gameboard (e.g. rows = 5 = 5x5 board).
+     * @return a GridPane object that will be the checkered gameboard instance.
      */
     private static GridPane generateTable(int rows) {
         // Styling string for cells and container
@@ -73,8 +78,12 @@ public class DynamicGameboard {
         return gameboardTable;
     }
 
-    /*
-    Takes the generated checkerboard and places the appropriate checker pieces in the appropriate color cell
+    /**
+     * Takes the generated checkerboard and places the appropriate checker pieces in the appropriate
+     * color cell.
+     * @param checkerboard a GridPane that represents the checkerboard.
+     * @return A GridPane with checker game pieces placed in each appropriate cell.
+     * @throws Exception This exception comes from the getNumberOfRows() and getNumberOfColumns() method.
      */
     public static GridPane generateCheckerPieces(GridPane checkerboard) throws Exception{
         for(int i = 0; i < getNumberOfRows(checkerboard); i++) {
@@ -85,11 +94,15 @@ public class DynamicGameboard {
                 }
             }
         }
-        return null;
+        return checkerboard;
     }
 
-    /*
-    This is a utility function that can be used to retrieve the Pane at the position row,column.
+    /**
+     * Retrieves the StackPane which represents a cell at the position (row, column) on the gameboard.
+     * @param row row of the target cell
+     * @param column column of the target cell
+     * @param gameboard the GridPane instance that represents the checkerboard
+     * @return A StackPane that represents the Cell at the specified location
      */
     public static StackPane getComponentAtCell(int row, int column, GridPane gameboard) {
         // Makes sure that the position is valid
@@ -110,8 +123,12 @@ public class DynamicGameboard {
         return null;
     }
 
-    /*
-    Uses reflection in order to access the private method getNumberOfRows() of GridPane.
+    /**
+     * Returns an Integer that represents the number of rows within the checkerboard. Reflection
+     * is used in order to access the private method getNumberOfRows() within the GridPane class.
+     * @param gridPane Represents the checkerboard GridPane instance.
+     * @return An Integer object that represents the number of rows within the checkerboard.
+     * @throws Exception May throw an exception when using Reflection to access the private method.
      */
     public static Integer getNumberOfRows(GridPane gridPane) throws Exception {
         Method method = gridPane.getClass().getDeclaredMethod("getNumberOfRows");
@@ -120,8 +137,12 @@ public class DynamicGameboard {
         return rows;
     }
 
-    /*
-    Uses reflection in order to access the private method getNumberOfColumns() of GridPane.
+    /**
+     * Returns an Integer that represents the number of columns within the checkerboard. Reflection
+     * is used in order to access the private method getNumberOfColumns() within the GridPane class.
+     * @param gridPane Represents the checkerbaord GridPane instance.
+     * @return An Integer object that represents the number of rows within the checkerboard.
+     * @throws Exception May throw an exception when using Reflection to access the private method.
      */
     public static Integer getNumberOfColumns(GridPane gridPane) throws Exception {
         Method method = gridPane.getClass().getDeclaredMethod("getNumberOfColumns");
@@ -130,8 +151,14 @@ public class DynamicGameboard {
         return columns;
     }
 
-    /*
-    Checks to make sure that the position is a valid cell in the GridPane.
+    /**
+     * Checks to make sure that the position on the checkerboard is within the bounds of the dimension.
+     * @param row The row of the position.
+     * @param column The column of the position.
+     * @param gridPane The GridPane that represents the checkerboard.
+     * @throws Exception Three possible exception points. The first two are from getNumberOfRows() and
+     * getNumberOfColumns(). The last exception point is if the position is out of bounds, an
+     * IndexOutOfBoundsException will be thrown with an error message explaining the exception.
      */
     private static void checkPositionOnGridpane(int row, int column, GridPane gridPane) throws Exception{
         Integer gameboardRows = getNumberOfRows(gridPane);
@@ -146,8 +173,11 @@ public class DynamicGameboard {
         }
     }
 
-    /*
-    Gets the background color of the cell.
+    /**
+     * Returns the background color of the specified StackPane cell. This will target the CSS style
+     * attribute "-fx-background-color" and return the found value.
+     * @param cell The StackPane cell to be checked.
+     * @return String representing the color of the cell. Possible values are "red" or "black".
      */
     private static String getCellBackgroundColor(StackPane cell) {
         String cellStyle = cell.getStyle();
@@ -157,8 +187,13 @@ public class DynamicGameboard {
         return "red";
     }
 
-    /*
-    Places a checker piece on the board with the appropriate color depending on board position.
+    // TODO: Implement placing the correct colored checker gamepiece in the cell depending on the position.
+    /**
+     * Places the appropriate colored checker gamepiece on the cell specified in the parameter depending on
+     * the cell's position on the board.
+     * @param row Row of the specified cell.
+     * @param column Column of the specified cell.
+     * @param cell The StackPane that represents the cell to be modified.
      */
     private static void placePieceInCell(int row, int column, StackPane cell) {
         //Implentation
