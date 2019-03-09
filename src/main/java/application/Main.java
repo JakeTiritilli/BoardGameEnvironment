@@ -1,8 +1,6 @@
 package application;
 
 import application.utility.*;
-import boardgamekit.players.*;
-import boardgamekit.utility.*;
 import javafx.scene.Parent;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -23,14 +21,5 @@ public class Main extends Application {
 
     public static void main(String[] args) throws Exception {
         launch(args);
-        // PlayerDataLoader test = new PlayerDataLoader("src/main/resources/json/UserData.json");
-        // try {
-        //     PlayerData p1 = test.loadData("Ryan");
-        //     p1.setScoreFor(Game.CHECKERS, 9);
-        //     test.writeData(p1);
-        //     System.out.println(test.getPlayers());
-        // } catch(Exception error) {
-        //     throw error;
-        // }
     }
 }
