@@ -3,15 +3,14 @@ package application.utility;
 /**
  * TicTacToe
  */
-import javafx.scene.layout.Pane;
-
-/**
- * OthelloVI
- */
 public class TicTacToeVI extends ViewInitializer {
     final static String fxmlResource = "/views/tictactoe/TicTacToe.fxml";
 
+    public static TicTacToeVI create() {
+        return new TicTacToeVI();
+    }
+
     public TicTacToeVI() {
-        resource = TicTacToeVI.fxmlResource;
+        super(fxmlResource);
     }
 }

@@ -1,14 +1,16 @@
 package application.utility;
 
-import javafx.scene.layout.Pane;
-
 /**
  * CheckersVI
  */
 public class CheckersVI extends ViewInitializer {
     final static String fxmlResource = "/views/Checkers/Checkerboard.fxml";
 
+    public static CheckersVI create() {
+        return new CheckersVI();
+    }
+
     public CheckersVI() {
-        resource = CheckersVI.fxmlResource;
+        super(fxmlResource);
     }
 }

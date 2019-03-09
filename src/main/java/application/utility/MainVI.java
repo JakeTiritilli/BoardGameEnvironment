@@ -1,15 +1,16 @@
 package application.utility;
 
-import application.Main;
-import javafx.scene.layout.Pane;
-
 /**
  * MainVI
  */
 public class MainVI extends ViewInitializer {
     final static String fxmlResource = "/views/application/MainMenu.fxml";
 
+    public static MainVI create() {
+        return new MainVI();
+    }
+
     public MainVI() {
-        resource = MainVI.fxmlResource;
+        super(fxmlResource);
     }
 }

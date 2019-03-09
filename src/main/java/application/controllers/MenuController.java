@@ -1,60 +1,72 @@
 package application.controllers;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import application.utility.*;
 import javafx.scene.control.*;
 import javafx.fxml.FXML;
 import javafx.event.ActionEvent;
+import javafx.scene.layout.Pane;
 
 /**
- * Abstract base class to hold common functionality of
- * Menu Controllers. The {@code menuAnchorPane} property
- * must be set in a class that inherits from it before methods
- * are called. This should be done by adding an {@code initialize} method
- * to the subclass that is automatically called when the FXML is loaded.
+ * Serves as the controller for the main and side bar menus.
+ * Handles events by swapping panes in and out of the center
+ * pane to display different games.
+ * 
+ * @author Jacob Tiritilli
  */
 public class MenuController {
-    private ArrayList<ViewInitializer> gameInitializers = new ArrayList<>();
-    private ArrayList<Button> gameButtons = new ArrayList<>();
+    // Array of view intializers for each game.
+    // The order must match the order of buttons
+    // in {@code gameButtons}.
+    private ViewInitializer[] gameInitializers = {
+        CheckersVI.create(),
+        OthelloVI.create(),
+        TicTacToeVI.create(),
+        MemoryVI.create()
+    };
 
     @FXML
-    Button checkersPlayButton;
+    private List<Button> gameButtons; // Outlet collection of UI buttons
 
-    @FXML
-    Button othelloPlayButton;
-
-    @FXML
-    Button ticTacToePlayButton;
-
-    @FXML
-    Button memoryPlayButton;
-
-    @FXML
-    protected void initialize() {
-        gameInitializers.add(new CheckersVI());
-        gameButtons.add(checkersPlayButton);
-        gameInitializers.add(new OthelloVI());
-        gameButtons.add(othelloPlayButton);
-        gameInitializers.add(new TicTacToeVI());
-        gameButtons.add(ticTacToePlayButton);
-        gameInitializers.add(new MemoryVI());
-        gameButtons.add(memoryPlayButton);
-    }
-
+    /**
+     * Loads a specific game view into the center pane. This is the handler
+     * that is invoked when any of the game load buttons in pressed in the
+     * menu. Based on the button that is pressed, the function searches for
+     * the corresponding game initializer in {@code gameInitializers} and then
+     * swaps out the panes.
+     * @param actionEvent the event that caused the function invocation. Used to
+     * extract a reference to the Button object that was clicked.
+     * @throws Exception if FXML could not be loaded.
+     */
     public void loadGameScene(ActionEvent actionEvent) throws Exception {
         Button gameButton = (Button) actionEvent.getSource();
         int gameNumber = gameButtons.indexOf(gameButton);
-        ViewInitializer gameInitializer = gameInitializers.get(gameNumber);
-        gameInitializer.swapPaneWith(RootVI.swapOutPane);
+        ViewInitializer gameInitializer = gameInitializers[gameNumber];
+        swapPaneIn(gameInitializer.getPane(), RootVI.swapOutPane);
     }
 
+    /**
+     * Event handler called when the button to load the main menu back is
+     * pressed.
+     * @param actionEvent the event that resulted in the function invocation.
+     * @throws Exception if FXML could not be loaded.
+     */
     public void loadMainMenuContent(ActionEvent actionEvent) throws Exception{
-        new MainVI().swapPaneWith(RootVI.swapOutPane);
+        Pane mainVI = MainVI.create().getPane();
+        swapPaneIn(mainVI, RootVI.swapOutPane);
     }
 
-    public void loadSideMenu(ActionEvent actionEvent) throws Exception {
-        new SideVI().swapPaneWith(RootVI.swapOutPane);
+    /**
+     * Swaps a given Pane into a container Pane.
+     * @param newPane the Pane to be swapped in
+     * @param containerPane the holding Pane that the
+     * new pane will be placed into, clearing out
+     * what was previously in its place.
+     */
+    private void swapPaneIn(Pane newPane, Pane containerPane) {
+        containerPane.getChildren().clear();
+        containerPane.getChildren().add(newPane);
     }
 
     /**

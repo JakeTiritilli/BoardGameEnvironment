@@ -9,6 +9,7 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import java.util.*?>
 
 <AnchorPane fx:id="sideBarMenuAnchorPane" prefHeight="750.0" prefWidth="290.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.MenuController">
    <children>
@@ -54,4 +55,12 @@
       </Label>
       <Separator layoutX="39.0" layoutY="518.0" prefWidth="213.0" />
    </children>
+   <fx:define>
+      <ArrayList fx:id="gameButtons" >
+         <fx:reference source="checkersPlayButton"/>
+         <fx:reference source="othelloPlayButton"/>
+         <fx:reference source="ticTacToePlayButton"/>
+         <fx:reference source="memoryPlayButton"/>
+      </ArrayList>
+   </fx:define>
 </AnchorPane>
