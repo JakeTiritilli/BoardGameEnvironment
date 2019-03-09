@@ -1,9 +1,11 @@
 package application.controllers;
 
-import application.utility.ViewGrabber;
-import application.utility.ViewInitializer;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
+import java.util.ArrayList;
+
+import application.utility.*;
+import javafx.scene.control.*;
+import javafx.fxml.FXML;
+import javafx.event.ActionEvent;
 
 /**
  * Abstract base class to hold common functionality of
@@ -12,38 +14,53 @@ import javafx.scene.layout.Pane;
  * are called. This should be done by adding an {@code initialize} method
  * to the subclass that is automatically called when the FXML is loaded.
  */
-public abstract class MenuController {
-    protected AnchorPane menuAnchorPane; // **Must be initialized first**
+public class MenuController {
+    private ArrayList<ViewInitializer> gameInitializers = new ArrayList<>();
+    private ArrayList<Button> gameButtons = new ArrayList<>();
 
-    public void loadCheckersContent() throws Exception {
-        Pane checkerboardPane = ViewInitializer.initGameboardPane(this);
-        loadContent(checkerboardPane);
+    @FXML
+    Button checkersPlayButton;
+
+    @FXML
+    Button othelloPlayButton;
+
+    @FXML
+    Button ticTacToePlayButton;
+
+    @FXML
+    Button memoryPlayButton;
+
+    @FXML
+    protected void initialize() {
+        gameInitializers.add(new CheckersVI());
+        gameButtons.add(checkersPlayButton);
+        gameInitializers.add(new OthelloVI());
+        gameButtons.add(othelloPlayButton);
+        gameInitializers.add(new TicTacToeVI());
+        gameButtons.add(ticTacToePlayButton);
+        gameInitializers.add(new MemoryVI());
+        gameButtons.add(memoryPlayButton);
     }
 
-    public void loadOthelloContent() throws Exception {
-        Pane othelloPane = ViewInitializer.initOthelloPane(this);
-        loadContent(othelloPane);
+    public void loadGameScene(ActionEvent actionEvent) throws Exception {
+        Button gameButton = (Button) actionEvent.getSource();
+        int gameNumber = gameButtons.indexOf(gameButton);
+        ViewInitializer gameInitializer = gameInitializers.get(gameNumber);
+        gameInitializer.swapPaneWith(RootVI.swapOutPane);
     }
 
-    public void loadMemoryContent() throws Exception {
-        Pane memoryPane = ViewInitializer.initMemoryPane(this);
-        loadContent(memoryPane);
+    public void loadMainMenuContent(ActionEvent actionEvent) throws Exception{
+        new MainVI().swapPaneWith(RootVI.swapOutPane);
     }
 
-    public void loadTictactoeContent() throws Exception {
-        Pane tictactoePane = ViewInitializer.initTicTacToePane(this);
-        loadContent(tictactoePane);
+    public void loadSideMenu(ActionEvent actionEvent) throws Exception {
+        new SideVI().swapPaneWith(RootVI.swapOutPane);
     }
 
     /**
-     * Loads the content of a new game or other content pane by
-     * clearing the old one and adding the new one in its place.
-     * @param contentPane a reference to the new content pane that is
-     * to replace the old one
+     * Called when the "Exit" button is pressed. Closes the entire application.
      */
-    private void loadContent(Pane contentPane) {
-        Pane contentWidgetPane = ViewGrabber.getContentWidgetPane(menuAnchorPane);
-        contentWidgetPane.getChildren().clear();
-        contentWidgetPane.getChildren().add(contentPane);
+    public void closeApplication() {
+        System.exit(0);
     }
 }
