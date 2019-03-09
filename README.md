@@ -17,7 +17,25 @@ Informatics 122 (Winter 2019) Final Project
 
 ## Documentation
 
-*Add any further documentation here.*
+### Elements Common to Board Games
+
+- Two players
+
+- A winning state
+
+- A game board
+
+- Pieces on a game board
+
+- Make a move on the game board
+
+- Switching of turns
+
+- Score
+
+- Player stats
+
+
 
 ## Team
 

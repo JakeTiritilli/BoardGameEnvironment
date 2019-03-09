@@ -86,7 +86,7 @@ public class TicTacToeController {
         game = new TicTacToe(TicTacToePlayer.X);
         statusLabel.setText("Turn: " + game.getCurrentPlayer().toString());
         
-        for (Label cell: cellList) {
+        for (Label cell : cellList) {
             cell.setText("");
         }
     }
