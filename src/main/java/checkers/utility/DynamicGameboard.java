@@ -9,6 +9,8 @@ import javafx.scene.layout.StackPane;
 import java.lang.reflect.Method;
 
 /**
+ * DEPRECATED NOT USING THIS ANYMORE
+ *
  * The purpose of this class is to generate a dynamic gameboard based on an int input.
  * The checkered gameboard will come back encapsulated in a StackPane.
  *

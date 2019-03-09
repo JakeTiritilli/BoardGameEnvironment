@@ -44,9 +44,7 @@ public class ViewInitializer {
     }
 
     /**
-     * Initializes the gameboard Pane which holds the checkerboard as well as game info. The gameboard
-     * will be created using the createDynamicGameboard() method from the DynamicGameboard class. The
-     * gameboard will then be inserted into the gameboard container widget on the Checkerboard view.
+     * Initializes the gameboard Pane which holds the checkerboard as well as game info.
      * @param object This is used only to access the getClass() method. This object can be anything.
      * @return AnchorPane that represents the gameboard screen. It can then be inserted into the main content widget
      * to display.
@@ -54,16 +52,6 @@ public class ViewInitializer {
      */
     public static AnchorPane initGameboardPane(Object object) throws Exception {
         AnchorPane gameboardPane = FXMLLoader.load(object.getClass().getResource("/views/checkers/Checkerboard.fxml"));
-
-        // Create gameboard and set style
-        StackPane gameboard = DynamicGameboard.createDynamicGameboard(8);
-        StackPane.setAlignment(gameboard, Pos.CENTER);
-        gameboardPane.setStyle("-fx-background-color: lightgray");
-
-        // Get container that gameboard will be placed and insert gameboard.
-        StackPane checkerboardContainerWidget = (StackPane) gameboardPane.getChildren().get(1);
-        checkerboardContainerWidget.getChildren().add(gameboard);
-
         return gameboardPane;
     }
 
