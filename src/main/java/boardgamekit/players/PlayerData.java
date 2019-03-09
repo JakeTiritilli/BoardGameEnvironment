@@ -50,12 +50,16 @@ public class PlayerData {
         switch (game) {
             case CHECKERS:
                 scoreBreakdown.put("checkers", score);
+                break;
             case OTHELLO:
                 scoreBreakdown.put("othello", score);
+                break;
             case MEMORY:
                 scoreBreakdown.put("memory", score);
+                break;
             case TICTACTOE:
                 scoreBreakdown.put("tictactoe", score);
+                break;
         }
     }
 }

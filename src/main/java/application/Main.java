@@ -25,8 +25,8 @@ public class Main extends Application {
         //launch(args);
         PlayerDataLoader test = new PlayerDataLoader("src/main/java/boardgamekit/players/UserData.json");
         try {
-            PlayerData p1 = test.loadData("Jake");
-            p1.setScoreFor(Game.TICTACTOE, 5);
+            PlayerData p1 = test.loadData("Ryan");
+            p1.setScoreFor(Game.CHECKERS, 9);
             test.writeData(p1);
         } catch(Exception error) {
             throw error;
