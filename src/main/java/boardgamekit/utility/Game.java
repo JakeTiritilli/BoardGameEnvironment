@@ -1,7 +1,9 @@
 package boardgamekit.utility;
 
 /**
- * Game
+ * Enum holding all of the available games in the system.
+ * 
+ * @author Jacob Tiritilli
  */
 public enum Game {
     CHECKERS,

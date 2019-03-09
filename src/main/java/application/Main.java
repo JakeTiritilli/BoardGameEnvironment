@@ -22,14 +22,15 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) throws Exception {
-        //launch(args);
-        PlayerDataLoader test = new PlayerDataLoader("src/main/java/boardgamekit/players/UserData.json");
-        try {
-            PlayerData p1 = test.loadData("Ryan");
-            p1.setScoreFor(Game.CHECKERS, 9);
-            test.writeData(p1);
-        } catch(Exception error) {
-            throw error;
-        }
+        launch(args);
+        // PlayerDataLoader test = new PlayerDataLoader("src/main/resources/json/UserData.json");
+        // try {
+        //     PlayerData p1 = test.loadData("Ryan");
+        //     p1.setScoreFor(Game.CHECKERS, 9);
+        //     test.writeData(p1);
+        //     System.out.println(test.getPlayers());
+        // } catch(Exception error) {
+        //     throw error;
+        // }
     }
 }
