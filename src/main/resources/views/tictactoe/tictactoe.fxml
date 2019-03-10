@@ -74,7 +74,7 @@
             <Font size="48.0" />
          </font>
       </Label>
-       <fx:define>
+      <fx:define>
            <ArrayList fx:id="cellList" >
                <fx:reference source="cell1"/>
                <fx:reference source="cell2"/>
