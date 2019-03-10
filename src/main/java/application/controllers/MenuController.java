@@ -31,7 +31,7 @@ public class MenuController {
 
     /**
      * Loads a specific game view into the center pane. This is the handler
-     * that is invoked when any of the game load buttons in pressed in the
+     * that is invoked when any of the game load buttons is pressed in the
      * menu. Based on the button that is pressed, the function searches for
      * the corresponding game initializer in {@code gameInitializers} and then
      * swaps out the panes.
