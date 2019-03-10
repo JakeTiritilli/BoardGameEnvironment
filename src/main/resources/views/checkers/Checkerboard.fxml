@@ -1,24 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.image.*?>
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<?import java.util.ArrayList?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="checkers.controllers.CheckerboardController">
    <children>
-      <Label alignment="CENTER" layoutX="220.0" layoutY="42.0" prefHeight="47.0" prefWidth="310.0" text="Checkers" textAlignment="CENTER">
-         <font>
-            <Font name="System Bold" size="48.0" />
-         </font>
-      </Label>
-      <StackPane layoutX="92.0" layoutY="112.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="439.0" prefWidth="567.0" />
+      <StackPane layoutX="118.0" layoutY="38.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="500.0" prefWidth="500.0">
+         <children>
+            <GridPane styleClass="board-border" stylesheets="@../../css/checkers/style.css">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <StackPane fx:id="blackCell1" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: black;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" />
+                  <StackPane fx:id="redCell1" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: red;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" GridPane.columnIndex="1" />
+                  <StackPane fx:id="blackCell2" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: black;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" GridPane.columnIndex="2" />
+                  <StackPane fx:id="redCell2" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: red;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" GridPane.columnIndex="3" />
+                  <StackPane fx:id="blackCell3" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: black;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" GridPane.columnIndex="4" />
+                  <StackPane fx:id="redCell3" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: red;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" GridPane.columnIndex="5" />
+                  <StackPane fx:id="blackCell4" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: black;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" GridPane.columnIndex="6" />
+                  <StackPane fx:id="redCell4" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: red;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" GridPane.columnIndex="7" />
+                  <StackPane fx:id="redCell5" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: red;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" GridPane.rowIndex="1" />
+                  <StackPane fx:id="blackCell5" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: black;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <StackPane fx:id="redCell6" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: red;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <StackPane fx:id="blackCell6" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: black;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                  <StackPane fx:id="redCell7" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: red;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                  <StackPane fx:id="blackCell7" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: black;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+                  <StackPane fx:id="redCell8" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: red;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" GridPane.columnIndex="6" GridPane.rowIndex="1" />
+                  <StackPane fx:id="blackCell8" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: black;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" GridPane.columnIndex="7" GridPane.rowIndex="1" />
+                  <StackPane fx:id="blackCell9" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: black;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" GridPane.rowIndex="2" />
+                  <StackPane fx:id="redCell9" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: red;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <StackPane fx:id="blackCell10" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: black;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <StackPane fx:id="redCell10" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: red;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                  <StackPane fx:id="blackCell11" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: black;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                  <StackPane fx:id="redCell11" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: red;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+                  <StackPane fx:id="blackCell12" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: black;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" GridPane.columnIndex="6" GridPane.rowIndex="2" />
+                  <StackPane fx:id="redCell12" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: red;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" GridPane.columnIndex="7" GridPane.rowIndex="2" />
+                  <StackPane fx:id="redCell13" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: red;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" GridPane.rowIndex="3" />
+                  <StackPane fx:id="blackCell13" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: black;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <StackPane fx:id="redCell14" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: red;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                  <StackPane fx:id="blackCell14" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: black;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                  <StackPane fx:id="redCell15" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: red;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+                  <StackPane fx:id="blackCell15" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: black;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" GridPane.columnIndex="5" GridPane.rowIndex="3" />
+                  <StackPane fx:id="redCell16" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: red;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" GridPane.columnIndex="6" GridPane.rowIndex="3" />
+                  <StackPane fx:id="blackCell16" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: black;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" GridPane.columnIndex="7" GridPane.rowIndex="3" />
+                  <StackPane fx:id="blackCell17" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: black;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" GridPane.rowIndex="4" />
+                  <StackPane fx:id="redCell17" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: red;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <StackPane fx:id="blackCell18" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: black;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                  <StackPane fx:id="redCell18" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: red;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                  <StackPane fx:id="blackCell19" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: black;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+                  <StackPane fx:id="redCell19" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: red;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" GridPane.columnIndex="5" GridPane.rowIndex="4" />
+                  <StackPane fx:id="blackCell20" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: black;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" GridPane.columnIndex="6" GridPane.rowIndex="4" />
+                  <StackPane fx:id="redCell20" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: red;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" GridPane.columnIndex="7" GridPane.rowIndex="4" />
+                  <StackPane fx:id="redCell21" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: red;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" GridPane.rowIndex="5" />
+                  <StackPane fx:id="blackCell21" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: black;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <StackPane fx:id="redCell22" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: red;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                  <StackPane fx:id="blackCell22" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: black;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                  <StackPane fx:id="redCell23" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: red;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" GridPane.columnIndex="4" GridPane.rowIndex="5" />
+                  <StackPane fx:id="blackCell23" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: black;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" GridPane.columnIndex="5" GridPane.rowIndex="5" />
+                  <StackPane fx:id="redCell24" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: red;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" GridPane.columnIndex="6" GridPane.rowIndex="5" />
+                  <StackPane fx:id="blackCell24" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: black;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" GridPane.columnIndex="7" GridPane.rowIndex="5" />
+                  <StackPane fx:id="blackCell25" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: black;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" GridPane.rowIndex="6" />
+                  <StackPane fx:id="redCell25" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: red;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <StackPane fx:id="blackCell26" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: black;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                  <StackPane fx:id="redCell26" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: red;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+                  <StackPane fx:id="blackCell27" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: black;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" GridPane.columnIndex="4" GridPane.rowIndex="6" />
+                  <StackPane fx:id="redCell27" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: red;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" GridPane.columnIndex="5" GridPane.rowIndex="6" />
+                  <StackPane fx:id="blackCell28" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: black;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" GridPane.columnIndex="6" GridPane.rowIndex="6" />
+                  <StackPane fx:id="redCell28" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: red;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" GridPane.columnIndex="7" GridPane.rowIndex="6" />
+                  <StackPane fx:id="redCell29" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: red;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" GridPane.rowIndex="7" />
+                  <StackPane fx:id="blackCell29" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: black;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                  <StackPane fx:id="redCell30" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: red;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+                  <StackPane fx:id="blackCell30" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: black;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+                  <StackPane fx:id="redCell31" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: red;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" GridPane.columnIndex="4" GridPane.rowIndex="7" />
+                  <StackPane fx:id="blackCell31" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: black;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" GridPane.columnIndex="5" GridPane.rowIndex="7" />
+                  <StackPane fx:id="redCell32" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: red;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" GridPane.columnIndex="6" GridPane.rowIndex="7" />
+                  <StackPane fx:id="blackCell32" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: black;" styleClass="board-border" stylesheets="@../../css/checkers/style.css" GridPane.columnIndex="7" GridPane.rowIndex="7" />
+               </children>
+            </GridPane>
+         </children></StackPane>
       <Label alignment="CENTER" layoutX="22.0" layoutY="551.0" prefHeight="24.0" prefWidth="96.0" text="Red Player">
          <font>
             <Font name="System Bold" size="18.0" />
@@ -39,5 +124,103 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
+      <fx:define>
+         <ArrayList fx:id="blackCellList">
+            <fx:reference source="blackCell1" />
+            <fx:reference source="blackCell2" />
+            <fx:reference source="blackCell3" />
+            <fx:reference source="blackCell4" />
+            <fx:reference source="blackCell5" />
+            <fx:reference source="blackCell6" />
+            <fx:reference source="blackCell7" />
+            <fx:reference source="blackCell8" />
+            <fx:reference source="blackCell9" />
+            <fx:reference source="blackCell10" />
+            <fx:reference source="blackCell11" />
+            <fx:reference source="blackCell12" />
+            <fx:reference source="blackCell13" />
+            <fx:reference source="blackCell14" />
+            <fx:reference source="blackCell15" />
+            <fx:reference source="blackCell16" />
+            <fx:reference source="blackCell17" />
+            <fx:reference source="blackCell18" />
+            <fx:reference source="blackCell19" />
+            <fx:reference source="blackCell20" />
+            <fx:reference source="blackCell21" />
+            <fx:reference source="blackCell22" />
+            <fx:reference source="blackCell23" />
+            <fx:reference source="blackCell24" />
+            <fx:reference source="blackCell25" />
+            <fx:reference source="blackCell26" />
+            <fx:reference source="blackCell27" />
+            <fx:reference source="blackCell28" />
+            <fx:reference source="blackCell29" />
+            <fx:reference source="blackCell30" />
+            <fx:reference source="blackCell31" />
+            <fx:reference source="blackCell32" />
+         </ArrayList>
+         <ArrayList fx:id="redCellList">
+            <fx:reference source="redCell1" />
+            <fx:reference source="redCell2" />
+            <fx:reference source="redCell3" />
+            <fx:reference source="redCell4" />
+            <fx:reference source="redCell5" />
+            <fx:reference source="redCell6" />
+            <fx:reference source="redCell7" />
+            <fx:reference source="redCell8" />
+            <fx:reference source="redCell9" />
+            <fx:reference source="redCell10" />
+            <fx:reference source="redCell11" />
+            <fx:reference source="redCell12" />
+            <fx:reference source="redCell13" />
+            <fx:reference source="redCell14" />
+            <fx:reference source="redCell15" />
+            <fx:reference source="redCell16" />
+            <fx:reference source="redCell17" />
+            <fx:reference source="redCell18" />
+            <fx:reference source="redCell19" />
+            <fx:reference source="redCell20" />
+            <fx:reference source="redCell21" />
+            <fx:reference source="redCell22" />
+            <fx:reference source="redCell23" />
+            <fx:reference source="redCell24" />
+            <fx:reference source="redCell25" />
+            <fx:reference source="redCell26" />
+            <fx:reference source="redCell27" />
+            <fx:reference source="redCell28" />
+            <fx:reference source="redCell29" />
+            <fx:reference source="redCell30" />
+            <fx:reference source="redCell31" />
+            <fx:reference source="redCell32" />
+         </ArrayList>
+         <ArrayList fx:id="redSideCellList">
+            <fx:reference source="redCell1" />
+            <fx:reference source="redCell2" />
+            <fx:reference source="redCell3" />
+            <fx:reference source="redCell4" />
+            <fx:reference source="redCell5" />
+            <fx:reference source="redCell6" />
+            <fx:reference source="redCell7" />
+            <fx:reference source="redCell8" />
+            <fx:reference source="redCell9" />
+            <fx:reference source="redCell10" />
+            <fx:reference source="redCell11" />
+            <fx:reference source="redCell12" />
+         </ArrayList>
+         <ArrayList fx:id="blackSideCellList">
+            <fx:reference source="redCell21" />
+            <fx:reference source="redCell22" />
+            <fx:reference source="redCell23" />
+            <fx:reference source="redCell24" />
+            <fx:reference source="redCell25" />
+            <fx:reference source="redCell26" />
+            <fx:reference source="redCell27" />
+            <fx:reference source="redCell28" />
+            <fx:reference source="redCell29" />
+            <fx:reference source="redCell30" />
+            <fx:reference source="redCell31" />
+            <fx:reference source="redCell32" />
+         </ArrayList>
+      </fx:define>
    </children>
 </AnchorPane>
