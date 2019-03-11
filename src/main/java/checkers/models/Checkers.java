@@ -78,7 +78,7 @@ public class Checkers {
         return validMoves;
     }
 
-    // TODO: Implement
+    // TODO: Handle King
     /**
      * Checks if the checker can make the move to the position. This takes into account whether it is a king or not.
      * If the position is 2 rows away, it will check to see if there is an enemy checker in the intermediate cell.
@@ -87,44 +87,82 @@ public class Checkers {
      * @return Boolean
      */
     private boolean isValidMoveForChecker(CheckerPiece checker, PosTuple pos) {
-    	// get all valid moves
-    	ArrayList<PosTuple> moves = getSurroundingPlayableCells(checker);
-		// check for enemy
-    	boolean enemy = false;
-		
-    	if(moves.contains(pos))
-		{
-    		// checker and pos are 2 rows away  
-    		if( Math.abs(checker.position.row - pos.row) > 1)
-    		{
-    			// CHECK enemy for red player
-    			if(checker.color == CheckerPlayer.RED)
-    			{
-    				 // down one row right col
-    				if(gameBoard[checker.position.row+1][checker.position.col+1] != null)
-    					enemy= true;
-    				// down one row left col
-    				else if(gameBoard[checker.position.row+1][checker.position.col-1] != null)
-    					enemy = true;
-    			}
-    			// check enemy for black player
-    			else 
-    			{
-    				 // up one row right col
-    				if(gameBoard[checker.position.row-1][checker.position.col+1] != null)
-    					enemy= true;
-    				// up one row left col
-    				else if(gameBoard[checker.position.row-1][checker.position.col-1] != null)
-    					enemy = true;
-    			}
-    		}
-			return true;
-		}
-    	if(checker.isKing)
-		{
-			// handleKing()
-		}
+    	// if pos is only 1 row away, check if it is a valid move for the color
+        if (Math.abs(checker.position.row - pos.row) == 1) {
+            return this.isSingleRowMoveValid(checker, pos);
+        }
+
+        // if pos is 2 rows away, check if there is a jump available
+        // can assume that it is two rows away if reached this point of flow
+        return this.isJumpMoveValid(checker, pos);
+    }
+
+    /**
+     * Checks to see if the single row move is valid for the specified CheckerPiece
+     * to the specified position.
+     * @param checker CheckerPiece being checked for the move
+     * @param pos PosTuple that represents the position being checked for a valid move
+     * @return Returns true if the single row move is valid
+     */
+    private boolean isSingleRowMoveValid(CheckerPiece checker, PosTuple pos) {
+        // TODO: handle King state
+        // Gets the row delta that would be valid for the color
+        int rowDelta = checker.color == CheckerPlayer.BLACK ? checker.position.row - 1 : checker.position.row + 1;
+
+        // if the pos being checked has a valid row delta, then check if cell is empty
+        if (pos.row == rowDelta) {
+            return this.gameBoard[pos.row][pos.col] == null;
+        }
         return false;
+    }
+
+    /**
+     * Checks to see if the specified checker piece can make the jump move to the
+     * specified position.
+     * @param checker The CheckerPiece that is being checked for the move
+     * @param pos A PosTuple that represents the position that the checker is checking to move to
+     * @return Returns true if the jump move is valid
+     */
+    private boolean isJumpMoveValid(CheckerPiece checker, PosTuple pos) {
+        int rowDelta;
+        int enemyRow;
+        int enemyCol;
+
+        // TODO: handle King state
+        // sets the row delta that would be valid for the color
+        // sets the row that an enemy could possibly be on for the jump
+        if (checker.color == CheckerPlayer.BLACK) {
+            rowDelta = checker.position.row - 2;
+            enemyRow = checker.position.row -1;
+
+        }
+        else {
+            rowDelta = checker.position.row + 2;
+            enemyRow = checker.position.row + 1;
+        }
+
+        // sets the var to the intermediate cell between the checker and final pos
+        enemyCol = (checker.position.col + pos.col) / 2;
+
+        // if the pos being checked is a valid move for that color, check for enemy
+        if (pos.row == rowDelta) {
+            return this.hasEnemy(checker, enemyRow, enemyCol);
+        }
+        return false;
+    }
+
+    /**
+     * Checks to see if there is an enemy at the position (enemyRow, enemyCol).
+     * @param checker CheckerPiece used to check for the opposing color
+     * @param enemyRow The row of the cell to be checked for an enemy
+     * @param enemyCol The col of the cell to be checked for an enemy
+     * @return If there is an enemy there, return true
+     */
+    private boolean hasEnemy(CheckerPiece checker, int enemyRow, int enemyCol) {
+        CheckerPlayer colorToCheckFor = checker.color == CheckerPlayer.BLACK ? CheckerPlayer.RED : CheckerPlayer.BLACK;
+        CheckerPiece cellToCheck = this.gameBoard[enemyRow][enemyCol];
+
+        return cellToCheck != null && cellToCheck.color == colorToCheckFor;
     }
 
     /**
