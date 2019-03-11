@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 
 <?import java.util.ArrayList?>
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="checkers.controllers.CheckerboardController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="750.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="checkers.controllers.CheckerboardController">
    <children>
       <StackPane layoutX="118.0" layoutY="38.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="500.0" prefWidth="500.0">
          <children>
@@ -125,101 +125,115 @@
          </font>
       </Label>
       <fx:define>
-         <ArrayList fx:id="blackCellList">
-            <fx:reference source="blackCell1" />
-            <fx:reference source="blackCell2" />
-            <fx:reference source="blackCell3" />
-            <fx:reference source="blackCell4" />
-            <fx:reference source="blackCell5" />
-            <fx:reference source="blackCell6" />
-            <fx:reference source="blackCell7" />
-            <fx:reference source="blackCell8" />
-            <fx:reference source="blackCell9" />
-            <fx:reference source="blackCell10" />
-            <fx:reference source="blackCell11" />
-            <fx:reference source="blackCell12" />
-            <fx:reference source="blackCell13" />
-            <fx:reference source="blackCell14" />
-            <fx:reference source="blackCell15" />
-            <fx:reference source="blackCell16" />
-            <fx:reference source="blackCell17" />
-            <fx:reference source="blackCell18" />
-            <fx:reference source="blackCell19" />
-            <fx:reference source="blackCell20" />
-            <fx:reference source="blackCell21" />
-            <fx:reference source="blackCell22" />
-            <fx:reference source="blackCell23" />
-            <fx:reference source="blackCell24" />
-            <fx:reference source="blackCell25" />
-            <fx:reference source="blackCell26" />
-            <fx:reference source="blackCell27" />
-            <fx:reference source="blackCell28" />
-            <fx:reference source="blackCell29" />
-            <fx:reference source="blackCell30" />
-            <fx:reference source="blackCell31" />
-            <fx:reference source="blackCell32" />
-         </ArrayList>
-         <ArrayList fx:id="redCellList">
-            <fx:reference source="redCell1" />
-            <fx:reference source="redCell2" />
-            <fx:reference source="redCell3" />
-            <fx:reference source="redCell4" />
-            <fx:reference source="redCell5" />
-            <fx:reference source="redCell6" />
-            <fx:reference source="redCell7" />
-            <fx:reference source="redCell8" />
-            <fx:reference source="redCell9" />
-            <fx:reference source="redCell10" />
-            <fx:reference source="redCell11" />
-            <fx:reference source="redCell12" />
-            <fx:reference source="redCell13" />
-            <fx:reference source="redCell14" />
-            <fx:reference source="redCell15" />
-            <fx:reference source="redCell16" />
-            <fx:reference source="redCell17" />
-            <fx:reference source="redCell18" />
-            <fx:reference source="redCell19" />
-            <fx:reference source="redCell20" />
-            <fx:reference source="redCell21" />
-            <fx:reference source="redCell22" />
-            <fx:reference source="redCell23" />
-            <fx:reference source="redCell24" />
-            <fx:reference source="redCell25" />
-            <fx:reference source="redCell26" />
-            <fx:reference source="redCell27" />
-            <fx:reference source="redCell28" />
-            <fx:reference source="redCell29" />
-            <fx:reference source="redCell30" />
-            <fx:reference source="redCell31" />
-            <fx:reference source="redCell32" />
+         <ArrayList fx:id="blackSideCellList">
+            <fx:reference source="redCell21"></fx:reference>
+            <fx:reference source="redCell22"></fx:reference>
+            <fx:reference source="redCell23"></fx:reference>
+            <fx:reference source="redCell24"></fx:reference>
+            <fx:reference source="redCell25"></fx:reference>
+            <fx:reference source="redCell26"></fx:reference>
+            <fx:reference source="redCell27"></fx:reference>
+            <fx:reference source="redCell28"></fx:reference>
+            <fx:reference source="redCell29"></fx:reference>
+            <fx:reference source="redCell30"></fx:reference>
+            <fx:reference source="redCell31"></fx:reference>
+            <fx:reference source="redCell32"></fx:reference>
          </ArrayList>
          <ArrayList fx:id="redSideCellList">
-            <fx:reference source="redCell1" />
-            <fx:reference source="redCell2" />
-            <fx:reference source="redCell3" />
-            <fx:reference source="redCell4" />
-            <fx:reference source="redCell5" />
-            <fx:reference source="redCell6" />
-            <fx:reference source="redCell7" />
-            <fx:reference source="redCell8" />
-            <fx:reference source="redCell9" />
-            <fx:reference source="redCell10" />
-            <fx:reference source="redCell11" />
-            <fx:reference source="redCell12" />
+            <fx:reference source="redCell1"></fx:reference>
+            <fx:reference source="redCell2"></fx:reference>
+            <fx:reference source="redCell3"></fx:reference>
+            <fx:reference source="redCell4"></fx:reference>
+            <fx:reference source="redCell5"></fx:reference>
+            <fx:reference source="redCell6"></fx:reference>
+            <fx:reference source="redCell7"></fx:reference>
+            <fx:reference source="redCell8"></fx:reference>
+            <fx:reference source="redCell9"></fx:reference>
+            <fx:reference source="redCell10"></fx:reference>
+            <fx:reference source="redCell11"></fx:reference>
+            <fx:reference source="redCell12"></fx:reference>
          </ArrayList>
-         <ArrayList fx:id="blackSideCellList">
-            <fx:reference source="redCell21" />
-            <fx:reference source="redCell22" />
-            <fx:reference source="redCell23" />
-            <fx:reference source="redCell24" />
-            <fx:reference source="redCell25" />
-            <fx:reference source="redCell26" />
-            <fx:reference source="redCell27" />
-            <fx:reference source="redCell28" />
-            <fx:reference source="redCell29" />
-            <fx:reference source="redCell30" />
-            <fx:reference source="redCell31" />
-            <fx:reference source="redCell32" />
+         <ArrayList fx:id="gameboard">
+            <ArrayList>
+               <fx:reference source="blackCell1"></fx:reference>
+               <fx:reference source="redCell1"></fx:reference>
+               <fx:reference source="blackCell2"></fx:reference>
+               <fx:reference source="redCell2"></fx:reference>
+               <fx:reference source="blackCell3"></fx:reference>
+               <fx:reference source="redCell3"></fx:reference>
+               <fx:reference source="blackCell4"></fx:reference>
+               <fx:reference source="redCell4"></fx:reference>
+            </ArrayList>
+            <ArrayList>
+               <fx:reference source="blackCell5"></fx:reference>
+               <fx:reference source="redCell5"></fx:reference>
+               <fx:reference source="blackCell6"></fx:reference>
+               <fx:reference source="redCell6"></fx:reference>
+               <fx:reference source="blackCell7"></fx:reference>
+               <fx:reference source="redCell7"></fx:reference>
+               <fx:reference source="blackCell8"></fx:reference>
+               <fx:reference source="redCell8"></fx:reference>
+            </ArrayList>
+            <ArrayList>
+               <fx:reference source="blackCell9"></fx:reference>
+               <fx:reference source="redCell9"></fx:reference>
+               <fx:reference source="blackCell10"></fx:reference>
+               <fx:reference source="redCell10"></fx:reference>
+               <fx:reference source="blackCell11"></fx:reference>
+               <fx:reference source="redCell11"></fx:reference>
+               <fx:reference source="blackCell12"></fx:reference>
+               <fx:reference source="redCell12"></fx:reference>
+            </ArrayList>
+            <ArrayList>
+               <fx:reference source="blackCell13"></fx:reference>
+               <fx:reference source="redCell13"></fx:reference>
+               <fx:reference source="blackCell14"></fx:reference>
+               <fx:reference source="redCell14"></fx:reference>
+               <fx:reference source="blackCell15"></fx:reference>
+               <fx:reference source="redCell15"></fx:reference>
+               <fx:reference source="blackCell16"></fx:reference>
+               <fx:reference source="redCell16"></fx:reference>
+            </ArrayList>
+            <ArrayList>
+               <fx:reference source="blackCell17"></fx:reference>
+               <fx:reference source="redCell17"></fx:reference>
+               <fx:reference source="blackCell18"></fx:reference>
+               <fx:reference source="redCell18"></fx:reference>
+               <fx:reference source="blackCell19"></fx:reference>
+               <fx:reference source="redCell19"></fx:reference>
+               <fx:reference source="blackCell20"></fx:reference>
+               <fx:reference source="redCell20"></fx:reference>
+            </ArrayList>
+            <ArrayList>
+               <fx:reference source="blackCell21"></fx:reference>
+               <fx:reference source="redCell21"></fx:reference>
+               <fx:reference source="blackCell22"></fx:reference>
+               <fx:reference source="redCell22"></fx:reference>
+               <fx:reference source="blackCell23"></fx:reference>
+               <fx:reference source="redCell23"></fx:reference>
+               <fx:reference source="blackCell24"></fx:reference>
+               <fx:reference source="redCell24"></fx:reference>
+            </ArrayList>
+            <ArrayList>
+               <fx:reference source="blackCell25"></fx:reference>
+               <fx:reference source="redCell25"></fx:reference>
+               <fx:reference source="blackCell26"></fx:reference>
+               <fx:reference source="redCell26"></fx:reference>
+               <fx:reference source="blackCell27"></fx:reference>
+               <fx:reference source="redCell27"></fx:reference>
+               <fx:reference source="blackCell28"></fx:reference>
+               <fx:reference source="redCell28"></fx:reference>
+            </ArrayList>
+            <ArrayList>
+               <fx:reference source="blackCell29"></fx:reference>
+               <fx:reference source="redCell29"></fx:reference>
+               <fx:reference source="blackCell30"></fx:reference>
+               <fx:reference source="redCell30"></fx:reference>
+               <fx:reference source="blackCell31"></fx:reference>
+               <fx:reference source="redCell31"></fx:reference>
+               <fx:reference source="blackCell32"></fx:reference>
+               <fx:reference source="redCell32"></fx:reference>
+            </ArrayList>
          </ArrayList>
       </fx:define>
    </children>

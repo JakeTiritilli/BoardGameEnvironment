@@ -1,6 +1,8 @@
 package checkers.controllers;
 
 import checkers.models.Checkers;
+import checkers.utility.CheckerPiece;
+import checkers.utility.PosTuple;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -16,17 +18,45 @@ public class CheckerboardController {
     private ArrayList<AnchorPane> redSideActiveCheckerPieces = new ArrayList(); // container of references to active red side checker pieces
 
     @FXML
-    ArrayList<StackPane> blackCellList; // reference to all black cells
+    ArrayList<ArrayList<StackPane>> gameboard; // 2D array that represents the gameboard
     @FXML
-    ArrayList<StackPane> redCellList; // reference to all red cells
+    ArrayList<StackPane> redSideCellList; // References to the red side black cells
     @FXML
-    ArrayList<StackPane> redSideCellList; // reference to red side cells (only playable cells)
-    @FXML
-    ArrayList<StackPane> blackSideCellList; // reference to black side cells (only playable cells)
+    ArrayList<StackPane> blackSideCellList; // References to the black side black cells
 
     @FXML
     public void initialize() {
         this.initializeGamePieces();
+        this.displayMovableCheckerPieces();
+    }
+
+    public void displayMovableCheckerPieces() {
+        ArrayList<CheckerPiece> movableCheckerPieces = this.game.getMovableCheckerPiecesForActivePlayer();
+        for(CheckerPiece checker : movableCheckerPieces) {
+            for(PosTuple validMove : checker.validMoves) {
+                this.displayValidMove(validMove);
+            }
+        }
+    }
+
+    private void displayValidMove(PosTuple validMove) {
+        StackPane validMoveCell = this.gameboard.get(validMove.row).get(validMove.col);
+        AnchorPane validMoveCircle = null;
+
+        // Load valid move circle indicator
+        try {
+            validMoveCircle = FXMLLoader.load(getClass().getResource("/views/checkers/ValidMoveCircle.fxml"));
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        StackPane.setAlignment(validMoveCircle, Pos.CENTER);
+
+        // Add the indicator if there isn't one there already
+        // This is to prevent overlapping indicators causing GUI to look weird
+        if(validMoveCell.getChildren().size() == 0) {
+            validMoveCell.getChildren().add(validMoveCircle);
+        }
     }
 
     /**

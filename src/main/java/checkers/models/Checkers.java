@@ -20,9 +20,6 @@ public class Checkers {
 
     public Checkers() {
         this.initializeGame();
-
-        // testing
-        this.getMovableCheckerPiecesForActivePlayer();
     }
 
     /**
@@ -75,6 +72,9 @@ public class Checkers {
                 validMoves.add(pos);
             }
         }
+
+        // Sets the array of valid moves in the CheckerPiece object
+        checker.validMoves = validMoves;
         return validMoves;
     }
 
