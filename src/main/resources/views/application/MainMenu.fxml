@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -12,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainMenuAnchorPane" prefHeight="700.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.MainMenuController">
+<AnchorPane fx:id="mainMenuAnchorPane" prefHeight="700.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.MainMenuController">
    <children>
       <Label alignment="CENTER" layoutX="120.0" layoutY="67.0" prefHeight="43.0" prefWidth="114.0" text="Checkers" textAlignment="CENTER">
          <font>
@@ -52,7 +47,7 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Button fx:id="memoryPlayButton" disable="true" layoutX="399.0" layoutY="581.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="151.0" text="Play" />
+      <Button fx:id="memoryPlayButton" layoutX="399.0" layoutY="581.0" mnemonicParsing="false" onAction="#loadMemoryContent" prefHeight="31.0" prefWidth="151.0" text="Play" />
       <ImageView fitHeight="150.0" fitWidth="195.0" layoutX="380.0" layoutY="415.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/memory.png" />
