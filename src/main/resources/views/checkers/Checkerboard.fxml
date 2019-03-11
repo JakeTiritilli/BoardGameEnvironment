@@ -165,14 +165,14 @@
                <fx:reference source="redCell4"></fx:reference>
             </ArrayList>
             <ArrayList>
-               <fx:reference source="blackCell5"></fx:reference>
                <fx:reference source="redCell5"></fx:reference>
-               <fx:reference source="blackCell6"></fx:reference>
+               <fx:reference source="blackCell5"></fx:reference>
                <fx:reference source="redCell6"></fx:reference>
-               <fx:reference source="blackCell7"></fx:reference>
+               <fx:reference source="blackCell6"></fx:reference>
                <fx:reference source="redCell7"></fx:reference>
-               <fx:reference source="blackCell8"></fx:reference>
+               <fx:reference source="blackCell7"></fx:reference>
                <fx:reference source="redCell8"></fx:reference>
+               <fx:reference source="blackCell8"></fx:reference>
             </ArrayList>
             <ArrayList>
                <fx:reference source="blackCell9"></fx:reference>
@@ -185,14 +185,14 @@
                <fx:reference source="redCell12"></fx:reference>
             </ArrayList>
             <ArrayList>
-               <fx:reference source="blackCell13"></fx:reference>
                <fx:reference source="redCell13"></fx:reference>
-               <fx:reference source="blackCell14"></fx:reference>
+               <fx:reference source="blackCell13"></fx:reference>
                <fx:reference source="redCell14"></fx:reference>
-               <fx:reference source="blackCell15"></fx:reference>
+               <fx:reference source="blackCell14"></fx:reference>
                <fx:reference source="redCell15"></fx:reference>
-               <fx:reference source="blackCell16"></fx:reference>
+               <fx:reference source="blackCell15"></fx:reference>
                <fx:reference source="redCell16"></fx:reference>
+               <fx:reference source="blackCell16"></fx:reference>
             </ArrayList>
             <ArrayList>
                <fx:reference source="blackCell17"></fx:reference>
@@ -205,14 +205,14 @@
                <fx:reference source="redCell20"></fx:reference>
             </ArrayList>
             <ArrayList>
-               <fx:reference source="blackCell21"></fx:reference>
                <fx:reference source="redCell21"></fx:reference>
-               <fx:reference source="blackCell22"></fx:reference>
+               <fx:reference source="blackCell21"></fx:reference>
                <fx:reference source="redCell22"></fx:reference>
-               <fx:reference source="blackCell23"></fx:reference>
+               <fx:reference source="blackCell22"></fx:reference>
                <fx:reference source="redCell23"></fx:reference>
-               <fx:reference source="blackCell24"></fx:reference>
+               <fx:reference source="blackCell23"></fx:reference>
                <fx:reference source="redCell24"></fx:reference>
+               <fx:reference source="blackCell24"></fx:reference>
             </ArrayList>
             <ArrayList>
                <fx:reference source="blackCell25"></fx:reference>
@@ -225,14 +225,14 @@
                <fx:reference source="redCell28"></fx:reference>
             </ArrayList>
             <ArrayList>
-               <fx:reference source="blackCell29"></fx:reference>
                <fx:reference source="redCell29"></fx:reference>
-               <fx:reference source="blackCell30"></fx:reference>
+               <fx:reference source="blackCell29"></fx:reference>
                <fx:reference source="redCell30"></fx:reference>
-               <fx:reference source="blackCell31"></fx:reference>
+               <fx:reference source="blackCell30"></fx:reference>
                <fx:reference source="redCell31"></fx:reference>
-               <fx:reference source="blackCell32"></fx:reference>
+               <fx:reference source="blackCell31"></fx:reference>
                <fx:reference source="redCell32"></fx:reference>
+               <fx:reference source="blackCell32"></fx:reference>
             </ArrayList>
          </ArrayList>
       </fx:define>
