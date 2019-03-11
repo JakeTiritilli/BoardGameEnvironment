@@ -3,8 +3,6 @@ package checkers.models;
 import checkers.utility.CheckerPiece;
 import checkers.utility.CheckerPlayer;
 import checkers.utility.PosTuple;
-import javafx.geometry.Pos;
-
 import java.util.ArrayList;
 
 /**
@@ -89,6 +87,43 @@ public class Checkers {
      * @return Boolean
      */
     private boolean isValidMoveForChecker(CheckerPiece checker, PosTuple pos) {
+    	// get all valid moves
+    	ArrayList<PosTuple> moves = getSurroundingPlayableCells(checker);
+		// check for enemy
+    	boolean enemy = false;
+		
+    	if(moves.contains(pos))
+		{
+    		// checker and pos are 2 rows away  
+    		if( Math.abs(checker.position.row - pos.row) > 1)
+    		{
+    			// CHECK enemy for red player
+    			if(checker.color == CheckerPlayer.RED)
+    			{
+    				 // down one row right col
+    				if(gameBoard[checker.position.row+1][checker.position.col+1] != null)
+    					enemy= true;
+    				// down one row left col
+    				else if(gameBoard[checker.position.row+1][checker.position.col-1] != null)
+    					enemy = true;
+    			}
+    			// check enemy for black player
+    			else 
+    			{
+    				 // up one row right col
+    				if(gameBoard[checker.position.row-1][checker.position.col+1] != null)
+    					enemy= true;
+    				// up one row left col
+    				else if(gameBoard[checker.position.row-1][checker.position.col-1] != null)
+    					enemy = true;
+    			}
+    		}
+			return true;
+		}
+    	if(checker.isKing)
+		{
+			// handleKing()
+		}
         return false;
     }
 

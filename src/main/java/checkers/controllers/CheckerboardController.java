@@ -12,8 +12,8 @@ import java.util.ArrayList;
 
 public class CheckerboardController {
     private Checkers game = new Checkers();
-    private ArrayList<AnchorPane> blackSideActiveCheckerPieces = new ArrayList<>(); // container of references to active black side checker pieces
-    private ArrayList<AnchorPane> redSideActiveCheckerPieces = new ArrayList<>(); // container of references to active red side checker pieces
+    private ArrayList<AnchorPane> blackSideActiveCheckerPieces = new ArrayList(); // container of references to active black side checker pieces
+    private ArrayList<AnchorPane> redSideActiveCheckerPieces = new ArrayList(); // container of references to active red side checker pieces
 
     @FXML
     ArrayList<StackPane> blackCellList; // reference to all black cells
