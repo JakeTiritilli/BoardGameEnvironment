@@ -3,8 +3,6 @@ package tictactoe.models;
 import tictactoe.utility.*;
 import boardgamekit.BoardGame;
 import boardgamekit.players.*;
-import boardgamekit.utility.Game;
-import boardgamekit.utility.GamePiece;
 
 /**
  * Represents a model for and contains general functionality for playing the
@@ -31,22 +29,19 @@ public class TicTacToe extends BoardGame {
     }
 
     private boolean horizontalWin() {
-        GamePiece[] gameBoard = oneDBoard;
-        return (gameBoard[0] != null && gameBoard[0] == gameBoard[1] && gameBoard[1] == gameBoard[2]) ||
-               (gameBoard[3] != null && gameBoard[3] == gameBoard[4] && gameBoard[4] == gameBoard[5]) ||
-               (gameBoard[6] != null && gameBoard[6] == gameBoard[7] && gameBoard[7] == gameBoard[8]);
+        return (oneDBoard[0] != null && oneDBoard[0] == oneDBoard[1] && oneDBoard[1] == oneDBoard[2]) ||
+               (oneDBoard[3] != null && oneDBoard[3] == oneDBoard[4] && oneDBoard[4] == oneDBoard[5]) ||
+               (oneDBoard[6] != null && oneDBoard[6] == oneDBoard[7] && oneDBoard[7] == oneDBoard[8]);
     }
 
     private boolean verticalWin() {
-        GamePiece[] gameBoard = oneDBoard;
-        return (gameBoard[0] != null && gameBoard[0] == gameBoard[3] && gameBoard[3] == gameBoard[6]) ||
-               (gameBoard[1] != null && gameBoard[1] == gameBoard[4] && gameBoard[4] == gameBoard[7]) ||
-               (gameBoard[2] != null && gameBoard[2] == gameBoard[5] && gameBoard[5] == gameBoard[8]);
+        return (oneDBoard[0] != null && oneDBoard[0] == oneDBoard[3] && oneDBoard[3] == oneDBoard[6]) ||
+               (oneDBoard[1] != null && oneDBoard[1] == oneDBoard[4] && oneDBoard[4] == oneDBoard[7]) ||
+               (oneDBoard[2] != null && oneDBoard[2] == oneDBoard[5] && oneDBoard[5] == oneDBoard[8]);
     }
 
     private boolean diagonalWin() {
-        GamePiece[] gameBoard = oneDBoard;
-        return (gameBoard[0] != null && gameBoard[0] == gameBoard[4] && gameBoard[4] == gameBoard[8]) ||
-               (gameBoard[2] != null && gameBoard[2] == gameBoard[4] && gameBoard[4] == gameBoard[6]);
+        return (oneDBoard[0] != null && oneDBoard[0] == oneDBoard[4] && oneDBoard[4] == oneDBoard[8]) ||
+               (oneDBoard[2] != null && oneDBoard[2] == oneDBoard[4] && oneDBoard[4] == oneDBoard[6]);
     }
 }
