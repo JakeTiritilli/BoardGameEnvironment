@@ -1,12 +1,12 @@
 package boardgamekit.utility;
 
 /**
- * GameBoardException
+ * GameOverException
  */
-public class GameBoardException extends Exception {
+public class GameOverException extends Exception {
     private static final long serialVersionUID = 1L;
 
-    public GameBoardException(String message) {
+    public GameOverException(String message) {
         super(message);
     }
 }

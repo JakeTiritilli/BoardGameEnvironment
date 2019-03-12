@@ -22,9 +22,9 @@ public abstract class BoardGame {
 
     private Player currentPlayer;
 
-    private GamePiece[][] twoDBoard;
+    protected GamePiece[][] twoDBoard;
 
-    private GamePiece[] oneDBoard;
+    protected GamePiece[] oneDBoard;
 
     /**
      * 
@@ -99,7 +99,7 @@ public abstract class BoardGame {
     /**
      * 
      */
-    abstract boolean gameIsWon();
+    abstract public boolean gameIsWon();
 
     /**
      * 
@@ -118,10 +118,10 @@ public abstract class BoardGame {
     /**
      * 
      */
-    public void init1DBoard(int size) throws GameBoardException {
-        if (twoDBoard != null) {
-            throw new GameBoardException("Already Initialized a 2D board. Only one board can be used.");
-        }
+    public void init1DBoard(int size) {
+        // if (twoDBoard != null) {
+        //     throw new GameBoardException("Already Initialized a 2D board. Only one board can be used.");
+        // }
 
         oneDBoard = new GamePiece[size];
     }
@@ -129,10 +129,10 @@ public abstract class BoardGame {
     /**
      * 
      */
-    public void init2DBoard(int rows, int columns) throws GameBoardException {
-        if (oneDBoard != null) {
-            throw new GameBoardException("Already Initialized a 1D board. Only one board can be used.");
-        }
+    public void init2DBoard(int rows, int columns) {
+        // if (oneDBoard != null) {
+        //     throw new GameBoardException("Already Initialized a 1D board. Only one board can be used.");
+        // }
 
         twoDBoard = new GamePiece[rows][columns];
     }
@@ -140,7 +140,11 @@ public abstract class BoardGame {
     /**
      * 
      */
-    public void makeMove1D(int position, boolean checkBounds, boolean checkOccupied, boolean switchPlayers) throws InvalidMoveException {
+    public void makeMove1D(int position, boolean checkBounds, boolean checkOccupied, boolean switchPlayers) throws InvalidMoveException, GameOverException {
+        if (gameIsWon()) {
+            throw new GameOverException("Attempts to make move after game completed.");
+        }
+        
         if (oneDBoard == null) {
             throw new InvalidMoveException("Cannot make a 1D move on a 2D board.");
         }
@@ -163,7 +167,11 @@ public abstract class BoardGame {
     /**
      * 
      */
-    public void makeMove2D(int row, int column, boolean checkBounds, boolean checkOccupied, boolean switchPlayers) throws InvalidMoveException {
+    public void makeMove2D(int row, int column, boolean checkBounds, boolean checkOccupied, boolean switchPlayers) throws InvalidMoveException, GameOverException {
+        if (gameIsWon()) {
+            throw new GameOverException("Attempts to make move after game completed.");
+        }
+        
         if (twoDBoard == null) {
             throw new InvalidMoveException("Cannot make a 2D move on a 1D board.");
         }
@@ -211,6 +219,13 @@ public abstract class BoardGame {
         }
 
         return oneDBoard[position];
+    }
+
+    /**
+     * 
+     */
+    public GamePiece getCurrentPlayerPiece() {
+        return (currentPlayer == player1) ? player1GamePiece : player2GamePiece;
     }
 
     /**

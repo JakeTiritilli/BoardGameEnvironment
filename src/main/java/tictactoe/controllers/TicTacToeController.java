@@ -23,7 +23,7 @@ public class TicTacToeController {
     // Holds the Tic Tac Toe game. Passes in player "X" as
     // the starting player, but this option may be given
     // to the user at a later point.
-    private TicTacToe game = new TicTacToe(TicTacToePlayer.X);
+    private TicTacToe game = new TicTacToe();
 
     // Outlet associated with the label in the view that will
     // display the status of the game.
@@ -51,7 +51,7 @@ public class TicTacToeController {
             cellList.get(i).setOnMouseClicked(event -> cellPressed(cellNum, label));
         }
 
-        statusLabel.setText("Turn: " + game.getCurrentPlayer().toString());
+        statusLabel.setText("Turn: " + game.getCurrentPlayerPiece().toString());
     }
 
     /**
@@ -62,19 +62,23 @@ public class TicTacToeController {
      * can be updated with the appropriate player
      */
     private void cellPressed(int cellNum, Label label) {
-        TicTacToePlayer currentPlayer = game.getCurrentPlayer();
+        TicTacToePlayer currentPlayer = (TicTacToePlayer) game.getCurrentPlayerPiece();
         
         // If move was invalid, then exit early.
-        if (!game.makeMove(cellNum)) { return; }
+        try {
+            game.makeMove1D(cellNum, true, true, true);
+        } catch (Exception e) {
+            return;
+        }
 
         label.setText(currentPlayer.toString());
 
-        if (game.gameWon()) {
+        if (game.gameIsWon()) {
             statusLabel.setText("Game Over: Player " + currentPlayer.toString() + " wins!");
         } else if (game.boardIsFull()) {
             statusLabel.setText("Cat's Game!");
         } else {
-            statusLabel.setText("Turn: " + game.getCurrentPlayer().toString());
+            statusLabel.setText("Turn: " + game.getCurrentPlayerPiece().toString());
         }
     }
 
@@ -83,8 +87,8 @@ public class TicTacToeController {
      * clear the board and status label.
      */
     public void startNewGame(ActionEvent actionEvent) {
-        game = new TicTacToe(TicTacToePlayer.X);
-        statusLabel.setText("Turn: " + game.getCurrentPlayer().toString());
+        game = new TicTacToe();
+        statusLabel.setText("Turn: " + game.getCurrentPlayerPiece().toString());
         
         for (Label cell : cellList) {
             cell.setText("");
