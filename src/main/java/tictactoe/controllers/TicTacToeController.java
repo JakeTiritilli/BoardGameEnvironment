@@ -67,7 +67,7 @@ public class TicTacToeController {
         
         // If move was invalid, then exit early.
         try {
-            game.makeMove(cellNum, true, true, true);
+            game.makeMove(cellNum, true, true);
         } catch (Exception e) {
             return;
         }
