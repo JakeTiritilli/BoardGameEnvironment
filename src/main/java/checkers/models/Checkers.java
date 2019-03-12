@@ -13,20 +13,18 @@ import java.util.ArrayList;
  */
 
 public class Checkers {
-    private CheckerPlayer currentPlayer;
     private CheckerPiece[][] gameBoard = new CheckerPiece[8][8];
     private ArrayList<CheckerPiece> blackCheckerPieceRefs = new ArrayList<>();
     private ArrayList<CheckerPiece> redCheckerPieceRefs = new ArrayList<>();
 
+    // Variables for turn execution
+    private CheckerPlayer currentPlayer;
+    private boolean jumping = false;
+    private CheckerPiece jumpingCheckerPiece = null;
+
+
     public Checkers() {
         this.initializeGame();
-    }
-
-    /**
-     * Toggles the current player.
-     */
-    public void changeTurn() {
-        this.currentPlayer = this.currentPlayer == CheckerPlayer.BLACK ? CheckerPlayer.RED : CheckerPlayer.BLACK;
     }
 
     /**
@@ -36,9 +34,85 @@ public class Checkers {
      */
     public ArrayList<CheckerPiece> getMovableCheckerPiecesForActivePlayer() {
         if (this.currentPlayer == CheckerPlayer.BLACK) {
-            return this.getMovableCheckerPieces(blackCheckerPieceRefs);
+            return this.getMovableCheckerPieces(this.blackCheckerPieceRefs);
         }
-        return this.getMovableCheckerPieces(redCheckerPieceRefs);
+        return this.getMovableCheckerPieces(this.redCheckerPieceRefs);
+    }
+
+    /**
+     * Checks to make sure the move is valid and then performs the move. It will set
+     * the checker to be placed into the new cell. If it was a single row move, it will
+     * change the player turn. Else, it will keep the same player and delete the checker
+     * that got jumped over.
+     * @param oldPosition
+     * @param newPosition
+     */
+    public void makeMove(PosTuple oldPosition, PosTuple newPosition) {
+        // (Check to make sure that the old pos has a checker there and the new pos
+        // does not have a checker there) and (make sure both positions are on the board).
+        if ((gameBoard[oldPosition.row][oldPosition.col] == null ||
+            gameBoard[newPosition.row][newPosition.col] != null) &&
+                (isValidPos(oldPosition) && isValidPos(newPosition))) {
+            throw new IllegalArgumentException("The position parameters in makeMove were not valid moves");
+        }
+
+        // If the move was a single row move (which means it wasn't a jump),
+        // then change the current player
+        if (Math.abs(oldPosition.row - newPosition.row) == 1) {
+            this.changeTurn();
+        }
+        // Else, there was a jump so delete the checker piece on the board and in refs
+        else {
+            int enemyRow = (oldPosition.row + newPosition.row) / 2;
+            int enemyCol = (oldPosition.col + newPosition.col) / 2;
+            this.deleteCheckerPiece(enemyRow, enemyCol);
+            this.setJumpRules(this.gameBoard[newPosition.row][newPosition.col]);
+        }
+
+        gameBoard[newPosition.row][newPosition.col] = gameBoard[oldPosition.row][oldPosition.col];
+        gameBoard[oldPosition.row][oldPosition.col] = null;
+    }
+
+    public void clearValidMovesForAllCheckerPieces() {
+        this.clearValidMovesForCheckerPieces(this.blackCheckerPieceRefs);
+        this.clearValidMovesForCheckerPieces(this.redCheckerPieceRefs);
+    }
+
+    /**
+     * Toggles the current player.
+     */
+    private void changeTurn() {
+        this.currentPlayer = this.currentPlayer == CheckerPlayer.BLACK ? CheckerPlayer.RED : CheckerPlayer.BLACK;
+    }
+
+    private void clearValidMovesForCheckerPieces(ArrayList<CheckerPiece> checkerPieces) {
+        for(CheckerPiece checker: checkerPieces) {
+            checker.clearValidMoves();
+        }
+    }
+
+    private void deleteCheckerPiece(int row, int col) {
+        CheckerPiece checkerToDelete = this.gameBoard[row][col];
+        CheckerPlayer enemyColor = checkerToDelete.color;
+
+        if(enemyColor == CheckerPlayer.BLACK) {
+            this.blackCheckerPieceRefs.remove(this.blackCheckerPieceRefs.indexOf(checkerToDelete));
+        }
+        else {
+            this.redCheckerPieceRefs.remove(this.redCheckerPieceRefs.indexOf(checkerToDelete));
+        }
+
+        this.gameBoard[row][col] = null;
+    }
+
+    private void setJumpRules(CheckerPiece checker) {
+        // Set the jumping boolean to true so that it restricts player movement
+        this.jumping = true;
+
+        // Set the jumping checker piece so that only that checker piece is checked
+        // for valid moves on next turn. The same player should still have the option
+        // to go if there are more valid moves after the jump for that single checker.
+        this.jumpingCheckerPiece = checker;
     }
 
     /**
@@ -49,11 +123,33 @@ public class Checkers {
      */
     private ArrayList<CheckerPiece> getMovableCheckerPieces(ArrayList<CheckerPiece> refs) {
         ArrayList<CheckerPiece> result = new ArrayList<>();
+
+        // If the checker is jumping, then restrict movement to only that checker
+        if (this.jumping) {
+            if (this.getValidMovesForChecker(this.jumpingCheckerPiece).size() != 0) {
+                result.add(this.jumpingCheckerPiece);
+            }
+            // No more valid jumps available so change turn
+            else {
+                this.changeTurn();
+            }
+            // Don't allow further execution because only checking for the jumping piece
+            return result;
+        }
+
         for(CheckerPiece checker : refs) {
             if(this.getValidMovesForChecker(checker).size() != 0) {
                 result.add(checker);
             }
         }
+
+        // If there are valid moves for the current player, change the turn.
+        // The result will return with size 0 so the controller will know to
+        // restart the turn with the new active player.
+        if(result.size() == 0) {
+            this.changeTurn();
+        }
+
         return result;
     }
 
