@@ -9,25 +9,25 @@ public class ValidMoveFinder {
         ArrayList<Integer[]> moves = new ArrayList<Integer[]>();
         for (int i = 0; i < 7; i++){
             for (int j = 0; i < 7; j++){
-                checkValidMoves(i, j, moves);
+                checkValidMoves(i, j, moves, turn);
             }
         }
         return moves;
     }
-    public static ArrayList<Integer[]> getFlips(Integer row, Integer col){
+    public static ArrayList<Integer[]> getFlips(Integer row, Integer col, Integer turn){
         ArrayList<Integer[]> flips = new ArrayList<Integer[]>();
         ArrayList<Integer[]> potential = new ArrayList<Integer[]>();
-        checkToFlip(row, col, flips, potential);
+        checkToFlip(row, col, flips, potential, turn);
         return flips;
     }
 
-    private static void checkValidMoves(Integer r, Integer c, ArrayList<Integer[]> validMoves){
+    private static void checkValidMoves(Integer r, Integer c, ArrayList<Integer[]> validMoves, Integer turn){
         int row = r;
         int col = c;
         for (Integer[] dir: Directions.getDirections()) {
             if (inBoundNext(row,col,dir)) {
-                if (Othello.getBoard()[row+dir[0]][col+dir[1]] != Othello.getTurn() && Othello.getBoard()[row+dir[0]][col+dir[1]] != 0) {
-                    while (inBoundNext(row, col, dir) && Othello.getBoard()[row+dir[0]][col+dir[1]] != Othello.getTurn()) {
+                if (!(Othello.getBoard()[row + dir[0]][col + dir[1]].equals(turn)) && !(Othello.getBoard()[row + dir[0]][col + dir[1]].equals(0))) {
+                    while (inBoundNext(row, col, dir) && !Othello.getBoard()[row + dir[0]][col + dir[1]].equals(turn)) {
                         if (Othello.getBoard()[row+dir[0]][col+dir[1]] == 0) {
                             validMoves.add(new Integer[]{row+dir[0],col+dir[1]});
                             break;
@@ -41,19 +41,17 @@ public class ValidMoveFinder {
     }
 
 
-    private static void checkToFlip(Integer r, Integer c, ArrayList<Integer[]> flips, ArrayList<Integer[]> potentialFlips){
+    private static void checkToFlip(Integer r, Integer c, ArrayList<Integer[]> flips, ArrayList<Integer[]> potentialFlips, Integer turn){
         int row = r;
         int col = c;
         for (Integer[] dir: Directions.getDirections()) {
             if (inBoundNext(row,col,dir)) {
-                if (Othello.getBoard()[row+dir[0]][col+dir[1]] != Othello.getTurn() && Othello.getBoard()[row+dir[0]][col+dir[1]] != 0) {
+                if (!Othello.getBoard()[row + dir[0]][col + dir[1]].equals(turn) && Othello.getBoard()[row+dir[0]][col+dir[1]] != 0) {
                     while (inBoundNext(row, col, dir)) {
-                        if (Othello.getBoard()[row+dir[0]][col+dir[1]] != Othello.getTurn())
+                        if (!Othello.getBoard()[row + dir[0]][col + dir[1]].equals(turn))
                             potentialFlips.add(new Integer[]{row+dir[0],col+dir[1]});
-                        else if( Othello.getBoard()[row+dir[0]][col+dir[1]] == Othello.getTurn()){
-                            for (Integer[] f: potentialFlips) {
-                                flips.add(f);
-                            }
+                        else if(Othello.getBoard()[row + dir[0]][col + dir[1]].equals(turn)){
+                            flips.addAll(potentialFlips);
                             potentialFlips.clear();
                             break;
                         }

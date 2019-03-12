@@ -55,7 +55,7 @@ public class Othello {
             ArrayList<Integer[]> moves = ValidMoveFinder.getValidMoves(turn);
             if (moves.size() > 0) {
                 gameboard[row][col] = getTurn();
-                ArrayList<Integer[]> flips = ValidMoveFinder.getFlips(row, col);
+                ArrayList<Integer[]> flips = ValidMoveFinder.getFlips(row, col, turn);
                 for (Integer[] flip : flips) {
                     gameboard[flip[0]][flip[1]] = turn;
                 }
