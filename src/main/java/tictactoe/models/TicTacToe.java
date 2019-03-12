@@ -14,11 +14,10 @@ import boardgamekit.utility.GamePiece;
  */
 public class TicTacToe extends BoardGame {
 
-    public TicTacToe() {
-        super(Player.createDefault("Jake"), Player.createDefault("Paul"), Game.TICTACTOE);
+    public TicTacToe(Player p1, Player p2) {
+        super(p1, p2, 9);
         setPlayer1GamePiece(TicTacToePlayer.X);
         setPlayer2GamePiece(TicTacToePlayer.O);
-        init1DBoard(9);
     }
 
     /**

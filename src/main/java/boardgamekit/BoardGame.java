@@ -8,42 +8,40 @@ import boardgamekit.utility.*;
  */
 public abstract class BoardGame {
 
-    private Game gameType;
-
     private String rawGameType;
 
     private Player player1;
 
     private GamePiece player1GamePiece;
 
-    private GamePiece player2GamePiece;
-
     private Player player2;
+    
+    private GamePiece player2GamePiece;
 
     private Player currentPlayer;
 
     protected GamePiece[][] twoDBoard;
 
     protected GamePiece[] oneDBoard;
-
+    
     /**
      * 
      */
-    public BoardGame(Player player1, Player player2, Game gameType) {
+    public BoardGame(Player player1, Player player2, int size) {
         this.player1 = player1;
         this.player2 = player2;
         this.currentPlayer = player1;
-        this.gameType = gameType;
+        oneDBoard = new GamePiece[size];
     }
 
     /**
      * 
      */
-    public BoardGame(Player player1, Player player2, String rawGameType) {
+    public BoardGame(Player player1, Player player2, int rows, int columns) {
         this.player1 = player1;
         this.player2 = player2;
         this.currentPlayer = player1;
-        this.rawGameType = rawGameType;
+        twoDBoard = new GamePiece[rows][columns];
     }
     
     /**
@@ -104,7 +102,7 @@ public abstract class BoardGame {
     /**
      * 
      */
-    public void setWinner(boolean forCurrentPlayer) {
+    public void setWinner(Game gameType, boolean forCurrentPlayer) {
         Player winner = (currentPlayer == player1) ? player1 : player1;
         int currentScore = winner.getScoreFor(gameType);
         
@@ -118,29 +116,7 @@ public abstract class BoardGame {
     /**
      * 
      */
-    public void init1DBoard(int size) {
-        // if (twoDBoard != null) {
-        //     throw new GameBoardException("Already Initialized a 2D board. Only one board can be used.");
-        // }
-
-        oneDBoard = new GamePiece[size];
-    }
-
-    /**
-     * 
-     */
-    public void init2DBoard(int rows, int columns) {
-        // if (oneDBoard != null) {
-        //     throw new GameBoardException("Already Initialized a 1D board. Only one board can be used.");
-        // }
-
-        twoDBoard = new GamePiece[rows][columns];
-    }
-
-    /**
-     * 
-     */
-    public void makeMove1D(int position, boolean checkBounds, boolean checkOccupied, boolean switchPlayers) throws InvalidMoveException, GameOverException {
+    public void makeMove(int position, boolean checkBounds, boolean checkOccupied, boolean switchPlayers) throws InvalidMoveException, GameOverException {
         if (gameIsWon()) {
             throw new GameOverException("Attempts to make move after game completed.");
         }
@@ -167,7 +143,7 @@ public abstract class BoardGame {
     /**
      * 
      */
-    public void makeMove2D(int row, int column, boolean checkBounds, boolean checkOccupied, boolean switchPlayers) throws InvalidMoveException, GameOverException {
+    public void makeMove(int row, int column, boolean checkBounds, boolean checkOccupied, boolean switchPlayers) throws InvalidMoveException, GameOverException {
         if (gameIsWon()) {
             throw new GameOverException("Attempts to make move after game completed.");
         }
@@ -194,7 +170,7 @@ public abstract class BoardGame {
     /**
      * 
      */
-    public GamePiece returnGamePiece2DAt(int row, int column) throws GameBoardException {
+    public GamePiece returnPieceAt(int row, int column) throws GameBoardException {
         if (twoDBoard == null) {
             throw new GameBoardException("Cannot use two indices on a 1D board.");
         }
@@ -209,7 +185,7 @@ public abstract class BoardGame {
     /**
      * 
      */
-    public GamePiece returnGamePiece1DAt(int position) throws GameBoardException {
+    public GamePiece returnPieceAt(int position) throws GameBoardException {
         if (oneDBoard == null) {
             throw new GameBoardException("Cannot use one indice on a 2D board.");
         }

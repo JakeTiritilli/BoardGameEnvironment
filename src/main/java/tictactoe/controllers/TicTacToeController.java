@@ -6,6 +6,7 @@ import javafx.scene.control.*;
 
 import java.util.List;
 
+import boardgamekit.players.Player;
 import tictactoe.models.*;
 import tictactoe.utility.*;
 
@@ -23,7 +24,7 @@ public class TicTacToeController {
     // Holds the Tic Tac Toe game. Passes in player "X" as
     // the starting player, but this option may be given
     // to the user at a later point.
-    private TicTacToe game = new TicTacToe();
+    private TicTacToe game = new TicTacToe(Player.createDefault(""), Player.createDefault("")); // REPLACE
 
     // Outlet associated with the label in the view that will
     // display the status of the game.
@@ -66,7 +67,7 @@ public class TicTacToeController {
         
         // If move was invalid, then exit early.
         try {
-            game.makeMove1D(cellNum, true, true, true);
+            game.makeMove(cellNum, true, true, true);
         } catch (Exception e) {
             return;
         }
@@ -87,7 +88,7 @@ public class TicTacToeController {
      * clear the board and status label.
      */
     public void startNewGame(ActionEvent actionEvent) {
-        game = new TicTacToe();
+        game = new TicTacToe(Player.createDefault(""), Player.createDefault("")); // REPLACE
         statusLabel.setText("Turn: " + game.getCurrentPlayerPiece().toString());
         
         for (Label cell : cellList) {
