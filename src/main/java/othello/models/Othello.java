@@ -8,13 +8,13 @@ import java.util.ArrayList;
 public class Othello {
 
 
-    private int currentPlayer;
+    private Integer currentPlayer;
 
     private static Integer turn;
-    int playerScore;
-    int[] validMoves;
-    final int boardWidth = 8;
-    final int boardLength= 8;
+    Integer playerScore;
+    Integer[] validMoves;
+    final Integer boardWidth = 8;
+    final Integer boardLength= 8;
 
     static Integer[][] gameboard;
 
@@ -52,10 +52,8 @@ public class Othello {
     public void makeMove(Integer row, Integer col)
     {
         if (!endGame()) {
-
-
-            ArrayList<Integer[]> moves = ValidMoveFinder.getValidMoves(row, col);
-            if (moves.size() != 0) {
+            ArrayList<Integer[]> moves = ValidMoveFinder.getValidMoves(turn);
+            if (moves.size() > 0) {
                 gameboard[row][col] = getTurn();
                 ArrayList<Integer[]> flips = ValidMoveFinder.getFlips(row, col);
                 for (Integer[] flip : flips) {
@@ -82,13 +80,14 @@ public class Othello {
         return true;
     }
 
-    public boolean playerHasMoves(int player) // check if player has moves, if not, switch to other player
+    public boolean playerHasMoves(Integer player) // check if player has moves, if not, switch to other player
     {
-        return false; // need to fill
+        return (ValidMoveFinder.getValidMoves(player).size() > 0);
     }
 
     public boolean validMove() // check if selected space is valid
     {
+        ArrayList<Integer[]> availableMoves = ValidMoveFinder.getValidMoves(getTurn());
         return false; // need to fill
     }
 

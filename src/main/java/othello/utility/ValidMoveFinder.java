@@ -5,9 +5,13 @@ import othello.models.Othello;
 import java.util.ArrayList;
 
 public class ValidMoveFinder {
-    public static ArrayList<Integer[]> getValidMoves(Integer row, Integer col){
+    public static ArrayList<Integer[]> getValidMoves(Integer turn){
         ArrayList<Integer[]> moves = new ArrayList<Integer[]>();
-        checkValidMoves(row, col, moves);
+        for (int i = 0; i < 7; i++){
+            for (int j = 0; i < 7; j++){
+                checkValidMoves(i, j, moves);
+            }
+        }
         return moves;
     }
     public static ArrayList<Integer[]> getFlips(Integer row, Integer col){
