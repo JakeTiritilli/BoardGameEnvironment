@@ -67,7 +67,7 @@ public class TicTacToe {
      * are null; otherwise, false.
      */
     public boolean boardIsFull() {
-        for (TicTacToePlayer slot: gameBoard) {
+        for (TicTacToePlayer slot : gameBoard) {
             if (slot == null) {
                 return false;
             }
