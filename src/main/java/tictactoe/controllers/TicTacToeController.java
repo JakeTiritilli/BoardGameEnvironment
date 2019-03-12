@@ -2,7 +2,7 @@ package tictactoe.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 
 import java.util.List;
 
@@ -86,7 +86,7 @@ public class TicTacToeController {
         game = new TicTacToe(TicTacToePlayer.X);
         statusLabel.setText("Turn: " + game.getCurrentPlayer().toString());
         
-        for (Label cell: cellList) {
+        for (Label cell : cellList) {
             cell.setText("");
         }
     }
