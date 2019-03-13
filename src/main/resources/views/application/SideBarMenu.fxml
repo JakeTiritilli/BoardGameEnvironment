@@ -9,20 +9,21 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import java.util.*?>
 
-<AnchorPane fx:id="sideBarMenuAnchorPane" prefHeight="750.0" prefWidth="290.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.SideBarMenuController">
+<AnchorPane fx:id="sideBarMenuAnchorPane" prefHeight="750.0" prefWidth="290.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.MenuController">
    <children>
-      <Button fx:id="checkersButton" layoutX="20.0" layoutY="79.0" mnemonicParsing="false" onAction="#loadCheckersContent" prefHeight="41.0" prefWidth="250.0" text="Checkers">
+      <Button fx:id="checkersPlayButton" layoutX="20.0" layoutY="79.0" mnemonicParsing="false" onAction="#loadGameScene" prefHeight="41.0" prefWidth="250.0" text="Checkers">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="othelloButton" disable="true" layoutX="20.0" layoutY="134.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="250.0" text="Othello">
+      <Button fx:id="othelloPlayButton" disable="true" layoutX="20.0" layoutY="134.0" mnemonicParsing="false" prefHeight="41.0" onAction="#loadGameScene" prefWidth="250.0" text="Othello">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="memoryButton" disable="true" layoutX="20.0" layoutY="189.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="250.0" text="Memory">
+      <Button fx:id="memoryPlayButton" disable="true" layoutX="20.0" layoutY="189.0" mnemonicParsing="false" onAction="#loadGameScene" prefHeight="41.0" prefWidth="250.0" text="Memory">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -42,7 +43,7 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="tictactoeButton" layoutX="20.0" layoutY="244.0" mnemonicParsing="false" onAction="#loadTictactoeContent" prefHeight="41.0" prefWidth="250.0" text="Tic-Tac-Toe">
+      <Button fx:id="ticTacToePlayButton" layoutX="20.0" layoutY="244.0" mnemonicParsing="false" onAction="#loadGameScene" prefHeight="41.0" prefWidth="250.0" text="Tic-Tac-Toe">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -54,4 +55,12 @@
       </Label>
       <Separator layoutX="39.0" layoutY="518.0" prefWidth="213.0" />
    </children>
+   <fx:define>
+      <ArrayList fx:id="gameButtons" >
+         <fx:reference source="checkersPlayButton"/>
+         <fx:reference source="othelloPlayButton"/>
+         <fx:reference source="ticTacToePlayButton"/>
+         <fx:reference source="memoryPlayButton"/>
+      </ArrayList>
+   </fx:define>
 </AnchorPane>
