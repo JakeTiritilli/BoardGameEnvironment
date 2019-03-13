@@ -36,6 +36,12 @@ public class CheckerboardController {
     @FXML
     ArrayList<StackPane> blackSideCellList; // References to the black side black cells
 
+    /**
+     * Initializes the user data for gameboard which places a GameboardNodeInfo object
+     * into each cell Node. This is used in order to derive game data so that it can
+     * be passed to the model. It then will initialize the game pieces on the board and then
+     * display valid moves for the movable checkers.
+     */
     @FXML
     public void initialize() {
         this.initializeUserDataForGameboard();
@@ -43,6 +49,10 @@ public class CheckerboardController {
         this.displayMovableCheckerPieces();
     }
 
+    /**
+     * Clears the board of the previous turn artifacts and sets up the board to show
+     * the new valid moves for the current turn.
+     */
     public void startTurn() {
         // Cleans the board and sets it up for the next turn/move
         this.clearEventHandlersAndIndicators();
@@ -142,6 +152,10 @@ public class CheckerboardController {
         }
     }
 
+    /**
+     * Adds click handlers to the cells that are valid moves for the movable checkers.
+     * @param validMoveCell
+     */
     private void addValidMoveClickEventHandlers(StackPane validMoveCell) {
         // Create and add event listener for valid move cell.
         // This is for if a checker is selected and the valid move cell is clicked
@@ -159,12 +173,21 @@ public class CheckerboardController {
         this.validMoveCellsWithEventHandlers.add(validMoveCell);
     }
 
+    /**
+     * Creates a click handler that will initiate the makeMove method on a valid
+     * click. A valid click would be that a checker is selected and the checker is
+     * valid to move to that cell.
+     * @param validMoveCell
+     * @param ref
+     * @return
+     */
     private EventHandler<MouseEvent> createValidMoveClickEventHandler(StackPane validMoveCell,
                                                                       CheckerboardController ref) {
         EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 if (ref.currentlySelectedCheckerPiece != null) {
+                    //TODO: make sure that the currently selected checker is valid for the cell
                     ref.makeMove(validMoveCell);
                 }
                 event.consume();
@@ -194,6 +217,11 @@ public class CheckerboardController {
         return eventHandler;
     }
 
+    /**
+     * Clears the cell where the checker originally was and moves the checker to the new
+     * cell. It then communicates the change to the model.
+     * @param validMoveCell cell that the checker is moving to.
+     */
     private void makeMove(StackPane validMoveCell) {
 
         // Clear the cell that the currently selected checker piece is in
@@ -210,7 +238,7 @@ public class CheckerboardController {
         PosTuple newPosition = newCellInfo.boardPosition;
 
         // Communicate changes to model
-        this.updateModel(oldPosition, newPosition);
+        this.updateModelForMove(oldPosition, newPosition);
 
         // Delete enemy if jumped
         this.handleJumpCondition(oldPosition, newPosition);
@@ -219,11 +247,24 @@ public class CheckerboardController {
         this.startTurn();
     }
 
-    private void updateModel(PosTuple oldPosition, PosTuple newPosition) {
+    /**
+     * Updates the model for the move made. Also clears the valid moves within the model
+     * to set up the model for the next turn.
+     * @param oldPosition
+     * @param newPosition
+     */
+    private void updateModelForMove(PosTuple oldPosition, PosTuple newPosition) {
         this.game.makeMove(oldPosition, newPosition);
         this.game.clearValidMovesForAllCheckerPieces();
     }
 
+    /**
+     * Handles the condition if a checker is currently jumping. This will be called
+     * after the move is made so if the game is in jumping state, a checker needs to be
+     * deleted.
+     * @param oldPosition position before the move
+     * @param newPosition position after the move
+     */
     private void handleJumpCondition(PosTuple oldPosition, PosTuple newPosition) {
         // If game.jumping == true, then make sure to delete the enemy
         if (this.game.isJumping()) {
@@ -233,10 +274,19 @@ public class CheckerboardController {
         }
     }
 
+    /**
+     * Returns the cell at the pos
+     * @param row of target cell
+     * @param col of target cell
+     * @return StackPane cell ref
+     */
     private StackPane getCellAtPos(int row, int col) {
         return this.gameboard.get(row).get(col);
     }
 
+    /**
+     * Clears event handlers and GUI artifacts from the board.
+     */
     private void clearEventHandlersAndIndicators() {
         this.clearCurrentlySelectedCheckerPiece();
         this.clearValidMoveIndicators();
@@ -245,6 +295,9 @@ public class CheckerboardController {
 
     }
 
+    /**
+     * Clears the yellow circles that indicate a valid move can be made.
+     */
     private void clearValidMoveIndicators() {
         for (StackPane validMoveCell : this.validMoveCellsWithEventHandlers) {
             validMoveCell.getChildren().remove(0);
@@ -271,6 +324,9 @@ public class CheckerboardController {
         this.validMoveCellsWithEventHandlers = new ArrayList<>();
     }
 
+    /**
+     * Clears the event handlers on the movable checker pieces.
+     */
     private void clearSelectableCheckerPiecesEventHandlers() {
         for (AnchorPane checker : this.checkerPiecesWithEventHandlers) {
             this.clearEventHandlerForNode(checker);
@@ -278,6 +334,10 @@ public class CheckerboardController {
         this.checkerPiecesWithEventHandlers = new ArrayList<>();
     }
 
+    /**
+     * Clears the event handlers on the given Pane node.
+     * @param gameboardNode Pane object which can represent a cell or checker
+     */
     private void clearEventHandlerForNode(Pane gameboardNode) {
         GameboardNodeInfo nodeInfo = (GameboardNodeInfo) gameboardNode.getUserData();
         EventHandler<MouseEvent> handlerRef = nodeInfo.clearClickEventHanlder();

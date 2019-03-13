@@ -53,11 +53,19 @@ public class Checkers {
         this.updateModelForMove(oldPosition, newPosition);
     }
 
+    /**
+     * Goes into each checker piece and clears the valid moves stored
+     * in the CheckerPiece object.
+     */
     public void clearValidMovesForAllCheckerPieces() {
         this.clearValidMovesForCheckerPieces(this.blackCheckerPieceRefs);
         this.clearValidMovesForCheckerPieces(this.redCheckerPieceRefs);
     }
 
+    /**
+     * Getter for this.jumping boolean.
+     * @return true if jumping
+     */
     public boolean isJumping() {
         return this.jumping;
     }
@@ -69,6 +77,14 @@ public class Checkers {
         this.currentPlayer = this.currentPlayer == CheckerPlayer.BLACK ? CheckerPlayer.RED : CheckerPlayer.BLACK;
     }
 
+    /**
+     * Checks to make sure that the old pos has a checker there and the new pos
+     * does not have a checker there) and (make sure both positions are on the board).
+     * This function is meant to be used before the actual move update.
+     * @param oldPosition PosTuple pos where the checker currently is.
+     * @param newPosition PosTuple pos where the checker will end up.
+     * @return true if valid move
+     */
     private boolean moveCheck(PosTuple oldPosition, PosTuple newPosition) {
         // (Check to make sure that the old pos has a checker there and the new pos
         // does not have a checker there) and (make sure both positions are on the board).
@@ -80,6 +96,15 @@ public class Checkers {
         return true;
     }
 
+    /**
+     * Handles the different kind of conditions with each move. There are generally
+     * two types of moves; a single row move and a jump move. If it is a single row
+     * move, change the turn. If it is a jump move, remove the enemy checker that
+     * got jumped over and set the jump rules for the next turn. The jump rules
+     * will make sure that the continuous turn from jumping will be enforced.
+     * @param oldPosition position before the move
+     * @param newPosition position after the move
+     */
     private void handleMoveConditions(PosTuple oldPosition, PosTuple newPosition) {
         // If the move was a single row move (which means it wasn't a jump),
         // then change the current player
@@ -98,6 +123,12 @@ public class Checkers {
         }
     }
 
+    /**
+     * Updates the gameboard model and the CheckerPiece model in order to reflect
+     * the new situation after the move.
+     * @param oldPosition position before the move
+     * @param newPosition position after the move
+     */
     private void updateModelForMove(PosTuple oldPosition, PosTuple newPosition) {
         // Update position value within CheckerPiece object
         CheckerPiece checkerToUpdate = gameBoard[oldPosition.row][oldPosition.col];
@@ -108,12 +139,23 @@ public class Checkers {
         gameBoard[oldPosition.row][oldPosition.col] = null;
     }
 
+    /**
+     * Clears all of the valid moves for each CheckerPiece object in the
+     * specified list.
+     * @param checkerPieces list of CheckerPiece objects
+     */
     private void clearValidMovesForCheckerPieces(ArrayList<CheckerPiece> checkerPieces) {
         for(CheckerPiece checker: checkerPieces) {
             checker.clearValidMoves();
         }
     }
 
+    /**
+     * Deletes the references to a checkerpiece given a row and col. This is
+     * for a jump move where a piece needs to be removed from the game state.
+     * @param row of piece to delete
+     * @param col of piece to delete
+     */
     private void deleteCheckerPiece(int row, int col) {
         CheckerPiece checkerToDelete = this.gameBoard[row][col];
         CheckerPlayer enemyColor = checkerToDelete.color;
@@ -128,6 +170,11 @@ public class Checkers {
         this.gameBoard[row][col] = null;
     }
 
+    /**
+     * Sets up the rules for the next turn so that the logic knows that the jumping
+     * checker should be restricted.
+     * @param checker CheckerPiece that is jumping
+     */
     private void setJumpRules(CheckerPiece checker) {
         // Set the jumping boolean to true so that it restricts player movement
         this.jumping = true;
