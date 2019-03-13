@@ -48,14 +48,39 @@ public class Checkers {
      * @param newPosition
      */
     public void makeMove(PosTuple oldPosition, PosTuple newPosition) {
+        this.moveCheck(oldPosition, newPosition);
+        this.handleMoveConditions(oldPosition, newPosition);
+        this.updateModelForMove(oldPosition, newPosition);
+    }
+
+    public void clearValidMovesForAllCheckerPieces() {
+        this.clearValidMovesForCheckerPieces(this.blackCheckerPieceRefs);
+        this.clearValidMovesForCheckerPieces(this.redCheckerPieceRefs);
+    }
+
+    public boolean isJumping() {
+        return this.jumping;
+    }
+
+    /**
+     * Toggles the current player.
+     */
+    private void changeTurn() {
+        this.currentPlayer = this.currentPlayer == CheckerPlayer.BLACK ? CheckerPlayer.RED : CheckerPlayer.BLACK;
+    }
+
+    private boolean moveCheck(PosTuple oldPosition, PosTuple newPosition) {
         // (Check to make sure that the old pos has a checker there and the new pos
         // does not have a checker there) and (make sure both positions are on the board).
         if ((gameBoard[oldPosition.row][oldPosition.col] == null ||
-            gameBoard[newPosition.row][newPosition.col] != null) &&
+                gameBoard[newPosition.row][newPosition.col] != null) &&
                 (isValidPos(oldPosition) && isValidPos(newPosition))) {
             throw new IllegalArgumentException("The position parameters in makeMove were not valid moves");
         }
+        return true;
+    }
 
+    private void handleMoveConditions(PosTuple oldPosition, PosTuple newPosition) {
         // If the move was a single row move (which means it wasn't a jump),
         // then change the current player
         if (Math.abs(oldPosition.row - newPosition.row) == 1) {
@@ -66,23 +91,21 @@ public class Checkers {
             int enemyRow = (oldPosition.row + newPosition.row) / 2;
             int enemyCol = (oldPosition.col + newPosition.col) / 2;
             this.deleteCheckerPiece(enemyRow, enemyCol);
-            this.setJumpRules(this.gameBoard[newPosition.row][newPosition.col]);
+
+            // Set the jump rules to the checker jumping
+            // The model hasn't been updated yet so it is still at old position
+            this.setJumpRules(this.gameBoard[oldPosition.row][oldPosition.col]);
         }
+    }
 
-        gameBoard[newPosition.row][newPosition.col] = gameBoard[oldPosition.row][oldPosition.col];
+    private void updateModelForMove(PosTuple oldPosition, PosTuple newPosition) {
+        // Update position value within CheckerPiece object
+        CheckerPiece checkerToUpdate = gameBoard[oldPosition.row][oldPosition.col];
+        checkerToUpdate.updatePosition(newPosition.row, newPosition.col);
+
+        // Update gameboard model to reflect move
+        gameBoard[newPosition.row][newPosition.col] = checkerToUpdate;
         gameBoard[oldPosition.row][oldPosition.col] = null;
-    }
-
-    public void clearValidMovesForAllCheckerPieces() {
-        this.clearValidMovesForCheckerPieces(this.blackCheckerPieceRefs);
-        this.clearValidMovesForCheckerPieces(this.redCheckerPieceRefs);
-    }
-
-    /**
-     * Toggles the current player.
-     */
-    private void changeTurn() {
-        this.currentPlayer = this.currentPlayer == CheckerPlayer.BLACK ? CheckerPlayer.RED : CheckerPlayer.BLACK;
     }
 
     private void clearValidMovesForCheckerPieces(ArrayList<CheckerPiece> checkerPieces) {
@@ -125,6 +148,7 @@ public class Checkers {
         ArrayList<CheckerPiece> result = new ArrayList<>();
 
         // If the checker is jumping, then restrict movement to only that checker
+        // and restrict it from making single moves
         if (this.jumping) {
             if (this.getValidMovesForChecker(this.jumpingCheckerPiece).size() != 0) {
                 result.add(this.jumpingCheckerPiece);
@@ -132,6 +156,7 @@ public class Checkers {
             // No more valid jumps available so change turn
             else {
                 this.changeTurn();
+                this.jumping = false;
             }
             // Don't allow further execution because only checking for the jumping piece
             return result;
@@ -178,18 +203,24 @@ public class Checkers {
     /**
      * Checks if the checker can make the move to the position. This takes into account whether it is a king or not.
      * If the position is 2 rows away, it will check to see if there is an enemy checker in the intermediate cell.
-     * @param checker CheckerPiece
-     * @param pos PosTuple
-     * @return Boolean
+     * @param checker CheckerPiece moving checker
+     * @param pos PosTuple position that checker wants to move to
+     * @return Boolean return true if it is a valid move
      */
     private boolean isValidMoveForChecker(CheckerPiece checker, PosTuple pos) {
     	// if pos is only 1 row away, check if it is a valid move for the color
         if (Math.abs(checker.position.row - pos.row) == 1) {
+            // If the checker is jumping, don't allow single row moves.
+            // The checker is only allowed to perform multiple jumps after
+            // the first jump.
+            if (this.jumping) {
+                return false;
+            }
             return this.isSingleRowMoveValid(checker, pos);
         }
 
-        // if pos is 2 rows away, check if there is a jump available
-        // can assume that it is two rows away if reached this point of flow
+        // If pos is 2 rows away, check if there is a jump available.
+        // Can assume that it is two rows away if reached this point of flow.
         return this.isJumpMoveValid(checker, pos);
     }
 
@@ -240,9 +271,10 @@ public class Checkers {
         // sets the var to the intermediate cell between the checker and final pos
         enemyCol = (checker.position.col + pos.col) / 2;
 
-        // if the pos being checked is a valid move for that color, check for enemy
+        // if the pos being checked is a valid move for that color, check for enemy and check the position
+        // that the checker is jumping to is empty
         if (pos.row == rowDelta) {
-            return this.hasEnemy(checker, enemyRow, enemyCol);
+            return this.hasEnemy(checker, enemyRow, enemyCol) && this.gameBoard[pos.row][pos.col] == null;
         }
         return false;
     }

@@ -23,12 +23,11 @@ import java.util.ArrayList;
 
 public class CheckerboardController {
     private Checkers game = new Checkers();
+    private AnchorPane currentlySelectedCheckerPiece = null;
 
     // These array lists are stored in order to remove the event handlers each turn
     private ArrayList<StackPane> validMoveCellsWithEventHandlers = new ArrayList<>();
     private ArrayList<AnchorPane> checkerPiecesWithEventHandlers = new ArrayList<>();
-
-    private AnchorPane currentlySelectedCheckerPiece = null;
 
     @FXML
     ArrayList<ArrayList<StackPane>> gameboard; // 2D array that represents the gameboard
@@ -47,7 +46,6 @@ public class CheckerboardController {
     public void startTurn() {
         // Cleans the board and sets it up for the next turn/move
         this.clearEventHandlersAndIndicators();
-
         displayMovableCheckerPieces();
     }
 
@@ -205,17 +203,38 @@ public class CheckerboardController {
         // Move the currently selected checker piece to the new cell
         validMoveCell.getChildren().add(this.currentlySelectedCheckerPiece);
 
+        // Extract cell info
         GameboardNodeInfo oldCellInfo = (GameboardNodeInfo) currentCell.getUserData();
         GameboardNodeInfo newCellInfo = (GameboardNodeInfo) validMoveCell.getUserData();
-
-        // Communicate changes to model
         PosTuple oldPosition = oldCellInfo.boardPosition;
         PosTuple newPosition = newCellInfo.boardPosition;
-        this.game.makeMove(oldPosition, newPosition);
-        this.game.clearValidMovesForAllCheckerPieces();
+
+        // Communicate changes to model
+        this.updateModel(oldPosition, newPosition);
+
+        // Delete enemy if jumped
+        this.handleJumpCondition(oldPosition, newPosition);
 
         // Restart the turn loop
         this.startTurn();
+    }
+
+    private void updateModel(PosTuple oldPosition, PosTuple newPosition) {
+        this.game.makeMove(oldPosition, newPosition);
+        this.game.clearValidMovesForAllCheckerPieces();
+    }
+
+    private void handleJumpCondition(PosTuple oldPosition, PosTuple newPosition) {
+        // If game.jumping == true, then make sure to delete the enemy
+        if (this.game.isJumping()) {
+            int enemyRow = (oldPosition.row + newPosition.row) / 2;
+            int enemyCol = (oldPosition.col + newPosition.col) / 2;
+            getCellAtPos(enemyRow, enemyCol).getChildren().clear();
+        }
+    }
+
+    private StackPane getCellAtPos(int row, int col) {
+        return this.gameboard.get(row).get(col);
     }
 
     private void clearEventHandlersAndIndicators() {

@@ -32,4 +32,8 @@ public class CheckerPiece {
     public void clearValidMoves() {
         this.validMoves = new ArrayList();
     }
+
+    public void updatePosition(int row, int col) {
+        this.position = new PosTuple(row, col);
+    }
 }
