@@ -92,7 +92,7 @@ public abstract class BoardGame {
      * class.
      * @return true if game has been won, else false.
      */
-    abstract public boolean gameIsWon();
+    public abstract boolean gameIsWon();
 
     /**
      * Sets the winner for the game and updates that player's profile.
@@ -111,39 +111,9 @@ public abstract class BoardGame {
      * Makes a move on the gameboard by placing a piece in a given cell.
      * @param row the row number
      * @param column the column number
-     * @param checkOccupied true if function should throw if that cell
-     * is already occupied, else false
-     * @param switchPlayers true if the function should automaticallly switch
-     * players at completion, else false
      * @throws InvalidMoveException if the move was out bounds or cell is already there
-     * @throws GameOverException if move was attempted to be made after the game was already over.
      */
-    public void makeMove(int row, int column, boolean checkOccupied, boolean switchPlayers) throws InvalidMoveException, GameOverException {
-        if (gameIsWon()) {
-            throw new GameOverException("Attempts to make move after game completed.");
-        }
-
-        if (row >= gameBoard.length || column >= gameBoard[0].length) {
-            throw new InvalidMoveException("Attempted to place a move out of bounds.");
-        }
-
-        if (checkOccupied && gameBoard[row][column] != null) {
-            throw new InvalidMoveException("Attempted to place a move ");
-        }
-
-        gameBoard[row][column] = (currentPlayer == player1) ? player1GamePiece : player2GamePiece;
-        
-        if (switchPlayers) {
-            switchCurrentPlayer();
-        }
-    }
-
-    /**
-     * Makes a move on the game board if the board is being treated an a 1D board.
-     */
-    public void makeMove(int position, boolean checkOccupied, boolean switchPlayers) throws InvalidMoveException, GameOverException {
-        makeMove(0, position, checkOccupied, switchPlayers);
-    }
+    abstract public void makeMove(int row, int column) throws InvalidMoveException;
 
     /**
      * Returns a piece at a given location on a 2D game board.
@@ -151,9 +121,9 @@ public abstract class BoardGame {
      * @param column the column number on the game board
      * @throws GameBoardException if the indices were out of bounds
      */
-    public GamePiece returnPieceAt(int row, int column) throws GameBoardException {
+    public GamePiece returnPieceAt(int row, int column) throws InvalidMoveException {
         if (row >= gameBoard.length || column >= gameBoard[0].length) {
-            throw new GameBoardException("Attempted to place a move out of bounds.");
+            throw new InvalidMoveException("Attempted to place a move out of bounds.");
         }
 
         return gameBoard[row][column];
@@ -162,7 +132,7 @@ public abstract class BoardGame {
     /**
      * Returns a given piece on the board if the board is being treated as a 1D board.
      */
-    public GamePiece returnPieceAt(int position) throws GameBoardException {
+    public GamePiece returnPieceAt(int position) throws InvalidMoveException {
         return returnPieceAt(0, position);
     }
 
@@ -175,7 +145,7 @@ public abstract class BoardGame {
     }
 
     /**
-     * Switched the current player to the other player.
+     * Switches the current player to the other player.
      */
     public void switchCurrentPlayer() {
         currentPlayer = (currentPlayer == player1) ? player2 : player1;

@@ -4,6 +4,7 @@ import tictactoe.utility.*;
 import boardgamekit.BoardGame;
 import boardgamekit.players.*;
 import boardgamekit.utility.GamePiece;
+import boardgamekit.utility.InvalidMoveException;
 
 /**
  * Represents a model for and contains general functionality for playing the
@@ -17,6 +18,28 @@ public class TicTacToe extends BoardGame {
         super(p1, p2, 9);
         setPlayer1GamePiece(TicTacToePlayer.X);
         setPlayer2GamePiece(TicTacToePlayer.O);
+    }
+
+    public void makeMove(int row, int column) throws InvalidMoveException {
+        if (gameIsWon()) {
+            throw new InvalidMoveException("Attempts to make move after game completed.");
+        }
+
+        if (row >= gameBoard.length || column >= gameBoard[0].length) {
+            throw new InvalidMoveException("Attempted to place a move out of bounds.");
+        }
+
+        if (gameBoard[row][column] != null) {
+            throw new InvalidMoveException("Attempted to place a move where a player already is.");
+        }
+
+        gameBoard[row][column] = getCurrentPlayerPiece();
+        
+        switchCurrentPlayer();
+    }
+
+    public void makeMove(int position) throws InvalidMoveException {
+        makeMove(0, position);
     }
 
     /**

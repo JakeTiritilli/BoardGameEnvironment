@@ -9,6 +9,7 @@ import java.util.List;
 import boardgamekit.players.Player;
 import tictactoe.models.*;
 import tictactoe.utility.*;
+import boardgamekit.utility.InvalidMoveException;
 
 /**
  * Represents the contoller for the Tic Tac Toe game
@@ -67,8 +68,8 @@ public class TicTacToeController {
         
         // If move was invalid, then exit early.
         try {
-            game.makeMove(cellNum, true, true);
-        } catch (Exception e) {
+            game.makeMove(cellNum);
+        } catch (InvalidMoveException e) {
             return;
         }
 
