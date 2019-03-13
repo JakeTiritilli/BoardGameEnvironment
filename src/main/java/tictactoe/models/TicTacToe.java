@@ -3,6 +3,7 @@ package tictactoe.models;
 import tictactoe.utility.*;
 import boardgamekit.BoardGame;
 import boardgamekit.players.*;
+import boardgamekit.utility.GamePiece;
 
 /**
  * Represents a model for and contains general functionality for playing the
@@ -25,23 +26,24 @@ public class TicTacToe extends BoardGame {
      * vertically, or diagonally; otherwise, false.
      */
     public boolean gameIsWon() {
-        return horizontalWin() || verticalWin() || diagonalWin();
+        GamePiece[] tictactoeBoard = gameBoard[0];
+        return horizontalWin(tictactoeBoard) || verticalWin(tictactoeBoard) || diagonalWin(tictactoeBoard);
     }
 
-    private boolean horizontalWin() {
-        return (gameBoard[0] != null && gameBoard[0] == gameBoard[1] && gameBoard[1] == gameBoard[2]) ||
-               (gameBoard[3] != null && gameBoard[3] == gameBoard[4] && gameBoard[4] == gameBoard[5]) ||
-               (gameBoard[6] != null && gameBoard[6] == gameBoard[7] && gameBoard[7] == gameBoard[8]);
+    private boolean horizontalWin(GamePiece[] board) {
+        return (board[0] != null && board[0] == board[1] && board[1] == board[2]) ||
+               (board[3] != null && board[3] == board[4] && board[4] == board[5]) ||
+               (board[6] != null && board[6] == board[7] && board[7] == board[8]);
     }
 
-    private boolean verticalWin() {
-        return (gameBoard[0] != null && gameBoard[0] == gameBoard[3] && gameBoard[3] == gameBoard[6]) ||
-               (gameBoard[1] != null && gameBoard[1] == gameBoard[4] && gameBoard[4] == gameBoard[7]) ||
-               (gameBoard[2] != null && gameBoard[2] == gameBoard[5] && gameBoard[5] == gameBoard[8]);
+    private boolean verticalWin(GamePiece[] board) {
+        return (board[0] != null && board[0] == board[3] && board[3] == board[6]) ||
+               (board[1] != null && board[1] == board[4] && board[4] == board[7]) ||
+               (board[2] != null && board[2] == board[5] && board[5] == board[8]);
     }
 
-    private boolean diagonalWin() {
-        return (gameBoard[0] != null && gameBoard[0] == gameBoard[4] && gameBoard[4] == gameBoard[8]) ||
-               (gameBoard[2] != null && gameBoard[2] == gameBoard[4] && gameBoard[4] == gameBoard[6]);
+    private boolean diagonalWin(GamePiece[] board) {
+        return (board[0] != null && board[0] == board[4] && board[4] == board[8]) ||
+               (board[2] != null && board[2] == board[4] && board[4] == board[6]);
     }
 }

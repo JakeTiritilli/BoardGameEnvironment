@@ -77,46 +77,11 @@ public class Player {
     }
 
     /**
-     * Returns the player's score for a particular game.
-     * @param game the game to retrieve the score for.
-     * @return and int representing the number of games the
-     * player has won for that particular board game.
+     * Gets the player's score for a particular game.
+     * @param game the board game to return the score for
      */
-    public int getScoreFor(Game game) {
-        switch (game) {
-            case CHECKERS:
-                return scoreBreakdown.getInt("checkers");
-            case OTHELLO:
-                return scoreBreakdown.getInt("othello");
-            case MEMORY:
-                return scoreBreakdown.getInt("memory");
-            case TICTACTOE:
-                return scoreBreakdown.getInt("tictactoe");
-            default:
-                return 0;
-        }
-    }
-
-    /**
-     * Sets the player's score for a particular game.
-     * @param game the board game to update the score for
-     * @param score the new score for that board game
-     */
-    public void setScoreFor(Game game, int score) {
-        switch (game) {
-            case CHECKERS:
-                scoreBreakdown.put("checkers", score);
-                break;
-            case OTHELLO:
-                scoreBreakdown.put("othello", score);
-                break;
-            case MEMORY:
-                scoreBreakdown.put("memory", score);
-                break;
-            case TICTACTOE:
-                scoreBreakdown.put("tictactoe", score);
-                break;
-        }
+    public int getScoreFor(String game) {
+        return scoreBreakdown.getInt(game);
     }
 
     /**

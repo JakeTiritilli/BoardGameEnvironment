@@ -12,8 +12,6 @@ import boardgamekit.utility.*;
  */
 public abstract class BoardGame {
 
-    private String rawGameType;
-
     private Player player1;
 
     private GamePiece player1GamePiece;
@@ -103,15 +101,10 @@ public abstract class BoardGame {
      * @param forCurrentPlayer if true, will set the current player as
      * the winner. Otherwise, the other player will be set as the winner.
      */
-    public void setWinner(Game gameType, boolean forCurrentPlayer) {
+    public void setWinner(String gameType, boolean forCurrentPlayer) {
         Player winner = (currentPlayer == player1) ? player1 : player1;
         int currentScore = winner.getScoreFor(gameType);
-        
-        if (gameType != null) {
-            winner.setScoreFor(gameType, currentScore + 1);
-        } else {
-            winner.setScoreFor(rawGameType, currentScore + 1);   
-        }
+        winner.setScoreFor(gameType, currentScore + 1);
     }
 
     /**
