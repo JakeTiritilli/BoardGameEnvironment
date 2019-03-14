@@ -7,6 +7,8 @@ package memory.controllers;
  * @author Kaitlyn Fong
  */
 
+import javafx.animation.PauseTransition;
+import javafx.util.Duration;
 import memory.models.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button ;
@@ -167,32 +169,31 @@ public class MemoryController {
                         case 5: cardShow5(); break;
                         case 6: cardShow6(); break;
                     }
-//                    try {
-//                        Thread.sleep(4000);
-//                    }
-//                    catch(InterruptedException ex)
-//                    {
-//                        Thread.currentThread().interrupt();
-//                    }
+                    PauseTransition pause = new PauseTransition(
+                            Duration.seconds(1)
+                    );
+                    pause.setOnFinished(event -> {
+                        //hide first card
+                        switch(game.currentPlayerPick[0]){
+                            case 1: cardHide1(); break;
+                            case 2: cardHide2(); break;
+                            case 3: cardHide3(); break;
+                            case 4: cardHide4(); break;
+                            case 5: cardHide5(); break;
+                            case 6: cardHide6(); break;
+                        }
+                        switch(cardNum){
+                            case 1: cardHide1(); break;
+                            case 2: cardHide2(); break;
+                            case 3: cardHide3(); break;
+                            case 4: cardHide4(); break;
+                            case 5: cardHide5(); break;
+                            case 6: cardHide6(); break;
+                        }
+                        game.changePlayer();
 
-                    //hide first card
-                    switch(game.currentPlayerPick[0]){
-                        case 1: cardHide1(); break;
-                        case 2: cardHide2(); break;
-                        case 3: cardHide3(); break;
-                        case 4: cardHide4(); break;
-                        case 5: cardHide5(); break;
-                        case 6: cardHide6(); break;
-                    }
-                    switch(cardNum){
-                        case 1: cardHide1(); break;
-                        case 2: cardHide2(); break;
-                        case 3: cardHide3(); break;
-                        case 4: cardHide4(); break;
-                        case 5: cardHide5(); break;
-                        case 6: cardHide6(); break;
-                    }
-                    game.changePlayer();
+                    });
+                    pause.play();
                     break;
                 case 3: //CASE 3: KEEP BOTH IMAGES SHOWING
                     playeronescore.setText("Score: " + game.playerOneScore);
