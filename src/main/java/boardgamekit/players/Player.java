@@ -23,11 +23,11 @@ import boardgamekit.utility.Game;
  * 
  * @author Jacob Tiritilli
  */
-public class PlayerData {
+public class Player {
     final private String userName;
     private JSONObject scoreBreakdown;
 
-    private PlayerData(String userName, JSONObject scoreBreakdown) {
+    private Player(String userName, JSONObject scoreBreakdown) {
         this.userName = userName;
         this.scoreBreakdown = scoreBreakdown;
     }
@@ -37,25 +37,25 @@ public class PlayerData {
      * in a JSON object.
      * @param userName the name of the user
      * @param scoreBreakdown a JSON object of the user's scores for each game
-     * @return a new {@code PlayerData} object
+     * @return a new {@code Player} object
      */
-    public static PlayerData create(String userName, JSONObject scoreBreakdown) {
-        return new PlayerData(userName, scoreBreakdown);
+    public static Player create(String userName, JSONObject scoreBreakdown) {
+        return new Player(userName, scoreBreakdown);
     }
 
     /**
      * Creates a default player by adding an associating game scores
      * JSON object with all zeroes for each game.
      * @param userName the name of the player
-     * @return a new {@code PlayerData} object
+     * @return a new {@code Player} object
      */
-    public static PlayerData createDefault(String userName) {
+    public static Player createDefault(String userName) {
         JSONObject scores = new JSONObject();
         List<Game> somethingList = Arrays.asList(Game.values());
         for (Game game : somethingList) {
             scores.put(game.toString().toLowerCase(), 0);
         }
-        return new PlayerData(userName, scores);
+        return new Player(userName, scores);
     }
 
     /**
@@ -77,24 +77,11 @@ public class PlayerData {
     }
 
     /**
-     * Returns the player's score for a particular game.
-     * @param game the game to retrieve the score for.
-     * @return and int representing the number of games the
-     * player has won for that particular board game.
+     * Gets the player's score for a particular game.
+     * @param game the board game to return the score for
      */
-    public int getScoreFor(Game game) {
-        switch (game) {
-            case CHECKERS:
-                return scoreBreakdown.getInt("checkers");
-            case OTHELLO:
-                return scoreBreakdown.getInt("othello");
-            case MEMORY:
-                return scoreBreakdown.getInt("memory");
-            case TICTACTOE:
-                return scoreBreakdown.getInt("tictactoe");
-            default:
-                return 0;
-        }
+    public int getScoreFor(String game) {
+        return scoreBreakdown.getInt(game);
     }
 
     /**
@@ -102,20 +89,7 @@ public class PlayerData {
      * @param game the board game to update the score for
      * @param score the new score for that board game
      */
-    public void setScoreFor(Game game, int score) {
-        switch (game) {
-            case CHECKERS:
-                scoreBreakdown.put("checkers", score);
-                break;
-            case OTHELLO:
-                scoreBreakdown.put("othello", score);
-                break;
-            case MEMORY:
-                scoreBreakdown.put("memory", score);
-                break;
-            case TICTACTOE:
-                scoreBreakdown.put("tictactoe", score);
-                break;
-        }
+    public void setScoreFor(String game, int score) {
+        scoreBreakdown.put(game, score);
     }
 }
