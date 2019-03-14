@@ -167,13 +167,13 @@ public class MemoryController {
                         case 5: cardShow5(); break;
                         case 6: cardShow6(); break;
                     }
-                    try {
-                        Thread.sleep(4000);
-                    }
-                    catch(InterruptedException ex)
-                    {
-                        Thread.currentThread().interrupt();
-                    }
+//                    try {
+//                        Thread.sleep(4000);
+//                    }
+//                    catch(InterruptedException ex)
+//                    {
+//                        Thread.currentThread().interrupt();
+//                    }
 
                     //hide first card
                     switch(game.currentPlayerPick[0]){

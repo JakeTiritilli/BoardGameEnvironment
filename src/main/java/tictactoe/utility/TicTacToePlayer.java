@@ -1,5 +1,7 @@
 package tictactoe.utility;
 
+import boardgamekit.utility.GamePiece;
+
 /**
  * Represents a Tic Tac Toe player as either the "X" player
  * or the "O" player. This enum was declared to make
@@ -8,6 +10,6 @@ package tictactoe.utility;
  * 
  * @author Jacob Tiritilli
  */
-public enum TicTacToePlayer {
+public enum TicTacToePlayer implements GamePiece {
     X, O
 }

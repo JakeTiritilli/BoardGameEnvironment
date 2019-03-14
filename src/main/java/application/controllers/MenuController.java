@@ -1,49 +1,78 @@
 package application.controllers;
 
-import application.utility.ViewGrabber;
-import application.utility.ViewInitializer;
-import javafx.scene.layout.AnchorPane;
+import java.util.List;
+
+import application.utility.*;
+import javafx.scene.control.*;
+import javafx.fxml.FXML;
+import javafx.event.ActionEvent;
 import javafx.scene.layout.Pane;
 
 /**
- * Abstract base class to hold common functionality of
- * Menu Controllers. The {@code menuAnchorPane} property
- * must be set in a class that inherits from it before methods
- * are called. This should be done by adding an {@code initialize} method
- * to the subclass that is automatically called when the FXML is loaded.
+ * Serves as the controller for the main and side bar menus.
+ * Handles events by swapping panes in and out of the center
+ * pane to display different games.
+ * 
+ * @author Jacob Tiritilli
  */
-public abstract class MenuController {
-    protected AnchorPane menuAnchorPane; // **Must be initialized first**
+public class MenuController {
+    // Array of view intializers for each game.
+    // The order must match the order of buttons
+    // in {@code gameButtons}.
+    private ViewInitializer[] gameInitializers = {
+        CheckersVI.create(),
+        OthelloVI.create(),
+        TicTacToeVI.create(),
+        MemoryVI.create()
+    };
 
-    public void loadCheckersContent() throws Exception {
-        Pane checkerboardPane = ViewInitializer.initGameboardPane(this);
-        loadContent(checkerboardPane);
-    }
+    @FXML
+    private List<Button> gameButtons; // Outlet collection of UI buttons
 
-    public void loadOthelloContent() throws Exception {
-        Pane othelloPane = ViewInitializer.initOthelloPane(this);
-        loadContent(othelloPane);
-    }
-
-    public void loadMemoryContent() throws Exception {
-        Pane memoryPane = ViewInitializer.initMemoryPane(this);
-        loadContent(memoryPane);
-    }
-
-    public void loadTictactoeContent() throws Exception {
-        Pane tictactoePane = ViewInitializer.initTicTacToePane(this);
-        loadContent(tictactoePane);
+    /**
+     * Loads a specific game view into the center pane. This is the handler
+     * that is invoked when any of the game load buttons is pressed in the
+     * menu. Based on the button that is pressed, the function searches for
+     * the corresponding game initializer in {@code gameInitializers} and then
+     * swaps out the panes.
+     * @param actionEvent the event that caused the function invocation. Used to
+     * extract a reference to the Button object that was clicked.
+     * @throws Exception if FXML could not be loaded.
+     */
+    public void loadGameScene(ActionEvent actionEvent) throws Exception {
+        Button gameButton = (Button) actionEvent.getSource();
+        int gameNumber = gameButtons.indexOf(gameButton);
+        ViewInitializer gameInitializer = gameInitializers[gameNumber];
+        swapPaneIn(gameInitializer.getPane(), RootVI.swapOutPane);
     }
 
     /**
-     * Loads the content of a new game or other content pane by
-     * clearing the old one and adding the new one in its place.
-     * @param contentPane a reference to the new content pane that is
-     * to replace the old one
+     * Event handler called when the button to load the main menu back is
+     * pressed.
+     * @param actionEvent the event that resulted in the function invocation.
+     * @throws Exception if FXML could not be loaded.
      */
-    private void loadContent(Pane contentPane) {
-        Pane contentWidgetPane = ViewGrabber.getContentWidgetPane(menuAnchorPane);
-        contentWidgetPane.getChildren().clear();
-        contentWidgetPane.getChildren().add(contentPane);
+    public void loadMainMenuContent(ActionEvent actionEvent) throws Exception{
+        Pane mainVI = MainVI.create().getPane();
+        swapPaneIn(mainVI, RootVI.swapOutPane);
+    }
+
+    /**
+     * Swaps a given Pane into a container Pane.
+     * @param newPane the Pane to be swapped in
+     * @param containerPane the holding Pane that the
+     * new pane will be placed into, clearing out
+     * what was previously in its place.
+     */
+    private void swapPaneIn(Pane newPane, Pane containerPane) {
+        containerPane.getChildren().clear();
+        containerPane.getChildren().add(newPane);
+    }
+
+    /**
+     * Called when the "Exit" button is pressed. Closes the entire application.
+     */
+    public void closeApplication() {
+        System.exit(0);
     }
 }

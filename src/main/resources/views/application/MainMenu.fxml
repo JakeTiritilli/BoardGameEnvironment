@@ -6,15 +6,16 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import java.util.*?>
 
-<AnchorPane fx:id="mainMenuAnchorPane" prefHeight="700.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.MainMenuController">
+<AnchorPane fx:id="mainMenuAnchorPane" prefHeight="700.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.MenuController">
    <children>
       <Label alignment="CENTER" layoutX="120.0" layoutY="67.0" prefHeight="43.0" prefWidth="114.0" text="Checkers" textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Button fx:id="checkersPlayButton" layoutX="101.0" layoutY="278.0" mnemonicParsing="false" onAction="#loadCheckersContent" prefHeight="31.0" prefWidth="151.0" text="Play" />
+      <Button fx:id="checkersPlayButton" layoutX="101.0" layoutY="278.0" mnemonicParsing="false" onAction="#loadGameScene" prefHeight="31.0" prefWidth="151.0" text="Play" />
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="100.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/checkers.jpg" />
@@ -25,7 +26,7 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Button fx:id="othelloPlayButton" disable="true" layoutX="399.0" layoutY="278.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="151.0" text="Play" />
+      <Button fx:id="othelloPlayButton" disable="true" layoutX="399.0" layoutY="278.0" mnemonicParsing="false" onAction="#loadGameScene" prefHeight="31.0" prefWidth="151.0" text="Play" />
       <ImageView fitHeight="157.0" fitWidth="159.0" layoutX="399.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/othello.png" />
@@ -36,7 +37,7 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Button fx:id="ticTacToePlayButton" layoutX="100.0" layoutY="581.0" mnemonicParsing="false" onAction="#loadTictactoeContent" prefHeight="31.0" prefWidth="151.0" text="Play" />
+      <Button fx:id="ticTacToePlayButton" layoutX="100.0" layoutY="581.0" mnemonicParsing="false" onAction="#loadGameScene" prefHeight="31.0" prefWidth="151.0" text="Play" />
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="100.0" layoutY="413.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/tictactoe.png" />
@@ -47,11 +48,19 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Button fx:id="memoryPlayButton" layoutX="399.0" layoutY="581.0" mnemonicParsing="false" onAction="#loadMemoryContent" prefHeight="31.0" prefWidth="151.0" text="Play" />
+      <Button fx:id="memoryPlayButton" disable="true" layoutX="399.0" layoutY="581.0" mnemonicParsing="false" onAction="#loadGameScene" prefHeight="31.0" prefWidth="151.0" text="Play" />
       <ImageView fitHeight="150.0" fitWidth="195.0" layoutX="380.0" layoutY="415.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/memory.png" />
          </image>
       </ImageView>
+      <fx:define>
+         <ArrayList fx:id="gameButtons" >
+            <fx:reference source="checkersPlayButton"/>
+            <fx:reference source="othelloPlayButton"/>
+            <fx:reference source="ticTacToePlayButton"/>
+            <fx:reference source="memoryPlayButton"/>
+         </ArrayList>
+      </fx:define>
    </children>
 </AnchorPane>
