@@ -50,21 +50,6 @@ public abstract class BoardGame {
         this.currentPlayer = player1;
         gameBoard = new GamePiece[rows][columns];
     }
-    
-    /**
-     * Returns whether there is a piece placed in every cell of the board.
-     * @return true if ever cell is occupied on the game board, else false
-     */
-    public boolean boardIsFull() {
-        for (GamePiece[] row : gameBoard) {
-            for (GamePiece slot : row) {
-                if (slot == null) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
 
     /**
      * Sets the game piece for player 1. This method can be called

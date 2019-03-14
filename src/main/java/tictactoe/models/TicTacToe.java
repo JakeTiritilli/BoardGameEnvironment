@@ -43,6 +43,21 @@ public class TicTacToe extends BoardGame {
     }
 
     /**
+     * Returns whether there is a piece placed in every cell of the board.
+     * @return true if ever cell is occupied on the game board, else false
+     */
+    public boolean boardIsFull() {
+        for (GamePiece[] row : gameBoard) {
+            for (GamePiece slot : row) {
+                if (slot == null) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    /**
      * Checks whether there is a winning sequence of three in a row
      * anywhere on the game board.
      * @return true if any player has three in a row horizontally,
