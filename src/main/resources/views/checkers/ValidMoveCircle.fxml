@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Circle?>
+
+<AnchorPane prefHeight="50.0" prefWidth="50.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Circle fill="#ffd90000" layoutX="25.0" layoutY="25.0" radius="20.0" strokeType="INSIDE" strokeWidth="3.0">
+         <stroke>
+            <RadialGradient centerX="0.511204481792717" centerY="0.4760191846522781" radius="0.5591715976331362">
+               <stops>
+                  <Stop color="#ffcc00" />
+                  <Stop color="#ffdd00c2" offset="1.0" />
+               </stops>
+            </RadialGradient>
+         </stroke>
+      </Circle>
+   </children>
+</AnchorPane>
