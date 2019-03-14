@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.shape.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="50.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="50.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Circle layoutX="25.0" layoutY="26.0" radius="20.0" stroke="GREY" strokeType="INSIDE" />
-      <Circle fill="#1f93ff00" layoutX="25.0" layoutY="26.0" radius="15.0" stroke="#808080" strokeType="INSIDE" />
+      <Circle layoutX="25.0" layoutY="25.0" radius="20.0" stroke="GREY" strokeType="INSIDE" strokeWidth="2.0" />
+      <Circle fill="#1f93ff00" layoutX="25.0" layoutY="25.0" radius="15.0" stroke="#808080" strokeType="INSIDE" />
    </children>
 </AnchorPane>

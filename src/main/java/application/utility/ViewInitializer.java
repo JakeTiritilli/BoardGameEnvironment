@@ -10,9 +10,9 @@ import javafx.fxml.FXMLLoader;
  * 
  * @author Jacob Tiritilli
  */
+
 public abstract class ViewInitializer {
     protected String fxmlResource; // Path to the view's FXML file
-
     /**
      * Constructor to force classes that extend this
      * class to provide a path to the FXML file.
