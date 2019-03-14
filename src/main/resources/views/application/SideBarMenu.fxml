@@ -11,39 +11,39 @@
 <?import javafx.scene.text.Font?>
 <?import java.util.*?>
 
-<AnchorPane fx:id="sideBarMenuAnchorPane" prefHeight="750.0" prefWidth="290.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.MenuController">
+<AnchorPane fx:id="sideBarMenuAnchorPane" prefHeight="750.0" prefWidth="270.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.MenuController">
    <children>
-      <Button fx:id="checkersPlayButton" layoutX="20.0" layoutY="79.0" mnemonicParsing="false" onAction="#loadGameScene" prefHeight="41.0" prefWidth="250.0" text="Checkers">
+      <Button fx:id="checkersPlayButton" layoutX="20.0" layoutY="79.0" mnemonicParsing="false" onAction="#loadGameScene" prefHeight="41.0" prefWidth="225.0" text="Checkers">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="othelloPlayButton" disable="true" layoutX="20.0" layoutY="134.0" mnemonicParsing="false" prefHeight="41.0" onAction="#loadGameScene" prefWidth="250.0" text="Othello">
+      <Button fx:id="othelloPlayButton" disable="true" layoutX="20.0" layoutY="134.0" mnemonicParsing="false" onAction="#loadGameScene" prefHeight="41.0" prefWidth="225.0" text="Othello">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="memoryPlayButton" disable="true" layoutX="20.0" layoutY="189.0" mnemonicParsing="false" onAction="#loadGameScene" prefHeight="41.0" prefWidth="250.0" text="Memory">
+      <Button fx:id="memoryPlayButton" disable="true" layoutX="20.0" layoutY="189.0" mnemonicParsing="false" onAction="#loadGameScene" prefHeight="41.0" prefWidth="225.0" text="Memory">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="mainMenuButton" layoutX="20.0" layoutY="541.0" mnemonicParsing="false" onAction="#loadMainMenuContent" prefHeight="41.0" prefWidth="250.0" text="Main Menu">
+      <Button fx:id="mainMenuButton" layoutX="20.0" layoutY="541.0" mnemonicParsing="false" onAction="#loadMainMenuContent" prefHeight="41.0" prefWidth="225.0" text="Main Menu">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="restartGameButton" disable="true" layoutX="20.0" layoutY="596.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="250.0" text="Restart Game">
+      <Button fx:id="restartGameButton" disable="true" layoutX="20.0" layoutY="596.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="225.0" text="Restart Game">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="exitGameButton" layoutX="20.0" layoutY="651.0" mnemonicParsing="false" onAction="#closeApplication" prefHeight="41.0" prefWidth="250.0" text="Exit">
+      <Button fx:id="exitGameButton" layoutX="20.0" layoutY="651.0" mnemonicParsing="false" onAction="#closeApplication" prefHeight="41.0" prefWidth="225.0" text="Exit">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="ticTacToePlayButton" layoutX="20.0" layoutY="244.0" mnemonicParsing="false" onAction="#loadGameScene" prefHeight="41.0" prefWidth="250.0" text="Tic-Tac-Toe">
+      <Button fx:id="ticTacToePlayButton" layoutX="20.0" layoutY="244.0" mnemonicParsing="false" onAction="#loadGameScene" prefHeight="41.0" prefWidth="225.0" text="Tic-Tac-Toe">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -53,7 +53,7 @@
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <Separator layoutX="39.0" layoutY="518.0" prefWidth="213.0" />
+      <Separator layoutY="518.0" prefHeight="3.0" prefWidth="389.0" />
    </children>
    <fx:define>
       <ArrayList fx:id="gameButtons" >
