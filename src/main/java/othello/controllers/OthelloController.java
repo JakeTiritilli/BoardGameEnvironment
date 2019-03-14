@@ -1,4 +1,5 @@
 package othello.controllers;
+
 import javafx.application.Application;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
@@ -9,51 +10,65 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.StrokeType;
 import javafx.stage.Stage;
 
-import othello.models.*;
+public class OthelloController extends Application{
 
-public class OthelloController extends Application {
+    private StackPane[][] board;
+    final int boardWidth = 8;
+    final int boardHeight = 8;
+    private final int tileSize = 60 ;
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage)
+    {
+        board = new StackPane[boardWidth][boardHeight];
         GridPane root = new GridPane();
-        final int size = 8 ;
-        for (int row = 0; row < size; row++) {
-            for (int col = 0; col < size; col ++) {
+
+        root.setHgap(2);
+        root.setVgap(2);
+        root.setStyle("-fx-background-color: grey;");
+
+        for (int i = 0 ; i < boardWidth ; ++i)
+        {
+            for (int j = 0 ; j < boardHeight ; j++) {
                 StackPane square = new StackPane();
                 square.setStyle("-fx-background-color: green;");
 
-                if((row == 3 && col == 3) || (row == 4 && col == 4))
+                square.setMinWidth(tileSize);
+                square.setMaxWidth(tileSize);
+                square.setMinHeight(tileSize);
+                square.setMaxHeight(tileSize);
+
+                square.setStyle("-fx-background-color: green");
+
+                board[i][j] = square;
+
+                if((i == 3 && j == 3) || (i == 4 && j == 4))
                 {
                     Circle piece = new Circle(20, Paint.valueOf("black"));
                     square.getChildren().add(piece);
                 }
-                if((row == 3 && col == 4) || (row == 4 && col == 3))
+
+                if((i == 3 && j == 4) || (i == 4 && j == 3))
                 {
                     Circle piece = new Circle(20, Paint.valueOf("white"));
                     square.getChildren().add(piece);
                 }
 
-
-                root.add(square, col, row);
-                square.setBorder(new Border(new BorderStroke(Color.BLACK,BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+                root.add(square,i, j);
             }
         }
-        for (int i = 0; i < size; i++) {
 
-                // commented out version will have dynamic squares
-//            root.getColumnConstraints().add(new ColumnConstraints(5, Control.USE_COMPUTED_SIZE, Double.POSITIVE_INFINITY, Priority.ALWAYS, HPos.CENTER, true));
-//            root.getRowConstraints().add(new RowConstraints(5, Control.USE_COMPUTED_SIZE, Double.POSITIVE_INFINITY, Priority.ALWAYS, VPos.CENTER, true));
-            root.getColumnConstraints().add(new ColumnConstraints(50));
-            root.getRowConstraints().add(new RowConstraints(50));
-        }
-        primaryStage.setScene(new Scene(root, 400, 400));
+
+        Scene scene = new Scene(root);
+        primaryStage.setScene(scene);
         primaryStage.show();
     }
 
     public static void main(String[] args) {
         launch(args);
     }
-
 }
