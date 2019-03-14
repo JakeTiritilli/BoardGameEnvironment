@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-<?import java.util.*?>
 
-<AnchorPane fx:id="sideBarMenuAnchorPane" prefHeight="750.0" prefWidth="270.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.MenuController">
+<?import java.util.ArrayList?>
+<AnchorPane fx:id="sideBarMenuAnchorPane" prefHeight="750.0" prefWidth="270.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.MenuController">
    <children>
       <Button fx:id="checkersPlayButton" layoutX="20.0" layoutY="79.0" mnemonicParsing="false" onAction="#loadGameScene" prefHeight="41.0" prefWidth="225.0" text="Checkers">
          <font>
@@ -28,17 +24,17 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="mainMenuButton" layoutX="20.0" layoutY="541.0" mnemonicParsing="false" onAction="#loadMainMenuContent" prefHeight="41.0" prefWidth="225.0" text="Main Menu">
+      <Button fx:id="mainMenuButton" layoutX="20.0" layoutY="527.0" mnemonicParsing="false" onAction="#loadMainMenuContent" prefHeight="41.0" prefWidth="225.0" text="Main Menu">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="restartGameButton" disable="true" layoutX="20.0" layoutY="596.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="225.0" text="Restart Game">
+      <Button fx:id="restartGameButton" disable="true" layoutX="20.0" layoutY="582.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="225.0" text="Restart Game">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="exitGameButton" layoutX="20.0" layoutY="651.0" mnemonicParsing="false" onAction="#closeApplication" prefHeight="41.0" prefWidth="225.0" text="Exit">
+      <Button fx:id="exitGameButton" layoutX="20.0" layoutY="637.0" mnemonicParsing="false" onAction="#closeApplication" prefHeight="41.0" prefWidth="225.0" text="Exit">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -48,19 +44,19 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Label alignment="CENTER" layoutX="17.0" layoutY="14.0" prefHeight="51.0" prefWidth="257.0" text="Games" textAlignment="CENTER" textFill="WHITE">
+      <Label alignment="CENTER" layoutX="17.0" layoutY="14.0" prefHeight="51.0" prefWidth="225.0" text="Games" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <Separator layoutY="518.0" prefHeight="3.0" prefWidth="389.0" />
+      <Separator layoutX="20.0" layoutY="500.0" prefWidth="225.0" />
    </children>
    <fx:define>
-      <ArrayList fx:id="gameButtons" >
-         <fx:reference source="checkersPlayButton"/>
-         <fx:reference source="othelloPlayButton"/>
-         <fx:reference source="ticTacToePlayButton"/>
-         <fx:reference source="memoryPlayButton"/>
+      <ArrayList fx:id="gameButtons">
+         <fx:reference source="checkersPlayButton" />
+         <fx:reference source="othelloPlayButton" />
+         <fx:reference source="ticTacToePlayButton" />
+         <fx:reference source="memoryPlayButton" />
       </ArrayList>
    </fx:define>
 </AnchorPane>
