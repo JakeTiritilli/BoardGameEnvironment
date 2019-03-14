@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import java.util.*?>
 
-<AnchorPane fx:id="mainMenuAnchorPane" prefHeight="700.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.MenuController">
+<AnchorPane fx:id="mainMenuAnchorPane" prefHeight="700.0" prefWidth="700.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.MenuController">
    <children>
       <Label alignment="CENTER" layoutX="120.0" layoutY="67.0" prefHeight="43.0" prefWidth="114.0" text="Checkers" textAlignment="CENTER">
          <font>
@@ -26,7 +26,7 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Button fx:id="othelloPlayButton" disable="false" layoutX="399.0" layoutY="278.0" mnemonicParsing="false" onAction="#loadGameScene" prefHeight="31.0" prefWidth="151.0" text="Play" />
+      <Button fx:id="othelloPlayButton" layoutX="399.0" layoutY="278.0" mnemonicParsing="false" onAction="#loadGameScene" prefHeight="31.0" prefWidth="151.0" text="Play" />
       <ImageView fitHeight="157.0" fitWidth="159.0" layoutX="399.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/othello.png" />
@@ -48,7 +48,7 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Button fx:id="memoryPlayButton" disable="false" layoutX="399.0" layoutY="581.0" mnemonicParsing="false" onAction="#loadGameScene" prefHeight="31.0" prefWidth="151.0" text="Play" />
+      <Button fx:id="memoryPlayButton" layoutX="399.0" layoutY="581.0" mnemonicParsing="false" onAction="#loadGameScene" prefHeight="31.0" prefWidth="151.0" text="Play" />
       <ImageView fitHeight="150.0" fitWidth="195.0" layoutX="380.0" layoutY="415.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/memory.png" />
