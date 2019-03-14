@@ -12,11 +12,12 @@ public class Othello {
 
     private OthelloPlayer currentPlayer;
 
+
     private static Integer turn;
     final Integer boardWidth = 8;
     final Integer boardLength= 8;
 
-    static OthelloPiece[][] gameboard;
+    static public OthelloPiece[][] gameboard;
 
     // Hard code black to go first
     public Othello()
@@ -58,23 +59,26 @@ public class Othello {
     public void makeMove(Integer row, Integer col)
     {
         if (!endGame()) {
-            ArrayList<Integer[]> moves = ValidMoveFinder.getValidMoves(currentPlayer);
-            if (moves.size() > 0) {
-                gameboard[row][col] = new OthelloPiece(currentPlayer);
-                ArrayList<Integer[]> flips = ValidMoveFinder.getFlips(row, col, currentPlayer);
-                for (Integer[] flip : flips) {
-                    gameboard[flip[0]][flip[1]].color = currentPlayer;
-                }
+            System.out.println("Making Move");
+            gameboard[row][col] = new OthelloPiece(currentPlayer);
+            System.out.println("Piece set");
+            ArrayList<Integer[]> flips = ValidMoveFinder.getFlips(row, col, currentPlayer);
+            for (Integer[] flip : flips) {
+                gameboard[flip[0]][flip[1]].color = currentPlayer;
             }
+            System.out.println("Pieces flipped");
+
             currentPlayer = currentPlayer.getOppositeColor();
         }
     }
+
+
 
     public boolean boardIsFull()
     {
         for(Integer i = 0; i < boardWidth; ++i)
         {
-            for(Integer j = 0; i < boardLength; ++j)
+            for(Integer j = 0; j < boardLength; ++j)
             {
                 if(gameboard[i][j] == null)
                 {
@@ -113,4 +117,7 @@ public class Othello {
         return currentPlayer;
     }
 
+    public void setCurrentPlayer(OthelloPlayer currentPlayer) {
+        this.currentPlayer = currentPlayer;
+    }
 }

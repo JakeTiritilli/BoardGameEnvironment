@@ -6,4 +6,13 @@ public class OthelloPiece {
     public OthelloPiece(OthelloPlayer c){
         color = c;
     }
+
+    public String toString(){
+        if(color == OthelloPlayer.WHITE){
+            return " W ";
+        }
+        else{
+            return " B ";
+        }
+    }
 }
