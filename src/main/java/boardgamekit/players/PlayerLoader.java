@@ -16,7 +16,7 @@ import org.json.JSONTokener;
  * 
  * @author Jacob Tiritilli
  */
-public class PlayerDataLoader {
+public class PlayerLoader {
     private File jsonFile;
 
     /**
@@ -24,40 +24,40 @@ public class PlayerDataLoader {
      * @param fileName the path to the JSON file to be read/written to
      * @throws IOException if the file was not found
      */
-    public PlayerDataLoader(String fileName) throws IOException {
+    public PlayerLoader(String fileName) throws IOException {
         jsonFile = new File(fileName).getAbsoluteFile();
     }
     
     /**
      * Loads all of the players' data from the JSON file and constructs
-     * a {@code PlayerData} object containing the scores for the player
+     * a {@code Player} object containing the scores for the player
      * in each game.
      * @param userName the name of the user
      * @throws IOException
      */
-    public PlayerData loadData(String userName) throws IOException {
+    public Player loadData(String userName) throws IOException {
         JSONTokener fileContent = new JSONTokener(new FileReader(jsonFile));
         JSONObject json = new JSONObject(fileContent);
         
         if (!json.has(userName)) {
-            return PlayerData.createDefault(userName);
+            return Player.createDefault(userName);
         }
         
-        JSONObject playerData = json.getJSONObject(userName);
-        return PlayerData.create(userName, playerData);
+        JSONObject player = json.getJSONObject(userName);
+        return Player.create(userName, player);
     }
 
     /**
-     * Writes a {@code PlayerData} object as JSON into the JSON file of
+     * Writes a {@code Player} object as JSON into the JSON file of
      * all user scores.
-     * @param playerData an obejct holding the name of the player along with
+     * @param Player an obejct holding the name of the player along with
      * all of their score for each game
      * @throws IOException
      */
-    public void writeData(PlayerData playerData) throws IOException {
+    public void writeData(Player Player) throws IOException {
         JSONTokener fileContent = new JSONTokener(new FileReader(jsonFile));
         JSONObject json = new JSONObject(fileContent);
-        json.put(playerData.getUsername(), playerData.getScoreBreakdown());
+        json.put(Player.getUsername(), Player.getScoreBreakdown());
         
         FileWriter fileWriter = new FileWriter(jsonFile);
         fileWriter.write(json.toString());
