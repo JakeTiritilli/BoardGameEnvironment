@@ -105,7 +105,7 @@ public class CheckerboardController {
         // No valid turns so restart.
         // The turn changes internally within the model based on conditions
         if (movableCheckerPieces.size() == 0) {
-            this.displayMovableCheckerPieces();
+            this.startTurn();
         }
 
         for(CheckerPiece checker : movableCheckerPieces) {
