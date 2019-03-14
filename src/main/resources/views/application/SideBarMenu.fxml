@@ -14,12 +14,12 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="othelloPlayButton" disable="false" layoutX="20.0" layoutY="134.0" mnemonicParsing="false" onAction="#loadGameScene" prefHeight="41.0" prefWidth="225.0" text="Othello">
+      <Button fx:id="othelloPlayButton" layoutX="20.0" layoutY="134.0" mnemonicParsing="false" onAction="#loadGameScene" prefHeight="41.0" prefWidth="225.0" text="Othello">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="memoryPlayButton" disable="true" layoutX="20.0" layoutY="189.0" mnemonicParsing="false" onAction="#loadGameScene" prefHeight="41.0" prefWidth="225.0" text="Memory">
+      <Button fx:id="memoryPlayButton" layoutX="20.0" layoutY="189.0" mnemonicParsing="false" onAction="#loadGameScene" prefHeight="41.0" prefWidth="225.0" text="Memory">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>

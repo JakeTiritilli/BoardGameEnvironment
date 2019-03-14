@@ -9,11 +9,11 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
+<?import java.util.*?>
 
-<?import java.util.ArrayList?>
 <AnchorPane prefHeight="750.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="othello.controllers.OthelloController">
    <children>
-      <StackPane layoutX="129.0" layoutY="97.0" prefHeight="500.0" prefWidth="500.0">
+      <StackPane layoutX="129.0" layoutY="40.0" prefHeight="500.0" prefWidth="500.0">
          <children>
             <GridPane style="-fx-border-color: grey; -fx-border-width: 3px 3px 3px 3px;">
               <columnConstraints>
@@ -105,42 +105,42 @@
             </GridPane>
          </children>
       </StackPane>
-      <Label alignment="CENTER" layoutX="115.0" layoutY="646.0" prefHeight="50.0" prefWidth="50.0" text="0">
+      <Label alignment="CENTER" layoutX="110.0" layoutY="580.0" prefHeight="50.0" prefWidth="50.0" text="0">
          <font>
             <Font size="27.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="583.0" layoutY="647.0" prefHeight="50.0" prefWidth="50.0" text="0">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="591.0" layoutY="575.0" prefHeight="50.0" prefWidth="50.0" text="0">
          <font>
             <Font size="27.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="36.0" layoutY="592.0" prefHeight="25.0" prefWidth="75.0" text="Player 1">
+      <Label alignment="CENTER" layoutX="31.0" layoutY="526.0" prefHeight="25.0" prefWidth="75.0" text="Player 1">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="643.0" layoutY="592.0" prefHeight="25.0" prefWidth="75.0" text="Player 2">
+      <Label alignment="CENTER" layoutX="651.0" layoutY="520.0" prefHeight="25.0" prefWidth="75.0" text="Player 2">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
-      <ImageView fitHeight="76.0" fitWidth="125.0" layoutX="36.0" layoutY="626.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="76.0" fitWidth="125.0" layoutX="31.0" layoutY="560.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/user.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="76.0" fitWidth="125.0" layoutX="639.0" layoutY="627.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="76.0" fitWidth="125.0" layoutX="647.0" layoutY="555.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/user.png" />
          </image>
       </ImageView>
-      <Label alignment="CENTER" layoutX="104.0" layoutY="672.0" prefHeight="50.0" prefWidth="75.0" text="Score">
+      <Label alignment="CENTER" layoutX="99.0" layoutY="606.0" prefHeight="50.0" prefWidth="75.0" text="Score">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="573.0" layoutY="670.0" prefHeight="50.0" prefWidth="75.0" text="Score">
+      <Label alignment="CENTER" layoutX="581.0" layoutY="598.0" prefHeight="50.0" prefWidth="75.0" text="Score">
          <font>
             <Font size="18.0" />
          </font>
@@ -150,90 +150,90 @@
     <fx:define>
         <ArrayList fx:id="gameboard">
             <ArrayList fx:id="row0">
-                <fx:reference source="Cell_0_0"></fx:reference>
-                <fx:reference source="Cell_0_1"></fx:reference>
-                <fx:reference source="Cell_0_2"></fx:reference>
-                <fx:reference source="Cell_0_3"></fx:reference>
-                <fx:reference source="Cell_0_4"></fx:reference>
-                <fx:reference source="Cell_0_5"></fx:reference>
-                <fx:reference source="Cell_0_6"></fx:reference>
-                <fx:reference source="Cell_0_7"></fx:reference>
+                <fx:reference source="Cell_0_0" />
+                <fx:reference source="Cell_0_1" />
+                <fx:reference source="Cell_0_2" />
+                <fx:reference source="Cell_0_3" />
+                <fx:reference source="Cell_0_4" />
+                <fx:reference source="Cell_0_5" />
+                <fx:reference source="Cell_0_6" />
+                <fx:reference source="Cell_0_7" />
             </ArrayList>
             <ArrayList fx:id="row1">
-                <fx:reference source="Cell_1_0"></fx:reference>
-                <fx:reference source="Cell_1_1"></fx:reference>
-                <fx:reference source="Cell_1_2"></fx:reference>
-                <fx:reference source="Cell_1_3"></fx:reference>
-                <fx:reference source="Cell_1_4"></fx:reference>
-                <fx:reference source="Cell_1_5"></fx:reference>
-                <fx:reference source="Cell_1_6"></fx:reference>
-                <fx:reference source="Cell_1_7"></fx:reference>
+                <fx:reference source="Cell_1_0" />
+                <fx:reference source="Cell_1_1" />
+                <fx:reference source="Cell_1_2" />
+                <fx:reference source="Cell_1_3" />
+                <fx:reference source="Cell_1_4" />
+                <fx:reference source="Cell_1_5" />
+                <fx:reference source="Cell_1_6" />
+                <fx:reference source="Cell_1_7" />
             </ArrayList>
 
             <ArrayList fx:id="row2">
-                <fx:reference source="Cell_2_0"></fx:reference>
-                <fx:reference source="Cell_2_1"></fx:reference>
-                <fx:reference source="Cell_2_2"></fx:reference>
-                <fx:reference source="Cell_2_3"></fx:reference>
-                <fx:reference source="Cell_2_4"></fx:reference>
-                <fx:reference source="Cell_2_5"></fx:reference>
-                <fx:reference source="Cell_2_6"></fx:reference>
-                <fx:reference source="Cell_2_7"></fx:reference>
+                <fx:reference source="Cell_2_0" />
+                <fx:reference source="Cell_2_1" />
+                <fx:reference source="Cell_2_2" />
+                <fx:reference source="Cell_2_3" />
+                <fx:reference source="Cell_2_4" />
+                <fx:reference source="Cell_2_5" />
+                <fx:reference source="Cell_2_6" />
+                <fx:reference source="Cell_2_7" />
             </ArrayList>
 
             <ArrayList fx:id="row3">
-                <fx:reference source="Cell_3_0"></fx:reference>
-                <fx:reference source="Cell_3_1"></fx:reference>
-                <fx:reference source="Cell_3_2"></fx:reference>
-                <fx:reference source="Cell_3_3"></fx:reference>
-                <fx:reference source="Cell_3_4"></fx:reference>
-                <fx:reference source="Cell_3_5"></fx:reference>
-                <fx:reference source="Cell_3_6"></fx:reference>
-                <fx:reference source="Cell_3_7"></fx:reference>
+                <fx:reference source="Cell_3_0" />
+                <fx:reference source="Cell_3_1" />
+                <fx:reference source="Cell_3_2" />
+                <fx:reference source="Cell_3_3" />
+                <fx:reference source="Cell_3_4" />
+                <fx:reference source="Cell_3_5" />
+                <fx:reference source="Cell_3_6" />
+                <fx:reference source="Cell_3_7" />
             </ArrayList>
 
             <ArrayList fx:id="row4">
-                <fx:reference source="Cell_4_0"></fx:reference>
-                <fx:reference source="Cell_4_1"></fx:reference>
-                <fx:reference source="Cell_4_2"></fx:reference>
-                <fx:reference source="Cell_4_3"></fx:reference>
-                <fx:reference source="Cell_4_4"></fx:reference>
-                <fx:reference source="Cell_4_5"></fx:reference>
-                <fx:reference source="Cell_4_6"></fx:reference>
-                <fx:reference source="Cell_4_7"></fx:reference>
+                <fx:reference source="Cell_4_0" />
+                <fx:reference source="Cell_4_1" />
+                <fx:reference source="Cell_4_2" />
+                <fx:reference source="Cell_4_3" />
+                <fx:reference source="Cell_4_4" />
+                <fx:reference source="Cell_4_5" />
+                <fx:reference source="Cell_4_6" />
+                <fx:reference source="Cell_4_7" />
             </ArrayList>
 
             <ArrayList fx:id="row5">
-                <fx:reference source="Cell_5_0"></fx:reference>
-                <fx:reference source="Cell_5_1"></fx:reference>
-                <fx:reference source="Cell_5_2"></fx:reference>
-                <fx:reference source="Cell_5_3"></fx:reference>
-                <fx:reference source="Cell_5_4"></fx:reference>
-                <fx:reference source="Cell_5_5"></fx:reference>
-                <fx:reference source="Cell_5_6"></fx:reference>
-                <fx:reference source="Cell_5_7"></fx:reference>
+                <fx:reference source="Cell_5_0" />
+                <fx:reference source="Cell_5_1" />
+                <fx:reference source="Cell_5_2" />
+                <fx:reference source="Cell_5_3" />
+                <fx:reference source="Cell_5_4" />
+                <fx:reference source="Cell_5_5" />
+                <fx:reference source="Cell_5_6" />
+                <fx:reference source="Cell_5_7" />
             </ArrayList>
 
             <ArrayList fx:id="row6">
-                <fx:reference source="Cell_6_0"></fx:reference>
-                <fx:reference source="Cell_6_1"></fx:reference>
-                <fx:reference source="Cell_6_2"></fx:reference>
-                <fx:reference source="Cell_6_3"></fx:reference>
-                <fx:reference source="Cell_6_4"></fx:reference>
-                <fx:reference source="Cell_6_5"></fx:reference>
-                <fx:reference source="Cell_6_6"></fx:reference>
-                <fx:reference source="Cell_6_7"></fx:reference>
+                <fx:reference source="Cell_6_0" />
+                <fx:reference source="Cell_6_1" />
+                <fx:reference source="Cell_6_2" />
+                <fx:reference source="Cell_6_3" />
+                <fx:reference source="Cell_6_4" />
+                <fx:reference source="Cell_6_5" />
+                <fx:reference source="Cell_6_6" />
+                <fx:reference source="Cell_6_7" />
             </ArrayList>
 
             <ArrayList fx:id="row7">
-                <fx:reference source="Cell_7_0"></fx:reference>
-                <fx:reference source="Cell_7_1"></fx:reference>
-                <fx:reference source="Cell_7_2"></fx:reference>
-                <fx:reference source="Cell_7_3"></fx:reference>
-                <fx:reference source="Cell_7_4"></fx:reference>
-                <fx:reference source="Cell_7_5"></fx:reference>
-                <fx:reference source="Cell_7_6"></fx:reference>
-                <fx:reference source="Cell_7_7"></fx:reference>
+                <fx:reference source="Cell_7_0" />
+                <fx:reference source="Cell_7_1" />
+                <fx:reference source="Cell_7_2" />
+                <fx:reference source="Cell_7_3" />
+                <fx:reference source="Cell_7_4" />
+                <fx:reference source="Cell_7_5" />
+                <fx:reference source="Cell_7_6" />
+                <fx:reference source="Cell_7_7" />
             </ArrayList>
 
 

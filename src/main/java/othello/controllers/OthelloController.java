@@ -22,10 +22,6 @@ public class OthelloController{
 
     @FXML
     public void initialize() {
-
-
-        System.out.println("helloworld");
-
         try{
             initializeBlackStartingPieces();
             initializeWhiteStartingPieces();
