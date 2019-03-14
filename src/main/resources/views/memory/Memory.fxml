@@ -18,6 +18,11 @@
             <Font name="System Bold" size="48.0" />
          </font>
       </Label>
+      <Label fx:id="statusLabel" alignment="CENTER" layoutX="162.0" layoutY="76.0" prefHeight="23.0" prefWidth="305.0" textFill="#ee2020">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
       <StackPane layoutX="92.0" layoutY="112.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="439.0" prefWidth="567.0">
          <children>
             <GridPane>
@@ -31,30 +36,42 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <ImageView fx:id="iv1" fitHeight="147.0" fitWidth="355.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                  <ImageView fx:id="iv1" fitHeight="147.0" fitWidth="355.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../images/bulldog.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="button1"  mnemonicParsing="false" onMouseClicked="#cardClicked1" prefHeight="188.0" prefWidth="316.0" />
-                  <ImageView fx:id="iv2" fitHeight="147.0" fitWidth="355.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" visible="false">
+                  <Button fx:id="button1" mnemonicParsing="false" onAction="#handleCardOne" prefHeight="188.0" prefWidth="316.0" />
+                  <ImageView fx:id="iv2" fitHeight="147.0" fitWidth="355.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
                      <image>
                         <Image url="@../../images/perch.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="button2"  mnemonicParsing="false" onMouseClicked="#cardClicked2"  prefHeight="188.0" prefWidth="316.0" GridPane.columnIndex="1" />
-                  <ImageView fx:id="iv3" fitHeight="147.0" fitWidth="355.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1" visible="false">
+                  <Button fx:id="button2" mnemonicParsing="false" onMouseClicked="#handleCardTwo" prefHeight="188.0" prefWidth="316.0" GridPane.columnIndex="1" />
+                  <ImageView fx:id="iv3" fitHeight="147.0" fitWidth="355.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                      <image>
                         <Image url="@../../images/perch.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="button3"  mnemonicParsing="false" onMouseClicked="#cardClicked3" prefHeight="188.0" prefWidth="316.0" GridPane.rowIndex="1" />
-                  <ImageView fx:id="iv4" fitHeight="147.0" fitWidth="355.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1" visible="false">
+                  <Button fx:id="button3" mnemonicParsing="false" onMouseClicked="#handleCardThree" prefHeight="188.0" prefWidth="316.0" GridPane.rowIndex="1" />
+                  <ImageView fx:id="iv4" fitHeight="147.0" fitWidth="355.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <image>
                         <Image url="@../../images/bulldog.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="button4"  mnemonicParsing="false" onMouseClicked="#cardClicked4" prefHeight="188.0" prefWidth="316.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Button fx:id="button4" mnemonicParsing="false" onMouseClicked="#handleCardFour" prefHeight="188.0" prefWidth="316.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <ImageView fx:id="iv5" fitHeight="147.0" fitWidth="355.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+                     <image>
+                        <Image url="@../../images/fox.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="button5" mnemonicParsing="false" onAction="#handleCardFive" prefHeight="188.0" prefWidth="316.0" GridPane.rowIndex="2" />
+                  <ImageView fx:id="iv6" fitHeight="147.0" fitWidth="355.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <image>
+                        <Image url="@../../images/fox.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="button6" mnemonicParsing="false" onAction="#handleCardSix" prefHeight="188.0" prefWidth="316.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>
             </GridPane>
          </children></StackPane>
@@ -68,5 +85,7 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
+      <Label fx:id="playeronescore" layoutX="53.0" layoutY="590.0" text="0" />
+      <Label fx:id="playertwoscore" layoutX="652.0" layoutY="590.0" text="0" />
    </children>
 </AnchorPane>
