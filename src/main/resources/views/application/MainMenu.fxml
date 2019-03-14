@@ -48,7 +48,7 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Button fx:id="memoryPlayButton" disable="true" layoutX="399.0" layoutY="581.0" mnemonicParsing="false" onAction="#loadGameScene" prefHeight="31.0" prefWidth="151.0" text="Play" />
+      <Button fx:id="memoryPlayButton" disable="false" layoutX="399.0" layoutY="581.0" mnemonicParsing="false" onAction="#loadGameScene" prefHeight="31.0" prefWidth="151.0" text="Play" />
       <ImageView fitHeight="150.0" fitWidth="195.0" layoutX="380.0" layoutY="415.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/memory.png" />
