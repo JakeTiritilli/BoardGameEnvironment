@@ -40,6 +40,23 @@ public class Checkers {
     }
 
     /**
+     * Gets the win condition status for the game state. If the size of one of
+     * the checker piece reference lists is 0, that means that the player has lost.
+     * @return CheckerPlayer.RED, CheckerPlayer.BLACK, or null
+     */
+    public CheckerPlayer getWinConditionStatus() {
+        if (this.blackCheckerPieceRefs.size() == 0) {
+            return CheckerPlayer.RED;
+        }
+        else if (this.redCheckerPieceRefs.size() == 0) {
+            return CheckerPlayer.BLACK;
+        }
+        else {
+            return null;
+        }
+    }
+
+    /**
      * Returns the score for each player. Score is derived from the checker color reference lists.
      * @param player Player score to return
      * @return score
@@ -95,7 +112,6 @@ public class Checkers {
         return this.jumping;
     }
 
-    // TODO: Handle King
     /**
      * Checks if the checker can make the move to the position. This takes into account whether it is a king or not.
      * If the position is 2 rows away, it will check to see if there is an enemy checker in the intermediate cell.
@@ -138,9 +154,9 @@ public class Checkers {
     private boolean moveCheck(PosTuple oldPosition, PosTuple newPosition) {
         // (Check to make sure that the old pos has a checker there and the new pos
         // does not have a checker there) and (make sure both positions are on the board).
-        if ((gameBoard[oldPosition.row][oldPosition.col] == null ||
-                gameBoard[newPosition.row][newPosition.col] != null) &&
-                (isValidPos(oldPosition) && isValidPos(newPosition))) {
+        if (gameBoard[oldPosition.row][oldPosition.col] == null ||
+                gameBoard[newPosition.row][newPosition.col] != null ||
+                !isValidPos(oldPosition) || !isValidPos(newPosition)) {
             throw new IllegalArgumentException("The position parameters in makeMove were not valid moves");
         }
         return true;
@@ -171,6 +187,30 @@ public class Checkers {
             // The model hasn't been updated yet so it is still at old position
             this.setJumpRules(this.gameBoard[oldPosition.row][oldPosition.col]);
         }
+
+        // Check for king state
+        if (this.checkKingCondition(oldPosition, newPosition)) {
+            // make the checker piece a king if in king state
+            gameBoard[oldPosition.row][oldPosition.col].makeKing();
+        }
+    }
+
+    /**
+     * Checks to see if the checker piece is in the right condition to become a king
+     * @param newPosition position the checker is moving to
+     * @return true if the piece is in king condition, false if
+     */
+    private boolean checkKingCondition(PosTuple oldPosition, PosTuple newPosition) {
+        CheckerPiece checkerToCheck = gameBoard[oldPosition.row][oldPosition.col];
+
+        // if piece is already a king
+        if (checkerToCheck.isKing) {
+            return true;
+        }
+
+        // Return the boolean result of whether the king condition is true
+        return (checkerToCheck.color == CheckerPlayer.BLACK && newPosition.row == 0) ||
+                (checkerToCheck.color == CheckerPlayer.RED && newPosition.row == 7);
     }
 
     /**
@@ -304,13 +344,14 @@ public class Checkers {
      * @return Returns true if the single row move is valid
      */
     private boolean isSingleRowMoveValid(CheckerPiece checker, PosTuple pos) {
-        // TODO: handle King state
         // Gets the row delta that would be valid for the color
         int rowDelta = checker.color == CheckerPlayer.BLACK ? checker.position.row - 1 : checker.position.row + 1;
 
-        // if the pos being checked has a valid row delta, then check if cell is empty and if the col
+        // if the pos being checked has a valid row delta or if the checker
+        // is a king (if king, row deleta doesnt matter),
+        // then check if cell is empty and if the col
         // delta is valid (single row move should only be moving 1 column away).
-        if (pos.row == rowDelta) {
+        if (pos.row == rowDelta || checker.isKing) {
             return this.gameBoard[pos.row][pos.col] == null && Math.abs(pos.col - checker.position.col) == 1;
         }
         return false;
@@ -328,25 +369,23 @@ public class Checkers {
         int enemyRow;
         int enemyCol;
 
-        // TODO: handle King state
         // sets the row delta that would be valid for the color
         // sets the row that an enemy could possibly be on for the jump
         if (checker.color == CheckerPlayer.BLACK) {
             rowDelta = checker.position.row - 2;
-            enemyRow = checker.position.row -1;
-
         }
         else {
             rowDelta = checker.position.row + 2;
-            enemyRow = checker.position.row + 1;
         }
 
-        // sets the var to the intermediate cell between the checker and final pos
+        // sets the enemy row and col to the intermediate cell between the checker and final pos
         enemyCol = (checker.position.col + pos.col) / 2;
+        enemyRow = (checker.position.row + pos.row) / 2;
 
-        // if the pos being checked is a valid move for that color, check for enemy and check the position
+        // if the pos being checked is a valid move for that color or the checker is a king,
+        // check for enemy and check that the position
         // that the checker is jumping to is empty
-        if (pos.row == rowDelta) {
+        if (pos.row == rowDelta || checker.isKing) {
             return this.hasEnemy(checker, enemyRow, enemyCol) && this.gameBoard[pos.row][pos.col] == null;
         }
         return false;

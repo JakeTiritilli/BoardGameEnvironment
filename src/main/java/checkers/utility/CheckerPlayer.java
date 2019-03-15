@@ -10,5 +10,14 @@ package checkers.utility;
  */
 
 public enum CheckerPlayer {
-    BLACK, RED
+    BLACK {
+        public String toString() {
+            return "Black";
+        }
+    },
+    RED {
+        public String toString() {
+            return "Red";
+        }
+    }
 }

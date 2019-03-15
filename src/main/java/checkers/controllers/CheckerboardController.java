@@ -15,6 +15,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -22,6 +23,8 @@ import javafx.scene.shape.Circle;
 
 import java.io.IOException;
 import java.util.ArrayList;
+
+// TODO: Handle king state on view (put a crown on piece)
 
 public class CheckerboardController {
     private Checkers game = new Checkers();
@@ -45,6 +48,10 @@ public class CheckerboardController {
     Label blackPlayerScoreLabel;
     @FXML
     Label redPlayerScoreLabel;
+    @FXML
+    GridPane boardGridPane;
+    @FXML
+    StackPane boardStackPane;
 
     /**
      * Initializes the user data for gameboard which places a GameboardNodeInfo object
@@ -67,8 +74,43 @@ public class CheckerboardController {
     public void startTurn() {
         // Cleans the board and sets it up for the next turn/move
         this.clearEventHandlersAndIndicators();
+
+        // If the game is over, stop game loop to prevent event handlers
+        // from being assigned
+        if (this.checkForWinCondition()) {
+            return;
+        }
+
         this.displayCurrentTurn();
         displayMovableCheckerPieces();
+    }
+
+    /**
+     * Checks for a win condition. The win condition is if one side does not have any more
+     * checker pieces left.
+     */
+    private boolean checkForWinCondition() {
+//        CheckerPlayer winner = this.game.getWinConditionStatus();
+        CheckerPlayer winner = CheckerPlayer.BLACK;
+
+        if (winner != null) {
+            this.displayWinner(winner);
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Displays the end game messages for the winner.
+     * @param winner the player who won
+     */
+    private void displayWinner(CheckerPlayer winner) {
+        boardGridPane.setOpacity(0.1);
+        Label winnerLabel = new Label(winner.toString() + " Player Wins!");
+        winnerLabel.setStyle("-fx-font: 55 arial;");
+        StackPane.setAlignment(winnerLabel, Pos.CENTER);
+
+        boardStackPane.getChildren().add(winnerLabel);
     }
 
     /**
@@ -277,25 +319,21 @@ public class CheckerboardController {
      * @param validMoveCell cell that the checker is moving to.
      */
     private void makeMove(StackPane validMoveCell) {
-        // Clear the cell that the currently selected checker piece is in
-        StackPane currentCell = (StackPane) this.currentlySelectedCheckerPiece.getParent();
-        currentCell.getChildren().clear();
-
         // Extract cell info
+        StackPane currentCell = (StackPane) this.currentlySelectedCheckerPiece.getParent();
         GameboardNodeInfo oldCellInfo = (GameboardNodeInfo) currentCell.getUserData();
         GameboardNodeInfo newCellInfo = (GameboardNodeInfo) validMoveCell.getUserData();
         PosTuple oldPosition = oldCellInfo.boardPosition;
         PosTuple newPosition = newCellInfo.boardPosition;
 
-        // Move the currently selected checker piece to the new cell and update checker position
-        validMoveCell.getChildren().add(this.currentlySelectedCheckerPiece);
-        GameboardNodeInfo checkerInfo = (GameboardNodeInfo) this.currentlySelectedCheckerPiece.getUserData();
-        checkerInfo.boardPosition = newPosition;
-
         // Communicate changes to model
         this.updateModelForMove(oldPosition, newPosition);
 
-        // Update displayed score
+        this.updateViewForMove(validMoveCell);
+
+        // Make the currently selected checker a king if in king condition
+        this.handleKingCondition(newPosition);
+
         this.updateDisplayedScore();
 
         // Delete enemy if jumped
@@ -303,6 +341,33 @@ public class CheckerboardController {
 
         // Restart the turn loop
         this.startTurn();
+    }
+
+    private void handleKingCondition(PosTuple pos) {
+        if (this.game.getCheckerPieceAtPos(pos).isKing) {
+            try {
+                AnchorPane crown = FXMLLoader.load(getClass().getResource("/views/checkers/KingIcon.fxml"));
+                this.currentlySelectedCheckerPiece.getChildren().add(crown);
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void updateViewForMove(StackPane validMoveCell) {
+        // Clear the cell that the currently selected checker piece is in
+        StackPane currentCell = (StackPane) this.currentlySelectedCheckerPiece.getParent();
+        currentCell.getChildren().clear();
+
+        // Extract cell info
+        GameboardNodeInfo newCellInfo = (GameboardNodeInfo) validMoveCell.getUserData();
+        PosTuple newPosition = newCellInfo.boardPosition;
+
+        // Move the currently selected checker piece to the new cell and update checker position
+        validMoveCell.getChildren().add(this.currentlySelectedCheckerPiece);
+        GameboardNodeInfo checkerInfo = (GameboardNodeInfo) this.currentlySelectedCheckerPiece.getUserData();
+        checkerInfo.boardPosition = newPosition;
     }
 
     /**
