@@ -129,11 +129,15 @@ public class Othello extends BoardGame {
 
         for (int i = 0; i < boardLength; i++){
             for (int j = 0; j < boardWidth; j++){
-                if (gameboard[i][j].color==OthelloPlayer.WHITE){
-                    p2Score++;
+                try {
+                    if (gameboard[i][j].color == OthelloPlayer.WHITE) {
+                        p2Score++;
+                    } else if (gameboard[i][j].color == OthelloPlayer.BLACK) {
+                        p1Score++;
+                    }
                 }
-                else if (gameboard[i][j].color==OthelloPlayer.BLACK){
-                    p1Score++;
+                catch (NullPointerException e){
+
                 }
             }
         }
