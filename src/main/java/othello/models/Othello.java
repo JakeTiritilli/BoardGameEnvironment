@@ -115,7 +115,7 @@ public class Othello extends BoardGame {
         return gameboard;
     }
 
-    public OthelloPlayer getTurn(){
+    public OthelloPlayer getCurrentPlayer(){
         return currentPlayer;
     }
 
