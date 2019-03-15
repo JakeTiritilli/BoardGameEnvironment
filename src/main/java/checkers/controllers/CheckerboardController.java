@@ -90,8 +90,7 @@ public class CheckerboardController {
      * checker pieces left.
      */
     private boolean checkForWinCondition() {
-//        CheckerPlayer winner = this.game.getWinConditionStatus();
-        CheckerPlayer winner = CheckerPlayer.BLACK;
+        CheckerPlayer winner = this.game.getWinConditionStatus();
 
         if (winner != null) {
             this.displayWinner(winner);
