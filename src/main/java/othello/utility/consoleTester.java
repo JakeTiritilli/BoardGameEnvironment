@@ -1,5 +1,6 @@
 package othello.utility;
 
+import boardgamekit.players.Player;
 import othello.models.Othello;
 
 import java.util.ArrayList;
@@ -7,12 +8,12 @@ import java.util.Scanner;
 
 public class consoleTester {
     public static void main(String[] args){
-        Othello game = new Othello();
+        Othello game = new Othello(Player.createDefault(""),Player.createDefault(""),8,8);
         Scanner in = new Scanner(System.in);
         while (!game.endGame()){
             printBoard(game);
 
-            ArrayList<Integer[]> moves = ValidMoveFinder.getValidMoves(game.getTurn());
+            ArrayList<Integer[]> moves = ValidMoveFinder.getValidMoves(game.getCurrentPlayer());
             System.out.println("Available Moves Found");
             if (moves.size() > 0){
                 boolean valid = false;
@@ -34,7 +35,7 @@ public class consoleTester {
                     }
                 }
             }
-            else game.setCurrentPlayer(game.getTurn().getOppositeColor());
+            else game.setCurrentPlayer(game.getCurrentPlayer().getOppositeColor());
         }
 
     }
