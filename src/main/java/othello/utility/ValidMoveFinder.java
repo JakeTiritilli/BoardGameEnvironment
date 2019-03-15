@@ -16,7 +16,6 @@ public class ValidMoveFinder {
                 }
             }
         }
-
         ArrayList<Integer[]> nonDuplicateMoves = (ArrayList<Integer[]>) moves.stream().distinct().collect(Collectors.toList());
         return nonDuplicateMoves;
     }
@@ -75,7 +74,6 @@ public class ValidMoveFinder {
                         }
                         row+=dir[0];
                         col+=dir[1];
-
                     }
                 }
             }

@@ -1,6 +1,8 @@
 package othello.utility;
 
-public class OthelloPiece {
+import boardgamekit.utility.GamePiece;
+
+public class OthelloPiece implements GamePiece {
     public OthelloPlayer color;
 
     public OthelloPiece(OthelloPlayer c){

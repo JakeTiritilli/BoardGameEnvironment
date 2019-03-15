@@ -1,27 +1,31 @@
 package othello.models;
 
 
+import boardgamekit.BoardGame;
+import boardgamekit.players.Player;
 import othello.utility.OthelloPiece;
 import othello.utility.OthelloPlayer;
 import othello.utility.ValidMoveFinder;
 
 import java.util.ArrayList;
 
-public class Othello {
+public class Othello extends BoardGame {
 
 
     private OthelloPlayer currentPlayer;
 
 
-    private static Integer turn;
     final Integer boardWidth = 8;
     final Integer boardLength= 8;
+    int p1Score = 0;
+    int p2Score = 0;
 
     static public OthelloPiece[][] gameboard;
 
     // Hard code black to go first
-    public Othello()
+    public Othello(Player p1, Player p2, int row, int col)
     {
+        super(p1,p2,row,col);
         currentPlayer = OthelloPlayer.BLACK; // black goes first
         initializeBoard();
     }
@@ -50,25 +54,28 @@ public class Othello {
     /**
      *
      * @param row = the row number
-     * @param col = the column number
+     * @param column = the column number
      *            1.takes in the coordinates of the board to place he pieces
      *            2.it will first check the available move for the current player
      *            if there is an available move, it will place the piece down and flip the pieces accordingly
      *            else, switch the turn right away
      */
-    public void makeMove(Integer row, Integer col)
+    public void makeMove(int row, int column)
     {
         if (!endGame()) {
             System.out.println("Making Move");
-            gameboard[row][col] = new OthelloPiece(currentPlayer);
+            gameboard[row][column] = new OthelloPiece(currentPlayer);
             System.out.println("Piece set");
-            ArrayList<Integer[]> flips = ValidMoveFinder.getFlips(row, col, currentPlayer);
+            ArrayList<Integer[]> flips = ValidMoveFinder.getFlips(row, column, currentPlayer);
             for (Integer[] flip : flips) {
                 gameboard[flip[0]][flip[1]].color = currentPlayer;
             }
             System.out.println("Pieces flipped");
-
+            updateScore();
             currentPlayer = currentPlayer.getOppositeColor();
+        }
+        else{
+            System.out.println("invalid: game has ended");
         }
     }
 
@@ -94,13 +101,6 @@ public class Othello {
         return (ValidMoveFinder.getValidMoves(player).size() > 0);
     }
 
-    public boolean validMove() // check if selected space is valid
-    {
-        ArrayList<Integer[]> availableMoves = ValidMoveFinder.getValidMoves(getTurn());
-        return false; // need to fill
-    }
-
-
     public boolean endGame() // game ends if no players have moves left or if the game board is full
     {
         if(boardIsFull() && playerHasMoves(OthelloPlayer.WHITE)==false && playerHasMoves(OthelloPlayer.BLACK)== false)
@@ -108,6 +108,9 @@ public class Othello {
         return false;
     }
 
+    public boolean gameIsWon(){
+        return endGame();
+    }
 
     public static OthelloPiece[][] getBoard(){
         return gameboard;
@@ -119,5 +122,21 @@ public class Othello {
 
     public void setCurrentPlayer(OthelloPlayer currentPlayer) {
         this.currentPlayer = currentPlayer;
+    }
+
+    public void updateScore(){
+        p1Score = 0;
+        p2Score = 0;
+
+        for (int i = 0; i < boardLength; i++){
+            for (int j = 0; j < boardWidth; j++){
+                if (gameboard[i][j].color==OthelloPlayer.WHITE){
+                    p2Score++;
+                }
+                else if (gameboard[i][j].color==OthelloPlayer.BLACK){
+                    p1Score++;
+                }
+            }
+        }
     }
 }
