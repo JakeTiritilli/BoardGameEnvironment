@@ -1,5 +1,10 @@
 package memory.controllers;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 /**
  * Represents a controller for and contains general functionality for playing the
  * game of Memory.
@@ -8,16 +13,21 @@ package memory.controllers;
  */
 
 import javafx.animation.PauseTransition;
+import javafx.event.ActionEvent;
 import javafx.util.Duration;
 import memory.models.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button ;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 
 public class MemoryController {
-
+	String[] imageArray = {"src/main/resources/images/bug.png", "src/main/resources/images/bee.png",
+	"src/main/resources/images/butterfly.png"};
+	@FXML
+	public Button reset;
     @FXML
     public Label statusLabel;
 
@@ -223,6 +233,49 @@ public class MemoryController {
         return;
          }
          }
+    
+    public List<Image> shuffleCards()
+    {
+    	List<Image> imageList = new ArrayList<>();
+    	for (int i = 0; i < imageArray.length; i++)
+    	{
+    		File file = new File(imageArray[i]);
+    		Image image = new Image(file.toURI().toString());
+    		imageList.add(image);
+    		imageList.add(image);    				
+    	}
+    	Collections.shuffle(imageList);
+    	return imageList;
+    }
+    @FXML
+    public void shuffle()
+    {
+    	List<Image> imageList = shuffleCards();
+	    iv1.setImage(imageList.get(0));
+	    iv2.setImage(imageList.get(1));
+	    iv3.setImage(imageList.get(2));
+	    iv4.setImage(imageList.get(3));
+	    iv5.setImage(imageList.get(4));
+	    iv6.setImage(imageList.get(5));
+	    button1.setVisible(true);
+	    button2.setVisible(true);
+	    button3.setVisible(true);
+	    button4.setVisible(true);
+	    button5.setVisible(true);
+	    button6.setVisible(true);
+    }
+    @FXML
+    public void startNewGame(ActionEvent event) 
+    {
+    	
+    	game = new Memory();
+    	shuffle();
+	    statusLabel.setText("New Game");
+	    playeronescore.setText("0");
+	    playertwoscore.setText("0");
+     
+    }
+
 
 //    public void startNewGame(ActionEvent actionEvent) {
 //        game = new Memory();
