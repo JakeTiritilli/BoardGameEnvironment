@@ -2,19 +2,30 @@ package boardgamekit.players;
 
 import javafx.scene.*;
 
+import java.io.IOException;
+
+import boardgamekit.BoardGameController;
+import javafx.fxml.FXMLLoader;
+import javafx.stage.Stage;
+
 /**
  * PlayerManager
  */
 public class PlayerManager {
+
+    private final String gameViewPath;
+
+    private final String loginViewPath;
     
-    private Scene scene;
+    private Scene baseScene;
     
     private Player player1;
 
     private Player player2;
 
-    public PlayerManager(Scene scene) {
-        this.scene = scene;
+    public PlayerManager(String gameViewPath, String loginViewPath) {
+        this.gameViewPath = gameViewPath;
+        this.loginViewPath = loginViewPath;
     }
 
     public void setPlayers(Player p1, Player p2) {
@@ -23,10 +34,45 @@ public class PlayerManager {
     }
 
     public void loadGame() {
-        // Use view initializer to load game.
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(gameViewPath));
+            Parent gamePane = fxmlLoader.load();
+            // BoardGameController gameController = fxmlLoader.getController();
+            // gameController.setPlayers(player1, player2);
+            
+            if (baseScene == null) {
+                createNewStage(gamePane, 600, 1000, "Board Game");
+            } else {
+                baseScene.setRoot(gamePane);
+            }
+
+        } catch (IOException error) {
+            System.out.println("Error occurred loading the login scene.");
+            System.out.println(error);
+            error.printStackTrace();
+        }
+    }
+
+    private void createNewStage(Parent pane, int width, int height, String title) {
+        Stage stage = new Stage();
+        stage.setTitle(title);
+        Scene newScene = new Scene(pane, width, height);
+        stage.setScene(newScene);
+        baseScene = newScene;
+        stage.show();
     }
 
     public void loadLogin() {
-        // User view initializer to load login screen.
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(loginViewPath));
+            Parent loginPane = fxmlLoader.load();
+            PlayerLoginController loginController = fxmlLoader.getController();
+            createNewStage(loginPane, 800, 650, "Login Page");
+            loginController.initGameController(this);
+        } catch (IOException error) {
+            System.out.println("Error occurred loading the login scene.");
+            System.out.println(error);
+            error.printStackTrace();
+        }
     }
 }

@@ -17,10 +17,10 @@ public class PlayerLoginController {
     private Label statusLabel;
 
     @FXML
-    private Label player1TF;
+    private TextField player1TF;
 
     @FXML
-    private Label player2TF;
+    private TextField player2TF;
 
     @FXML
     private Button loginButton;
@@ -46,7 +46,7 @@ public class PlayerLoginController {
         );
     }
 
-    public Player loginPlayer(Label playerName) {
+    public Player loginPlayer(TextField playerName) {
         String player = playerName.getText();
 
         if (player.isEmpty()) {

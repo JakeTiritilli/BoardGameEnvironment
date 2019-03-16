@@ -2,6 +2,7 @@ package application.controllers;
 
 import java.util.List;
 
+import boardgamekit.players.PlayerManager;
 import javafx.scene.control.*;
 import javafx.fxml.FXML;
 import javafx.event.ActionEvent;
@@ -32,7 +33,11 @@ public class MenuController extends ViewInitializer{
     public void loadGameScene(ActionEvent actionEvent) throws Exception {
         Button gameButton = (Button) actionEvent.getSource();
         int gameNumber = gameButtons.indexOf(gameButton);
-        swapPaneIn(getPane(gameNumber), swapOutPane);
+        // swapPaneIn(getPane(gameNumber), swapOutPane);
+        String loginPath = ViewInitializer.LOGIN;
+        String gamePath = gamesURL[gameNumber];
+        PlayerManager playerManager = new PlayerManager(gamePath, loginPath);
+        playerManager.loadLogin();
     }
 
     /**
@@ -41,7 +46,7 @@ public class MenuController extends ViewInitializer{
      * @param actionEvent the event that resulted in the function invocation.
      * @throws Exception if FXML could not be loaded.
      */
-    public void loadMainMenuContent(ActionEvent actionEvent) throws Exception{
+    public void loadMainMenuContent(ActionEvent actionEvent) throws Exception {
         Pane mainVI = getPane(ViewInitializer.MAINMENU);
         swapPaneIn(mainVI, swapOutPane);
     }

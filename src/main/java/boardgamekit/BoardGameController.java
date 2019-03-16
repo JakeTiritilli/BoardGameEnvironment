@@ -2,6 +2,7 @@ package boardgamekit;
 
 import java.util.ArrayList;
 
+import boardgamekit.players.Player;
 import boardgamekit.utility.GamePiece;
 import javafx.fxml.*;
 import javafx.scene.control.*;
@@ -17,7 +18,7 @@ import javafx.event.ActionEvent;
  * A way to display the current score
  * 
  */
-public abstract class BoardGameController implements Initializable {
+public abstract class BoardGameController {
 
     @FXML
     ArrayList<GamePiece> gameBoard;
@@ -31,10 +32,9 @@ public abstract class BoardGameController implements Initializable {
     @FXML
     Label player2Score;
 
-    @FXML
-    public void initialize() {
-        System.out.println("");
-    }
+    protected Player player1;
+    
+    protected Player player2;
 
     public void updateStatus(String text) {
         statusLabel.setText(text);
@@ -46,5 +46,10 @@ public abstract class BoardGameController implements Initializable {
 
     public void setPlayer2Score(String score) {
         player2Score.setText(score);
+    }
+
+    public void setPlayers(Player player1, Player player2) {
+        this.player1 = player1;
+        this.player2 = player2;
     }
 }

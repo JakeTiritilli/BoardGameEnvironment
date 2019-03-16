@@ -9,7 +9,6 @@ import javafx.scene.layout.Pane;
  * 
  * @author Jacob Tiritilli
  */
-
 public class ViewInitializer {
 	
 	// Reference to the underlying Pane that new games are swapped into.
@@ -23,11 +22,13 @@ public class ViewInitializer {
 	final static String SIDEVI = "/views/application/SideBarMenu.fxml";
 	final static String TICTACTOE = "/views/tictactoe/TicTacToe.fxml";
 	
+	final static String LOGIN = "/views/boardgamekit/PlayerLogin.fxml";
+	
 	
 	 /* Array of view intializers for each game.
     The order must match the order of buttons
     in {@code gameButtons}. */
-	protected String[] gamesURL = {CHECKER,OTHELLO,TICTACTOE, MEMORY };
+	protected String[] gamesURL = { CHECKER, OTHELLO, TICTACTOE, MEMORY };
 
 	  /**
      * Loads the root view of the application that inserts the
@@ -58,8 +59,7 @@ public class ViewInitializer {
 	 * @throws Exception if the file could not be loaded
 	 * @return the Pane containing the view created from the FXML file
 	 */
-	public Pane getPane(String resource) throws Exception
-	{
+	public Pane getPane(String resource) throws Exception {
 		return FXMLLoader.load(this.getClass().getResource(resource));
 	}
 	
