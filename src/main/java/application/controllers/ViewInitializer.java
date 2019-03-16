@@ -24,8 +24,7 @@ public class ViewInitializer {
 	
 	final static String LOGIN = "/views/boardgamekit/PlayerLogin.fxml";
 	
-	
-	 /* Array of view intializers for each game.
+	/* Array of view intializers for each game.
     The order must match the order of buttons
     in {@code gameButtons}. */
 	protected String[] gamesURL = { CHECKER, OTHELLO, TICTACTOE, MEMORY };
@@ -47,9 +46,9 @@ public class ViewInitializer {
         swapOutPane = mainContentWidget;
         mainContentWidget.getChildren().add(mainMenuPane);
 
-        // Gets the sideBarMenuWidget Pane found in MainWindow.fxml and adds the sideBarMenu Pane to it.
-        Pane sideBarMenuWidget = (Pane) root.lookup("#sideBarMenuWidget");
-        sideBarMenuWidget.getChildren().add(sideBarMenuPane);
+        // // Gets the sideBarMenuWidget Pane found in MainWindow.fxml and adds the sideBarMenu Pane to it.
+        // Pane sideBarMenuWidget = (Pane) root.lookup("#sideBarMenuWidget");
+        // sideBarMenuWidget.getChildren().add(sideBarMenuPane);
 
         return root;
     }

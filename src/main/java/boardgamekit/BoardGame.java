@@ -135,4 +135,8 @@ public abstract class BoardGame {
     public void switchCurrentPlayer() {
         currentPlayer = (currentPlayer == player1) ? player2 : player1;
     }
+
+    public Player getCurrentPlayer() {
+        return currentPlayer;
+    }
 }

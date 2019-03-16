@@ -39,15 +39,16 @@ public class PlayerManager {
             Parent gamePane = fxmlLoader.load();
             // BoardGameController gameController = fxmlLoader.getController();
             // gameController.setPlayers(player1, player2);
+            // gameController.initializeGameModel();
             
             if (baseScene == null) {
-                createNewStage(gamePane, 600, 1000, "Board Game");
+                createNewStage(gamePane, 800, 690, "Board Game");
             } else {
                 baseScene.setRoot(gamePane);
             }
 
         } catch (IOException error) {
-            System.out.println("Error occurred loading the login scene.");
+            System.out.println("Error occurred loading the game scene.");
             System.out.println(error);
             error.printStackTrace();
         }
@@ -56,6 +57,7 @@ public class PlayerManager {
     private void createNewStage(Parent pane, int width, int height, String title) {
         Stage stage = new Stage();
         stage.setTitle(title);
+        stage.setResizable(false);
         Scene newScene = new Scene(pane, width, height);
         stage.setScene(newScene);
         baseScene = newScene;
@@ -67,7 +69,7 @@ public class PlayerManager {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(loginViewPath));
             Parent loginPane = fxmlLoader.load();
             PlayerLoginController loginController = fxmlLoader.getController();
-            createNewStage(loginPane, 800, 650, "Login Page");
+            createNewStage(loginPane, 800, 690, "Login Page");
             loginController.initGameController(this);
         } catch (IOException error) {
             System.out.println("Error occurred loading the login scene.");

@@ -6,7 +6,6 @@ import boardgamekit.players.Player;
 import boardgamekit.utility.GamePiece;
 import javafx.fxml.*;
 import javafx.scene.control.*;
-import javafx.event.ActionEvent;
 
 /**
  * BoardGameController
@@ -21,16 +20,16 @@ import javafx.event.ActionEvent;
 public abstract class BoardGameController {
 
     @FXML
-    ArrayList<GamePiece> gameBoard;
+    protected ArrayList<GamePiece> gameBoard;
 
     @FXML
-    Label statusLabel;
+    protected Label statusLabel;
 
     @FXML
-    Label player1Score;
+    protected Label player1Score;
 
     @FXML
-    Label player2Score;
+    protected Label player2Score;
 
     protected Player player1;
     
@@ -52,4 +51,6 @@ public abstract class BoardGameController {
         this.player1 = player1;
         this.player2 = player2;
     }
+
+    public abstract void initializeGameModel();
 }

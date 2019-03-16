@@ -4,9 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-import java.net.URL;
 import java.util.List;
-import java.util.ResourceBundle;
 
 import boardgamekit.BoardGameController;
 import boardgamekit.players.Player;
@@ -22,16 +20,16 @@ import boardgamekit.utility.InvalidMoveException;
  * 
  * @author Jacob Tiritilli
  */
-public class TicTacToeController {//extends BoardGameController {
+public class TicTacToeController extends BoardGameController {
 
     // Holds the Tic Tac Toe game. Passes in player "X" as
     // the starting player, but this option may be given
     // to the user at a later point.
-    private TicTacToe game = new TicTacToe(Player.createDefault(""), Player.createDefault(""));
+    private TicTacToe game;
 
     // Outlet associated with the label in the view that will
     // display the status of the game.
-    public Label statusLabel;
+    // public Label statusLabel;
 
     // Outlet collection of all of the labels that act
     // as cells on the game board in the
@@ -46,16 +44,28 @@ public class TicTacToeController {//extends BoardGameController {
      * mouse. The handler is passed both the number of the cell and a reference to
      * that cell's label.
      */
-    @FXML
-    public void initialize() {
+    // @FXML
+    // public void initialize() {
+    //     for (int i = 0; i < cellList.size(); i++) {
+    //         final int cellNum = i;
+    //         final Label label = cellList.get(i);
+    //         cellList.get(i).setOnMouseClicked(event -> cellPressed(cellNum, label));
+    //     }
+
+    //     statusLabel.setText("Turn: " + game.getCurrentPlayerPiece().toString());
+    //     // game = new TicTacToe(player1, player2);
+    // }
+
+    public void initializeGameModel() {
+        game = new TicTacToe(player1, player2);
+
         for (int i = 0; i < cellList.size(); i++) {
             final int cellNum = i;
             final Label label = cellList.get(i);
             cellList.get(i).setOnMouseClicked(event -> cellPressed(cellNum, label));
         }
 
-        statusLabel.setText("Turn: " + game.getCurrentPlayerPiece().toString());
-        // game = new TicTacToe(player1, player2);
+        setTurnStatus();
     }
 
     /**
@@ -63,8 +73,8 @@ public class TicTacToeController {//extends BoardGameController {
      * clicked. It informs the model of the move and updates the view.
      * 
      * @param cellNum the number of the cell that was clicked (0-9)
-     * @param label   a reference to the label of the clicked cell so that it can be
-     *                updated with the appropriate player
+     * @param label a reference to the label of the clicked cell so that it can be
+     *              updated with the appropriate player
      */
     private void cellPressed(int cellNum, Label label) {
         TicTacToePlayer currentPlayer = (TicTacToePlayer) game.getCurrentPlayerPiece();
@@ -83,8 +93,14 @@ public class TicTacToeController {//extends BoardGameController {
         } else if (game.boardIsFull()) {
             statusLabel.setText("Cat's Game!");
         } else {
-            statusLabel.setText("Turn: " + game.getCurrentPlayerPiece().toString());
+            setTurnStatus();
         }
+    }
+
+    private void setTurnStatus() {
+        String piece = game.getCurrentPlayerPiece().toString();
+        String player = game.getCurrentPlayer().getUsername();
+        statusLabel.setText("Turn: " + piece + " (" + player + ")");
     }
 
     /**
@@ -92,7 +108,7 @@ public class TicTacToeController {//extends BoardGameController {
      * status label.
      */
     public void startNewGame(ActionEvent actionEvent) {
-        game = new TicTacToe(Player.createDefault(""), Player.createDefault("")); // REPLACE
+        game = new TicTacToe(player1, player2);
         statusLabel.setText("Turn: " + game.getCurrentPlayerPiece().toString());
 
         for (Label cell : cellList) {

@@ -15,7 +15,7 @@ public class Main extends Application {
         // Setting up stage and shows it
         primaryStage.setTitle("Board Game Environment");
         primaryStage.setResizable(false);
-        primaryStage.setScene(new Scene(root, 1000, 700));
+        primaryStage.setScene(new Scene(root, 700, 700));
         primaryStage.show();
     }
 
