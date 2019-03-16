@@ -2,7 +2,6 @@ package application.controllers;
 
 import java.util.List;
 
-import application.utility.*;
 import javafx.scene.control.*;
 import javafx.fxml.FXML;
 import javafx.event.ActionEvent;
@@ -15,16 +14,7 @@ import javafx.scene.layout.Pane;
  * 
  * @author Jacob Tiritilli
  */
-public class MenuController {
-    // Array of view intializers for each game.
-    // The order must match the order of buttons
-    // in {@code gameButtons}.
-    private ViewInitializer[] gameInitializers = {
-        CheckersVI.create(),
-        OthelloVI.create(),
-        TicTacToeVI.create(),
-        MemoryVI.create()
-    };
+public class MenuController extends ViewInitializer{
 
     @FXML
     private List<Button> gameButtons; // Outlet collection of UI buttons
@@ -42,8 +32,7 @@ public class MenuController {
     public void loadGameScene(ActionEvent actionEvent) throws Exception {
         Button gameButton = (Button) actionEvent.getSource();
         int gameNumber = gameButtons.indexOf(gameButton);
-        ViewInitializer gameInitializer = gameInitializers[gameNumber];
-        swapPaneIn(gameInitializer.getPane(), RootVI.swapOutPane);
+        swapPaneIn(getPane(gameNumber), swapOutPane);
     }
 
     /**
@@ -53,8 +42,8 @@ public class MenuController {
      * @throws Exception if FXML could not be loaded.
      */
     public void loadMainMenuContent(ActionEvent actionEvent) throws Exception{
-        Pane mainVI = MainVI.create().getPane();
-        swapPaneIn(mainVI, RootVI.swapOutPane);
+        Pane mainVI = getPane(ViewInitializer.MAINMENU);
+        swapPaneIn(mainVI, swapOutPane);
     }
 
     /**
@@ -75,4 +64,5 @@ public class MenuController {
     public void closeApplication() {
         System.exit(0);
     }
+
 }
