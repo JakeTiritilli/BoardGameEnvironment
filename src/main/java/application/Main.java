@@ -10,7 +10,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = new ViewInitializer().getRootPane();
+        Parent root = new ViewInitializer().getPane(ViewInitializer.MAINMENU);
 
         // Setting up stage and shows it
         primaryStage.setTitle("Board Game Environment");

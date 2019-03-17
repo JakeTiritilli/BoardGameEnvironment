@@ -7,7 +7,6 @@ import javafx.scene.control.*;
 import java.util.List;
 
 import boardgamekit.BoardGameController;
-import boardgamekit.players.Player;
 import tictactoe.models.*;
 import tictactoe.utility.*;
 import boardgamekit.utility.InvalidMoveException;
@@ -44,27 +43,22 @@ public class TicTacToeController extends BoardGameController {
      * mouse. The handler is passed both the number of the cell and a reference to
      * that cell's label.
      */
-    // @FXML
-    // public void initialize() {
-    //     for (int i = 0; i < cellList.size(); i++) {
-    //         final int cellNum = i;
-    //         final Label label = cellList.get(i);
-    //         cellList.get(i).setOnMouseClicked(event -> cellPressed(cellNum, label));
-    //     }
-
-    //     statusLabel.setText("Turn: " + game.getCurrentPlayerPiece().toString());
-    //     // game = new TicTacToe(player1, player2);
-    // }
-
-    public void initializeGameModel() {
-        game = new TicTacToe(player1, player2);
-
+    @FXML
+    public void initialize() {
         for (int i = 0; i < cellList.size(); i++) {
             final int cellNum = i;
             final Label label = cellList.get(i);
             cellList.get(i).setOnMouseClicked(event -> cellPressed(cellNum, label));
         }
+    }
 
+    /**
+     * Creates an instance of the model and sets the turn label
+     * to the current player. This method is called autmatically
+     * during the segue from the login screen to the actual game.
+     */
+    public void initializeGameModel() {
+        game = new TicTacToe(player1, player2);
         setTurnStatus();
     }
 

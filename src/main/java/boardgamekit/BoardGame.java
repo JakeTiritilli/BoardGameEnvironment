@@ -1,6 +1,8 @@
 package boardgamekit;
 
-import boardgamekit.players.Player;
+import java.io.IOException;
+
+import boardgamekit.players.*;
 import boardgamekit.utility.*;
 
 /**
@@ -90,6 +92,15 @@ public abstract class BoardGame {
         Player winner = (currentPlayer == player1) ? player1 : player1;
         int currentScore = winner.getScoreFor(gameType);
         winner.setScoreFor(gameType, currentScore + 1);
+
+        try {
+            PlayerLoader loader = new PlayerLoader("src/main/resources/json/UserData.json");
+            loader.writeData(winner);
+        } catch (IOException error) {
+            System.out.println("Error occurred loading the game scene.");
+            System.out.println(error);
+            error.printStackTrace();
+        }
     }
 
     /**
