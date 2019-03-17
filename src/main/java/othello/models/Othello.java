@@ -48,6 +48,9 @@ public class Othello extends BoardGame {
         // set black starting pieces
         gameboard[3][4] = new OthelloPiece(OthelloPlayer.BLACK);
         gameboard[4][3] = new OthelloPiece(OthelloPlayer.BLACK);
+
+        p1Score = 2;
+        p2Score = 2;
     }
 
     /**
@@ -102,8 +105,16 @@ public class Othello extends BoardGame {
 
     public boolean endGame() // game ends if no players have moves left or if the game board is full
     {
-        if(boardIsFull() && playerHasMoves(OthelloPlayer.WHITE)==false && playerHasMoves(OthelloPlayer.BLACK)== false)
+        if(boardIsFull()) {
+            System.out.println("GAME OVER");
             return true;
+        }
+
+        else if(playerHasMoves(OthelloPlayer.WHITE)==false && playerHasMoves(OthelloPlayer.BLACK)== false)
+        {
+            System.out.println("GAME OVER");
+            return true;
+        }
         return false;
     }
 
@@ -121,6 +132,16 @@ public class Othello extends BoardGame {
 
     public void setCurrentPlayer(OthelloPlayer currentPlayer) {
         this.currentPlayer = currentPlayer;
+    }
+
+    public int getP1Score()
+    {
+        return this.p1Score;
+    }
+
+    public int getP2Score()
+    {
+        return this.p2Score;
     }
 
     public void updateScore(){
