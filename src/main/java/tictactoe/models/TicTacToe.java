@@ -65,7 +65,11 @@ public class TicTacToe extends BoardGame {
      */
     public boolean gameIsWon() {
         GamePiece[] tictactoeBoard = gameBoard[0];
-        return horizontalWin(tictactoeBoard) || verticalWin(tictactoeBoard) || diagonalWin(tictactoeBoard);
+        boolean isWon = horizontalWin(tictactoeBoard) || verticalWin(tictactoeBoard) || diagonalWin(tictactoeBoard);
+        if (isWon) {
+            setWinner("tictactoe", true);
+        }
+        return isWon;
     }
 
     private boolean horizontalWin(GamePiece[] board) {
