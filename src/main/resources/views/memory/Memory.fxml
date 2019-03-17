@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -16,14 +11,14 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="memory.controllers.MemoryController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="memory.controllers.MemoryController">
    <children>
-      <Label alignment="CENTER" layoutX="220.0" layoutY="42.0" prefHeight="47.0" prefWidth="310.0" text="Memory" textAlignment="CENTER">
+      <Label alignment="CENTER" layoutX="219.0" layoutY="14.0" prefHeight="47.0" prefWidth="310.0" text="Memory" textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="48.0" />
          </font>
       </Label>
-      <Label fx:id="statusLabel" alignment="CENTER" layoutX="500.0" layoutY="72.0" prefHeight="23.0" prefWidth="237.0" textFill="#ee2020">
+      <Label fx:id="statusLabel" alignment="CENTER" layoutX="199.0" layoutY="75.0" prefHeight="23.0" prefWidth="354.0" textFill="#ee2020">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -80,18 +75,18 @@
                </children>
             </GridPane>
          </children></StackPane>
-      <Label alignment="CENTER" layoutX="22.0" layoutY="551.0" prefHeight="24.0" prefWidth="96.0" text="Player 1">
+      <Label fx:id="player1name" alignment="CENTER" layoutX="22.0" layoutY="576.0" prefHeight="24.0" prefWidth="200.0">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="603.0" layoutY="551.0" prefHeight="27.0" prefWidth="131.0" text="Player 2">
+      <Label fx:id="player2name" alignment="CENTER" layoutX="539.0" layoutY="574.0" prefHeight="27.0" prefWidth="200.0">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="playeronescore" layoutX="53.0" layoutY="590.0" text="0" />
-      <Label fx:id="playertwoscore" layoutX="652.0" layoutY="590.0" text="0" />
-      <Button fx:id="reset" layoutX="364.0" layoutY="584.0" mnemonicParsing="false" onAction="#startNewGame" text="Reset" />
+      <Label fx:id="player1Score" layoutX="118.0" layoutY="609.0" text="0" />
+      <Label fx:id="player2Score" layoutX="634.0" layoutY="609.0" text="0" />
+      <!--<Button fx:id="reset" layoutX="364.0" layoutY="584.0" mnemonicParsing="false" onAction="#startNewGame" text="Change Images" />-->
    </children>
 </AnchorPane>
