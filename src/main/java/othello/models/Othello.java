@@ -99,7 +99,7 @@ public class Othello extends BoardGame {
         return true;
     }
 
-    public boolean playerHasMoves(OthelloPlayer player) // check if player has moves, if not, switch to other player
+    public boolean playerHasMoves(OthelloPlayer player) // check if player has moves
     {
         return (ValidMoveFinder.getValidMoves(player).size() > 0);
     }

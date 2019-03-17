@@ -55,10 +55,11 @@ public class OthelloController {
 
         try {
             initializeBoard();
-            displayCurrentTurn();
-
-
-        } catch (IOException e) {
+            addMouseClickEvent();
+            updateScore();
+            startTurn();
+        }
+        catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -68,14 +69,25 @@ public class OthelloController {
     private void initializeBoard() throws IOException {
         initializeBlackStartingPieces();
         initializeWhiteStartingPieces();
-        addMouseClickEvent();
-        updateScore();
-        startTurn();
 
     }
 
     private void startTurn()
     {
+
+        if(game.endGame())
+        {
+            if(game.getP1Score() > game.getP2Score())
+            {
+                infoLabel.setText("Black Won!");
+            }
+            else
+            {
+                infoLabel.setText("White Won!");
+            }
+            return;
+        }
+
         infoLabel.setText("");
         if(!game.playerHasMoves(game.getCurrentPlayer()))
         {
@@ -116,6 +128,7 @@ public class OthelloController {
     {
         ArrayList<Integer[]> validMoves = ValidMoveFinder.getValidMoves(game.getCurrentPlayer());
 
+
         for (Integer[] move : validMoves) {
             if (move[0] == row && move[1] == col) { // Move is verified as valid
 
@@ -136,8 +149,8 @@ public class OthelloController {
             }
         }
 
-        game.setCurrentPlayer(game.getCurrentPlayer().getOppositeColor());
-        startTurn();
+        // If move is not valid
+        infoLabel.setText("Invalid Move");
         return false;
 
 
