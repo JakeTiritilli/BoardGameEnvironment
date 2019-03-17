@@ -1,10 +1,6 @@
 package boardgamekit.players;
 
-import java.util.Arrays;
-import java.util.List;
-
 import org.json.JSONObject;
-import boardgamekit.utility.Game;
 
 /**
  * This class serves as a representation of the data
@@ -51,10 +47,6 @@ public class Player {
      */
     public static Player createDefault(String userName) {
         JSONObject scores = new JSONObject();
-        List<Game> somethingList = Arrays.asList(Game.values());
-        for (Game game : somethingList) {
-            scores.put(game.toString().toLowerCase(), 0);
-        }
         return new Player(userName, scores);
     }
 

@@ -70,7 +70,13 @@ public abstract class BoardGameController {
      */
     public abstract void initializeGameModel();
 
+    /**
+     * Used to do any initialization before the start of a player's turn.
+     */
     public abstract void startTurn();
 
+    /**
+     * Used to make a move on the game board in the view.
+     */
     public void makeMove() {};
 }
