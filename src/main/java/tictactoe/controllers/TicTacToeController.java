@@ -48,7 +48,7 @@ public class TicTacToeController extends BoardGameController {
         for (int i = 0; i < cellList.size(); i++) {
             final int cellNum = i;
             final Label label = cellList.get(i);
-            cellList.get(i).setOnMouseClicked(event -> cellPressed(cellNum, label));
+            cellList.get(i).setOnMouseClicked(event -> makeMove(cellNum, label));
         }
     }
 
@@ -59,7 +59,7 @@ public class TicTacToeController extends BoardGameController {
      */
     public void initializeGameModel() {
         game = new TicTacToe(player1, player2);
-        setTurnStatus();
+        startTurn();
     }
 
     /**
@@ -70,7 +70,7 @@ public class TicTacToeController extends BoardGameController {
      * @param label a reference to the label of the clicked cell so that it can be
      *              updated with the appropriate player
      */
-    private void cellPressed(int cellNum, Label label) {
+    private void makeMove(int cellNum, Label label) {
         TicTacToePlayer currentPlayer = (TicTacToePlayer) game.getCurrentPlayerPiece();
 
         // If move was invalid, then exit early.
@@ -87,11 +87,11 @@ public class TicTacToeController extends BoardGameController {
         } else if (game.boardIsFull()) {
             statusLabel.setText("Cat's Game!");
         } else {
-            setTurnStatus();
+            startTurn();
         }
     }
 
-    private void setTurnStatus() {
+    public void startTurn() {
         String piece = game.getCurrentPlayerPiece().toString();
         String player = game.getCurrentPlayer().getUsername();
         statusLabel.setText("Turn: " + piece + " (" + player + ")");

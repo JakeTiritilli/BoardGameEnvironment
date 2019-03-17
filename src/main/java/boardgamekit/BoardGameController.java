@@ -69,4 +69,8 @@ public abstract class BoardGameController {
      * login and will ensure that the game is able to be played.
      */
     public abstract void initializeGameModel();
+
+    public abstract void startTurn();
+
+    public void makeMove() {};
 }
