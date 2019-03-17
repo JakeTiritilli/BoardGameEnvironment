@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane prefHeight="394.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boardgamekit.players.PlayerLoginController">
+   <children>
+      <Label alignment="CENTER" layoutX="207.0" layoutY="66.0" prefHeight="67.0" prefWidth="370.0" text="Player Login">
+         <font>
+            <Font name="Cambria Math" size="58.0" />
+         </font>
+      </Label>
+      <Label layoutX="254.0" layoutY="203.0" prefHeight="29.0" prefWidth="55.0" text="Player1:" />
+      <TextField fx:id="player1TF" layoutX="317.0" layoutY="202.0" promptText="Player 1 Name" />
+      <Button fx:id="loginButton" layoutX="384.0" layoutY="300.0" mnemonicParsing="false" text="Login" />
+      <Label layoutX="254.0" layoutY="251.0" prefHeight="29.0" prefWidth="55.0" text="Player2:" />
+      <TextField fx:id="player2TF" layoutX="317.0" layoutY="250.0" promptText="Player 2 Name" />
+      <Label fx:id="statusLabel" alignment="CENTER" layoutX="171.0" layoutY="160.0" prefHeight="29.0" prefWidth="459.0" textFill="#c62929">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

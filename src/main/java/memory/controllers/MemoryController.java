@@ -1,5 +1,10 @@
 package memory.controllers;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 /**
  * Represents a controller for and contains general functionality for playing the
  * game of Memory.
@@ -8,24 +13,21 @@ package memory.controllers;
  */
 
 import javafx.animation.PauseTransition;
+import javafx.event.ActionEvent;
 import javafx.util.Duration;
 import memory.models.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button ;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
-import java.util.List;
 
 
 public class MemoryController {
-
-    @FXML
-    private List<ImageView> imageList;
-
-    @FXML
-    private List<Button> buttonList;
-
+	String[] imageArray = {"src/main/resources/images/bug.png", "src/main/resources/images/bee.png",
+	"src/main/resources/images/butterfly.png"};
+	@FXML
+	public Button reset;
     @FXML
     public Label statusLabel;
 
@@ -35,19 +37,47 @@ public class MemoryController {
     @FXML
     public Label playertwoscore;
 
+    @FXML
+    private ImageView iv1;
+    @FXML
+    private Button  button1;
 
+    @FXML
+    private ImageView iv2;
+    @FXML
+    private Button  button2;
+
+    @FXML
+    private ImageView iv3;
+    @FXML
+    private Button  button3;
+
+    @FXML
+    private ImageView iv4;
+    @FXML
+    private Button  button4;
+
+    @FXML
+    private ImageView iv5;
+    @FXML
+    private Button  button5;
+
+    @FXML
+    private ImageView iv6;
+    @FXML
+    private Button  button6;
 
     @FXML
     private void handleCardOne() {
         cardFlipped(1);
     }
     public void cardShow1(){
-        imageList.get(0).setVisible(true);
-        buttonList.get(0).setVisible(false);
+        iv1.setVisible(true);
+        button1.setVisible(false);
         }
     public void cardHide1(){
-        imageList.get(0).setVisible(false);
-        buttonList.get(0).setVisible(true);
+        iv1.setVisible(false);
+        button1.setVisible(true);
     }
 
     @FXML
@@ -55,12 +85,12 @@ public class MemoryController {
         cardFlipped(2);
     }
     public void cardShow2(){
-        imageList.get(1).setVisible(true);
-        buttonList.get(1).setVisible(false);
+        iv2.setVisible(true);
+        button2.setVisible(false);
     }
     public void cardHide2(){
-        imageList.get(1).setVisible(false);
-        buttonList.get(1).setVisible(true);
+        iv2.setVisible(false);
+        button2.setVisible(true);
     }
 
     @FXML
@@ -68,12 +98,12 @@ public class MemoryController {
         cardFlipped(3);
     }
     public void cardShow3(){
-        imageList.get(2).setVisible(true);
-        buttonList.get(2).setVisible(false);
+        iv3.setVisible(true);
+        button3.setVisible(false);
     }
     public void cardHide3(){
-        imageList.get(2).setVisible(false);
-        buttonList.get(2).setVisible(true);
+        iv3.setVisible(false);
+        button3.setVisible(true);
     }
 
     @FXML
@@ -81,12 +111,12 @@ public class MemoryController {
         cardFlipped(4);
     }
     public void cardShow4(){
-        imageList.get(3).setVisible(true);
-        buttonList.get(3).setVisible(false);
+        iv4.setVisible(true);
+        button4.setVisible(false);
     }
     public void cardHide4(){
-        imageList.get(3).setVisible(false);
-        buttonList.get(3).setVisible(true);
+        iv4.setVisible(false);
+        button4.setVisible(true);
     }
 
     @FXML
@@ -94,12 +124,12 @@ public class MemoryController {
         cardFlipped(5);
     }
     public void cardShow5(){
-        imageList.get(4).setVisible(true);
-        buttonList.get(4).setVisible(false);
+        iv5.setVisible(true);
+        button5.setVisible(false);
     }
     public void cardHide5(){
-        imageList.get(4).setVisible(false);
-        buttonList.get(4).setVisible(true);
+        iv5.setVisible(false);
+        button5.setVisible(true);
     }
 
     @FXML
@@ -107,12 +137,12 @@ public class MemoryController {
         cardFlipped(6);
     }
     public void cardShow6(){
-        imageList.get(5).setVisible(true);
-        buttonList.get(5).setVisible(false);
+        iv6.setVisible(true);
+        button6.setVisible(false);
     }
     public void cardHide6(){
-        imageList.get(5).setVisible(false);
-        buttonList.get(5).setVisible(true);
+        iv6.setVisible(false);
+        button6.setVisible(true);
     }
 
 
@@ -203,6 +233,49 @@ public class MemoryController {
         return;
          }
          }
+    
+    public List<Image> shuffleCards()
+    {
+    	List<Image> imageList = new ArrayList<>();
+    	for (int i = 0; i < imageArray.length; i++)
+    	{
+    		File file = new File(imageArray[i]);
+    		Image image = new Image(file.toURI().toString());
+    		imageList.add(image);
+    		imageList.add(image);    				
+    	}
+    	Collections.shuffle(imageList);
+    	return imageList;
+    }
+    @FXML
+    public void shuffle()
+    {
+    	List<Image> imageList = shuffleCards();
+	    iv1.setImage(imageList.get(0));
+	    iv2.setImage(imageList.get(1));
+	    iv3.setImage(imageList.get(2));
+	    iv4.setImage(imageList.get(3));
+	    iv5.setImage(imageList.get(4));
+	    iv6.setImage(imageList.get(5));
+	    button1.setVisible(true);
+	    button2.setVisible(true);
+	    button3.setVisible(true);
+	    button4.setVisible(true);
+	    button5.setVisible(true);
+	    button6.setVisible(true);
+    }
+    @FXML
+    public void startNewGame(ActionEvent event) 
+    {
+    	
+    	game = new Memory();
+    	shuffle();
+	    statusLabel.setText("New Game");
+	    playeronescore.setText("0");
+	    playertwoscore.setText("0");
+     
+    }
+
 
 //    public void startNewGame(ActionEvent actionEvent) {
 //        game = new Memory();
