@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
-<?import java.util.*?>
 
-<AnchorPane prefHeight="750.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="othello.controllers.OthelloController">
+<?import java.util.ArrayList?>
+<AnchorPane fx:id="board" prefHeight="750.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="othello.controllers.OthelloController">
    <children>
       <StackPane layoutX="129.0" layoutY="40.0" prefHeight="500.0" prefWidth="500.0">
          <children>
@@ -105,22 +105,22 @@
             </GridPane>
          </children>
       </StackPane>
-      <Label alignment="CENTER" layoutX="110.0" layoutY="580.0" prefHeight="50.0" prefWidth="50.0" text="0">
+      <Label fx:id="blackScoreCard" alignment="CENTER" layoutX="110.0" layoutY="580.0" prefHeight="50.0" prefWidth="50.0" text="0">
          <font>
             <Font size="27.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="591.0" layoutY="575.0" prefHeight="50.0" prefWidth="50.0" text="0">
+      <Label fx:id="whiteScoreCard" alignment="CENTER" contentDisplay="CENTER" layoutX="591.0" layoutY="575.0" prefHeight="50.0" prefWidth="50.0" text="0">
          <font>
             <Font size="27.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="31.0" layoutY="526.0" prefHeight="25.0" prefWidth="75.0" text="Player 1">
+      <Label alignment="CENTER" layoutX="31.0" layoutY="526.0" prefHeight="25.0" prefWidth="75.0" text="Black">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="651.0" layoutY="520.0" prefHeight="25.0" prefWidth="75.0" text="Player 2">
+      <Label alignment="CENTER" layoutX="651.0" layoutY="520.0" prefHeight="25.0" prefWidth="75.0" text="White">
          <font>
             <Font size="17.0" />
          </font>
@@ -143,6 +143,13 @@
       <Label alignment="CENTER" layoutX="581.0" layoutY="598.0" prefHeight="50.0" prefWidth="75.0" text="Score">
          <font>
             <Font size="18.0" />
+         </font>
+      </Label>
+      <StackPane fx:id="blackPlayerTurnPane" layoutX="19.0" layoutY="426.0" prefHeight="100.0" prefWidth="100.0" />
+      <StackPane fx:id="whitePlayerTurnPane" layoutX="639.0" layoutY="426.0" prefHeight="100.0" prefWidth="100.0" />
+      <Label fx:id="infoLabel" alignment="CENTER" layoutX="176.0" layoutY="562.0" prefHeight="89.0" prefWidth="407.0">
+         <font>
+            <Font size="29.0" />
          </font>
       </Label>
    </children>
