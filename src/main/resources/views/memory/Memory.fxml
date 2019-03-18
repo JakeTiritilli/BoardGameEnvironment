@@ -78,6 +78,18 @@
                      </image>
                   </ImageView>
                   <Button fx:id="button6" mnemonicParsing="false"  prefHeight="188.0" prefWidth="316.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <fx:define>
+           <ArrayList fx:id="ivList" >
+               <fx:reference source="iv1"/>
+               <fx:reference source="iv2"/>
+               <fx:reference source="iv3"/>
+               <fx:reference source="iv4"/>
+               <fx:reference source="iv5"/>
+               <fx:reference source="iv6"/>
+              
+           </ArrayList>
+           </fx:define>
+           
                    <fx:define>
            <ArrayList fx:id="buttonList" >
                <fx:reference source="button1"/>
@@ -88,7 +100,11 @@
                <fx:reference source="button6"/>
               
            </ArrayList>
-       </fx:define>
+           </fx:define>
+           
+           
+           
+          
       
                </children>
             </GridPane>
