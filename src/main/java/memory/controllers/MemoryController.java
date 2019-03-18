@@ -30,16 +30,12 @@ public class MemoryController extends BoardGameController {
 	"src/main/resources/images/butterfly.png"};
 
 	@FXML
-	public Button reset;
-	@FXML
-    public Button test;
+	public Button reset;	
 
     @FXML
     private Label player1name;
     @FXML
-    private Label player2name;
-
-    
+    private Label player2name;    
     
 
     @FXML
@@ -50,17 +46,16 @@ public class MemoryController extends BoardGameController {
     
 
     public void cardShow(int num)
-    {
-    	
+    {    	
     	ivList.get(num-1).setVisible(true);
     	buttonList.get(num-1).setVisible(false);
-       }
+     }
+    
     public void cardHide(int num)
-    {
-    	
+    {    	
     	ivList.get(num-1).setVisible(false);    		
     	buttonList.get(num-1).setVisible(true);
-    	}    
+    }    
     
 
     private Memory game;
@@ -114,13 +109,10 @@ public class MemoryController extends BoardGameController {
                     PauseTransition pause = new PauseTransition(
                             Duration.seconds(1)
                     );
-                    pause.setOnFinished(event -> {
-                       
+                    pause.setOnFinished(event -> {                       
                     	
-                    	cardHide(game.currentPlayerPick[0]);
-                    	
-                    	cardHide(cardNum);
-                    	
+                    	cardHide(game.currentPlayerPick[0]);                    	
+                    	cardHide(cardNum);                    	
                         game.switchCurrentPlayer();
 
                     });
@@ -167,13 +159,10 @@ public class MemoryController extends BoardGameController {
    public void shuffle()
    {
    	List<Image> imageList = shuffleCards();
-   	
-   	ivList.get(0).setImage(imageList.get(0));
-	ivList.get(1).setImage(imageList.get(2));
-	ivList.get(2).setImage(imageList.get(3));
-    ivList.get(3).setImage(imageList.get(1));
-    ivList.get(4).setImage(imageList.get(4));
-    ivList.get(5).setImage(imageList.get(5));
+   	for (int i = 0; i < imageList.size(); i++)
+   	{
+   		ivList.get(i).setImage(imageList.get(i));
+   	}   	
     for (int i = 0; i < buttonList.size(); i++) {       
         buttonList.get(i).setVisible(true);
     }
@@ -185,8 +174,8 @@ public class MemoryController extends BoardGameController {
    	game = new Memory(player1, player2, 3);
   	shuffle();
     statusLabel.setText("New Game");
-      player1Score.setText("0");
-      player2Score.setText("0");
+    player1Score.setText("0");
+    player2Score.setText("0");
 
   }
 

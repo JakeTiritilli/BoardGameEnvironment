@@ -42,13 +42,13 @@ public class Memory extends BoardGame{
 
     }
 
-    
+    /*
     public String getPlayerString(){
         if (currentPlayer == playerOne)
             return "One";
         else
             return "Two";
-    }
+    }*/
 	
 
     //Change the current player
