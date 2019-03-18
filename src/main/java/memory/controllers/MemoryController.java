@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.*;
 
 /**
  * Represents a controller for and contains general functionality for playing the
@@ -30,6 +31,8 @@ public class MemoryController extends BoardGameController {
 
 	@FXML
 	public Button reset;
+	@FXML
+    public Button test;
 
     @FXML
     private Label player1name;
@@ -69,10 +72,11 @@ public class MemoryController extends BoardGameController {
     @FXML
     private List<Button> buttonList;
     
-    @FXML
-    private void handleCardOne() {
-        cardFlipped(1);
-    }
+    
+//    @FXML
+//    private void handleCardOne() {
+//        cardFlipped(1);
+//    }
     public void cardShow1(){
         iv1.setVisible(true);
         button1.setVisible(false);
@@ -82,10 +86,10 @@ public class MemoryController extends BoardGameController {
         button1.setVisible(true);
     }
 
-    @FXML
-    private void handleCardTwo() {
-        cardFlipped(2);
-    }
+//    @FXML
+//    private void handleCardTwo() {
+//        cardFlipped(2);
+//    }
     public void cardShow2(){
         iv2.setVisible(true);
         button2.setVisible(false);
@@ -95,10 +99,10 @@ public class MemoryController extends BoardGameController {
         button2.setVisible(true);
     }
 
-    @FXML
-    private void handleCardThree() {
-        cardFlipped(3);
-    }
+//    @FXML
+//    private void handleCardThree() {
+//        cardFlipped(3);
+//    }
     public void cardShow3(){
         iv3.setVisible(true);
         button3.setVisible(false);
@@ -107,11 +111,11 @@ public class MemoryController extends BoardGameController {
         iv3.setVisible(false);
         button3.setVisible(true);
     }
-
-    @FXML
-    private void handleCardFour() {
-        cardFlipped(4);
-    }
+//
+//    @FXML
+//    private void handleCardFour() {
+//        cardFlipped(4);
+//    }
     public void cardShow4(){
         iv4.setVisible(true);
         button4.setVisible(false);
@@ -121,10 +125,10 @@ public class MemoryController extends BoardGameController {
         button4.setVisible(true);
     }
 
-    @FXML
-    private void handleCardFive() {
-        cardFlipped(5);
-    }
+//    @FXML
+//    private void handleCardFive() {
+//        cardFlipped(5);
+//    }
     public void cardShow5(){
         iv5.setVisible(true);
         button5.setVisible(false);
@@ -134,10 +138,10 @@ public class MemoryController extends BoardGameController {
         button5.setVisible(true);
     }
 
-    @FXML
-    private void handleCardSix() {
-        cardFlipped(6);
-    }
+//    @FXML
+//    private void handleCardSix() {
+//        cardFlipped(6);
+//    }
     public void cardShow6(){
         iv6.setVisible(true);
         button6.setVisible(false);
@@ -150,16 +154,16 @@ public class MemoryController extends BoardGameController {
     
 
     private Memory game;
-    /*
+
     @FXML
     public void initialize() {
         for (int i = 0; i < buttonList.size(); i++) {
-            final int buttonNum = i;
+            final int buttonNum = (i+1);
             final Button button = buttonList.get(i);
             buttonList.get(i).setOnMouseClicked(event -> cardFlipped(buttonNum));
         }
     }
-    */
+
     
     public void initializeGameModel() {
     	
