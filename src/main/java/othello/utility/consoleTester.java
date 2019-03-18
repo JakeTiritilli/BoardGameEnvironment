@@ -13,7 +13,7 @@ public class consoleTester {
         while (!game.endGame()){
             printBoard(game);
 
-            ArrayList<Integer[]> moves = ValidMoveFinder.getValidMoves(game.getCurrentPlayer());
+            ArrayList<Integer[]> moves = ValidMoveFinder.getValidMoves(game.getCurrentTurn());
             System.out.println("Available Moves Found");
             if (moves.size() > 0){
                 boolean valid = false;
@@ -35,7 +35,7 @@ public class consoleTester {
                     }
                 }
             }
-            else game.setCurrentPlayer(game.getCurrentPlayer().getOppositeColor());
+            else game.setCurrentPlayer(game.getCurrentTurn().getOppositeColor());
         }
 
     }
