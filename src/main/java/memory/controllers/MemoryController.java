@@ -31,7 +31,7 @@ public class MemoryController extends BoardGameController {
 	@FXML
 	public Button reset;
 
-    @FXML
+	@FXML
     private Label player1name;
     @FXML
     private Label player2name;
@@ -155,9 +155,8 @@ public class MemoryController extends BoardGameController {
 
     public void startTurn() {
         statusLabel.setText("Turn: Player " + game.getPlayerString());
-        player1Score.setText("Score: " + game.playerOneScore);
-        player2Score.setText("Score: " + game.playerTwoScore);
-
+        setPlayer1Score(Integer.toString(game.playerOneScore));
+        setPlayer2Score(Integer.toString(game.playerTwoScore));
     }
 
 
@@ -214,8 +213,8 @@ public class MemoryController extends BoardGameController {
                     pause.play();
                     break;
                 case 3: //CASE 3: KEEP BOTH IMAGES SHOWING
-                    player1Score.setText("Score: " + game.playerOneScore);
-                    player2Score.setText("Score: " + game.playerTwoScore);
+                	setPlayer1Score(Integer.toString(game.playerOneScore));
+                    setPlayer2Score(Integer.toString(game.playerTwoScore));
                     switch(cardNum){
                         case 1: cardShow1(); break;
                         case 2: cardShow2(); break;
@@ -233,9 +232,7 @@ public class MemoryController extends BoardGameController {
                     break;
 
             }
-            statusLabel.setText("Turn: Player " + game.getPlayerString());
-            player1Score.setText("Score: " + game.playerOneScore);
-            player2Score.setText("Score: " + game.playerTwoScore);
+            startTurn();
         }
          else {
         //GAME IS FINISHED

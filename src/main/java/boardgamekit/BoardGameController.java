@@ -63,7 +63,7 @@ public abstract class BoardGameController {
     }
 
     /**
-     * This method should be used to initialze and instance of the
+     * This method should be used to initialize an instance of the
      * {@code BoardGame} object that represents the game's model.
      * This will be called automatically during the segue after the player
      * login and will ensure that the game is able to be played.
