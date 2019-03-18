@@ -1,23 +1,29 @@
 package memory.models;
 
+import boardgamekit.BoardGame;
+import boardgamekit.players.*;
+import boardgamekit.utility.InvalidMoveException;
+
 /**
  * Represents a model for and contains general functionality for playing the
  * game of Memory.
  * 
  * @author Kaitlyn Fong
  */
-public class Memory {
+public class Memory extends BoardGame{
 
     private int currentPlayer;
     public int[] currentPlayerPick = new int[2];
+    public Player playerOne;
     public int playerOneScore;
+    public Player playerTwo;
     public int playerTwoScore;
     private int[] cardIndex = new int[7];
     public int numMatches = 0;
 
-    public Memory() {
-        playerOneScore = 0;
-        playerTwoScore = 0;
+    public Memory(Player p1, Player p2, int d) {
+       super(p1, p2, 3);
+        
 
         //SET UP VALUE OF CARDS
         cardIndex[1] = 1;
@@ -59,6 +65,10 @@ public class Memory {
             return false;
     }
 
+    @Override
+    public void makeMove(int row, int column) {}
+
+
     public int makeMove(int cardNum) {
         //IF FIRST CARDFLIP
         if (currentPlayerPick[0] == 0 && currentPlayerPick[1] == 0){
@@ -75,7 +85,7 @@ public class Memory {
             else {
                 //IS A CARD MATCH
                 if (currentPlayer == 1)
-                    playerOneScore ++;
+                   playerOneScore++;
                 else
                     playerTwoScore ++;
                 numMatches ++;
@@ -85,7 +95,7 @@ public class Memory {
         }
     }
 
-    public boolean allCardsFlipped(){
+    public boolean gameIsWon(){
         return numMatches == 3;
     }
 

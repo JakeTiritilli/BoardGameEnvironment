@@ -12,6 +12,7 @@ import java.util.List;
  * @author Kaitlyn Fong
  */
 
+import boardgamekit.BoardGameController;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.util.Duration;
@@ -23,19 +24,17 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 
-public class MemoryController {
+public class MemoryController extends BoardGameController {
 	String[] imageArray = {"src/main/resources/images/bug.png", "src/main/resources/images/bee.png",
 	"src/main/resources/images/butterfly.png"};
+
 	@FXML
 	public Button reset;
-    @FXML
-    public Label statusLabel;
 
+	@FXML
+    private Label player1name;
     @FXML
-    public Label playeronescore;
-
-    @FXML
-    public Label playertwoscore;
+    private Label player2name;
 
     @FXML
     private ImageView iv1;
@@ -146,20 +145,30 @@ public class MemoryController {
     }
 
 
-    private Memory game = new Memory();
+    private Memory game;
+    
+    public void initializeGameModel() {
+        game = new Memory(player1,player2,3);
+        player1name.setText("Player 1: " + player1.getUsername());
+        player2name.setText("Player 2: " + player2.getUsername());
+    }
+
+    public void startTurn() {
+        statusLabel.setText("Turn: Player " + game.getPlayerString());
+        setPlayer1Score(Integer.toString(game.playerOneScore));
+        setPlayer2Score(Integer.toString(game.playerTwoScore));
+    }
 
 
     public void cardFlipped(int cardNum) {
 
         int moveNum;
 
-        if (!game.allCardsFlipped()) {
+        if (!game.gameIsWon()) {
             //GAME UNFINISHED
             moveNum = game.makeMove(cardNum);
             switch(moveNum){
                 case 1: //CASE 1: SHOW IMAGE AND KEEP SHOWN
-                    playeronescore.setText("Score: " + game.playerOneScore);
-                    playertwoscore.setText("Score: " + game.playerTwoScore);
                     switch(cardNum){
                         case 1: cardShow1(); break;
                         case 2: cardShow2(); break;
@@ -169,8 +178,6 @@ public class MemoryController {
                         case 6: cardShow6(); break;
                     } break;
                 case 2: //CASE 2: SHOW IMAGE FOR A SMALL AMOUNT OF TIME THEN FLIP BOTH CARDS BACK
-//                    playeronescore.setText("Score: " + game.playerOneScore);
-//                    playertwoscore.setText("Score: " + game.playerTwoScore);
                     switch(cardNum){
                         case 1: cardShow1(); break;
                         case 2: cardShow2(); break;
@@ -206,8 +213,8 @@ public class MemoryController {
                     pause.play();
                     break;
                 case 3: //CASE 3: KEEP BOTH IMAGES SHOWING
-                    playeronescore.setText("Score: " + game.playerOneScore);
-                    playertwoscore.setText("Score: " + game.playerTwoScore);
+                	setPlayer1Score(Integer.toString(game.playerOneScore));
+                    setPlayer2Score(Integer.toString(game.playerTwoScore));
                     switch(cardNum){
                         case 1: cardShow1(); break;
                         case 2: cardShow2(); break;
@@ -216,7 +223,7 @@ public class MemoryController {
                         case 5: cardShow5(); break;
                         case 6: cardShow6(); break;
                     }
-                    if (game.allCardsFlipped()) {
+                    if (game.gameIsWon()) {
                         statusLabel.setText("Game Over: Player " + game.whoWon() + " wins!");
                         return;
                     }
@@ -225,7 +232,7 @@ public class MemoryController {
                     break;
 
             }
-            statusLabel.setText("Turn: Player " + game.getPlayerString());
+            startTurn();
         }
          else {
         //GAME IS FINISHED
@@ -234,54 +241,50 @@ public class MemoryController {
          }
          }
     
-    public List<Image> shuffleCards()
-    {
-    	List<Image> imageList = new ArrayList<>();
+   public List<Image> shuffleCards()
+  {
+  	List<Image> imageList = new ArrayList<>();
     	for (int i = 0; i < imageArray.length; i++)
-    	{
-    		File file = new File(imageArray[i]);
-    		Image image = new Image(file.toURI().toString());
-    		imageList.add(image);
-    		imageList.add(image);    				
-    	}
-    	Collections.shuffle(imageList);
-    	return imageList;
+   	{
+   		File file = new File(imageArray[i]);
+   		Image image = new Image(file.toURI().toString());
+   		imageList.add(image);
+   		imageList.add(image);
+   	}
+   	//Collections.shuffle(imageList);
+   	return imageList;
     }
-    @FXML
-    public void shuffle()
-    {
-    	List<Image> imageList = shuffleCards();
-	    iv1.setImage(imageList.get(0));
-	    iv2.setImage(imageList.get(1));
-	    iv3.setImage(imageList.get(2));
-	    iv4.setImage(imageList.get(3));
-	    iv5.setImage(imageList.get(4));
-	    iv6.setImage(imageList.get(5));
-	    button1.setVisible(true);
-	    button2.setVisible(true);
-	    button3.setVisible(true);
-	    button4.setVisible(true);
-	    button5.setVisible(true);
-	    button6.setVisible(true);
-    }
-    @FXML
-    public void startNewGame(ActionEvent event) 
-    {
-    	
-    	game = new Memory();
-    	shuffle();
-	    statusLabel.setText("New Game");
-	    playeronescore.setText("0");
-	    playertwoscore.setText("0");
-     
-    }
+   @FXML
+   public void shuffle()
+   {
+   	List<Image> imageList = shuffleCards();
+   	iv1.setImage(imageList.get(0));
+	iv2.setImage(imageList.get(2));
+	iv3.setImage(imageList.get(3));
+    iv4.setImage(imageList.get(1));
+    iv5.setImage(imageList.get(4));
+    iv6.setImage(imageList.get(5));
+    button1.setVisible(true);
+    button2.setVisible(true);
+    button3.setVisible(true);
+    button4.setVisible(true);
+    button5.setVisible(true);
+	button6.setVisible(true);
+   }
+   @FXML
+   public void startNewGame(ActionEvent event)
+   {
+
+   	game = new Memory(player1, player2, 3);
+  	shuffle();
+    statusLabel.setText("New Game");
+      player1Score.setText("0");
+      player2Score.setText("0");
+
+  }
 
 
-//    public void startNewGame(ActionEvent actionEvent) {
-//        game = new Memory();
-//        statusLabel.setText("Turn: Player One");
-//
-//    }
+  
 
 
 
