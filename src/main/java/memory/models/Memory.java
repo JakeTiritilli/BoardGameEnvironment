@@ -23,8 +23,10 @@ public class Memory extends BoardGame{
 
     public Memory(Player p1, Player p2, int d) {
        super(p1, p2, 3);
+
         playerOneScore = 0;
         playerTwoScore = 0;
+
 
         //SET UP VALUE OF CARDS
         cardIndex[1] = 1;
@@ -33,10 +35,12 @@ public class Memory extends BoardGame{
         cardIndex[4] = 1;
         cardIndex[5] = 3;
         cardIndex[6] = 3;
+
         playerOne = p1;
         playerTwo = p2;
         currentPlayer = playerOne;
         
+
         currentPlayerPick[0] = 0;
         currentPlayerPick[1] = 0;
 
@@ -53,7 +57,9 @@ public class Memory extends BoardGame{
 
     //Change the current player
     public void switchCurrentPlayer(){
+
         currentPlayer = (currentPlayer == playerOne)? playerTwo : playerOne;
+
         currentPlayerPick[0] = 0;
         currentPlayerPick[1] = 0;
     }

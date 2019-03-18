@@ -1,6 +1,7 @@
 package checkers.utility;
 
 import java.util.ArrayList;
+import boardgamekit.utility.*;
 
 /**
  * Represents a checker piece on the board. Holds the position

@@ -8,7 +8,7 @@ import java.util.List;
 
 import boardgamekit.BoardGameController;
 import tictactoe.models.*;
-import tictactoe.utility.*;
+import boardgamekit.utility.GamePiece;
 import boardgamekit.utility.InvalidMoveException;
 
 /**
@@ -71,7 +71,7 @@ public class TicTacToeController extends BoardGameController {
      *              updated with the appropriate player
      */
     private void makeMove(int cellNum, Label label) {
-        TicTacToePlayer currentPlayer = (TicTacToePlayer) game.getCurrentPlayerPiece();
+        GamePiece currentPlayer = game.getCurrentPlayerPiece();
 
         // If move was invalid, then exit early.
         try {

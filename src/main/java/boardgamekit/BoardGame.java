@@ -14,14 +14,20 @@ import boardgamekit.utility.*;
  */
 public abstract class BoardGame {
 
-    private Player player1;
+    protected Player player1;
 
-    private GamePiece player1GamePiece;
+    protected GamePiece player1GamePiece;
 
-    private Player player2;
+    protected int player1Score = 0;
+
     
-    private GamePiece player2GamePiece;
+    protected Player player2;
+    
+    protected GamePiece player2GamePiece;
 
+    protected int player2Score = 0;
+
+    
     private Player currentPlayer;
 
     protected GamePiece[][] gameBoard;
@@ -147,7 +153,61 @@ public abstract class BoardGame {
         currentPlayer = (currentPlayer == player1) ? player2 : player1;
     }
 
+    /**
+     * Returns the current player
+     * @return the player whose turn in currently is
+     */
     public Player getCurrentPlayer() {
         return currentPlayer;
+    }
+
+    /**
+     * Returns the score of player 1
+     * @return the current score of player 1 in the
+     * individual game
+     */
+    public int getPlayer1Score() {
+        return player1Score;
+    }
+
+     /**
+     * Returns the score of player 2
+     * @return the current score of player 1 in the
+     * individual game
+     */
+    public int getPlayer2Score() {
+        return player2Score;
+    }
+
+    /**
+     * Sets the score of player 1
+     */
+    public void setPlayer1Score(int player1Score) {
+        this.player1Score = player1Score;
+    }
+
+    /**
+     * Sets the score of player 1
+     */
+    public void setPlayer2Score(int player2Score) {
+        this.player2Score = player2Score;
+    }
+
+    /**
+     * Increments the score of player 1.
+     * @return player 1's updated score
+     */
+    public int incPlayer1Score() {
+        player1Score += 1;
+        return player1Score;
+    }
+
+    /**
+     * Increments the score of player 2.
+     * @return player 2's updated score
+     */
+    public int incPlayer2Score() {
+        player2Score += 1;
+        return player2Score;
     }
 }

@@ -84,6 +84,7 @@ public class MemoryController extends BoardGameController {
     public void initializeGameModel() {
     	
         game = new Memory(player1,player2,3);
+
         player1name.setText("Player 1: " + game.getPlayerOne().getUsername());
         player2name.setText("Player 2: " + game.getPlayerTwo().getUsername());
     }
@@ -92,6 +93,7 @@ public class MemoryController extends BoardGameController {
         statusLabel.setText("Turn: Player " + game.getCurrentPlayer().getUsername());
         player1Score.setText("Score: " + game.playerOneScore);
         player2Score.setText("Score: " + game.playerTwoScore);
+
 
     }
 
@@ -102,7 +104,9 @@ public class MemoryController extends BoardGameController {
         int moveNum;
 
         if (!game.gameIsWon()) {
+
         	startTurn();
+
             //GAME UNFINISHED
             moveNum = game.makeMove(cardNum);
             switch(moveNum){
@@ -114,14 +118,11 @@ public class MemoryController extends BoardGameController {
                     PauseTransition pause = new PauseTransition(
                             Duration.seconds(1)
                     );
-                    pause.setOnFinished(event -> {
-                       
+                    pause.setOnFinished(event -> {                      
                     	
-                    	cardHide(game.currentPlayerPick[0]);
-                    	
-                    	cardHide(cardNum);
-                    	
-                        game.switchCurrentPlayer();
+                    	cardHide(game.currentPlayerPick[0]);                    	
+                    	cardHide(cardNum);                  	
+                      game.switchCurrentPlayer();
 
                     });
                     pause.play();
@@ -141,7 +142,7 @@ public class MemoryController extends BoardGameController {
                     break;
 
             }
-            
+
         }
          else {
         //GAME IS FINISHED
