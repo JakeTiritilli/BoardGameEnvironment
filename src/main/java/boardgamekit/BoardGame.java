@@ -18,14 +18,14 @@ public abstract class BoardGame {
 
     private GamePiece player1GamePiece;
 
-    private int player1Score = 0;
+    protected int player1Score = 0;
 
     
     private Player player2;
     
     private GamePiece player2GamePiece;
 
-    private int player2Score = 0;
+    protected int player2Score = 0;
 
     
     private Player currentPlayer;
