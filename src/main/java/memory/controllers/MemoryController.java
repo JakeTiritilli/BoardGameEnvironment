@@ -25,11 +25,11 @@ import javafx.scene.image.ImageView;
 
 
 public class MemoryController extends BoardGameController {
-//	String[] imageArray = {"src/main/resources/images/bug.png", "src/main/resources/images/bee.png",
-//	"src/main/resources/images/butterfly.png"};
+	String[] imageArray = {"src/main/resources/images/bug.png", "src/main/resources/images/bee.png",
+	"src/main/resources/images/butterfly.png"};
 
-//	@FXML
-//	public Button reset;
+	@FXML
+	public Button reset;
 
     @FXML
     private Label player1name;
@@ -146,7 +146,7 @@ public class MemoryController extends BoardGameController {
 
 
     private Memory game;
-
+    
     public void initializeGameModel() {
         game = new Memory(player1,player2,3);
         player1name.setText("Player 1: " + player1.getUsername());
@@ -244,54 +244,50 @@ public class MemoryController extends BoardGameController {
          }
          }
     
-//    public List<Image> shuffleCards()
-//    {
-//    	List<Image> imageList = new ArrayList<>();
-//    	for (int i = 0; i < imageArray.length; i++)
-//    	{
-//    		File file = new File(imageArray[i]);
-//    		Image image = new Image(file.toURI().toString());
-//    		imageList.add(image);
-//    		imageList.add(image);
-//    	}
-//    	Collections.shuffle(imageList);
-//    	return imageList;
-//    }
-//    @FXML
-//    public void shuffle()
-//    {
-//    	List<Image> imageList = shuffleCards();
-//	    iv1.setImage(imageList.get(0));
-//	    iv2.setImage(imageList.get(1));
-//	    iv3.setImage(imageList.get(2));
-//	    iv4.setImage(imageList.get(3));
-//	    iv5.setImage(imageList.get(4));
-//	    iv6.setImage(imageList.get(5));
-//	    button1.setVisible(true);
-//	    button2.setVisible(true);
-//	    button3.setVisible(true);
-//	    button4.setVisible(true);
-//	    button5.setVisible(true);
-//	    button6.setVisible(true);
-//    }
-//    @FXML
-//    public void startNewGame(ActionEvent event)
-//    {
-//
-//    	game = new Memory();
-//    	shuffle();
-//	    statusLabel.setText("New Game");
-//        player1Score.setText("0");
-//        player2Score.setText("0");
-//
-//    }
+   public List<Image> shuffleCards()
+  {
+  	List<Image> imageList = new ArrayList<>();
+    	for (int i = 0; i < imageArray.length; i++)
+   	{
+   		File file = new File(imageArray[i]);
+   		Image image = new Image(file.toURI().toString());
+   		imageList.add(image);
+   		imageList.add(image);
+   	}
+   	//Collections.shuffle(imageList);
+   	return imageList;
+    }
+   @FXML
+   public void shuffle()
+   {
+   	List<Image> imageList = shuffleCards();
+   	iv1.setImage(imageList.get(0));
+	iv2.setImage(imageList.get(2));
+	iv3.setImage(imageList.get(3));
+    iv4.setImage(imageList.get(1));
+    iv5.setImage(imageList.get(4));
+    iv6.setImage(imageList.get(5));
+    button1.setVisible(true);
+    button2.setVisible(true);
+    button3.setVisible(true);
+    button4.setVisible(true);
+    button5.setVisible(true);
+	button6.setVisible(true);
+   }
+   @FXML
+   public void startNewGame(ActionEvent event)
+   {
+
+   	game = new Memory(player1, player2, 3);
+  	shuffle();
+    statusLabel.setText("New Game");
+      player1Score.setText("0");
+      player2Score.setText("0");
+
+  }
 
 
-//    public void startNewGame(ActionEvent actionEvent) {
-//        game = new Memory();
-//        statusLabel.setText("Turn: Player One");
-//
-//    }
+  
 
 
 

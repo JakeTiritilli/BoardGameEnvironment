@@ -10,7 +10,7 @@ import boardgamekit.utility.InvalidMoveException;
  * 
  * @author Kaitlyn Fong
  */
-public class Memory extends BoardGame {
+public class Memory extends BoardGame{
 
     private int currentPlayer;
     public int[] currentPlayerPick = new int[2];
@@ -20,7 +20,7 @@ public class Memory extends BoardGame {
     public int numMatches = 0;
 
     public Memory(Player p1, Player p2, int d) {
-        super(p1, p2, 3);
+       super(p1, p2, 3);
         playerOneScore = 0;
         playerTwoScore = 0;
 
