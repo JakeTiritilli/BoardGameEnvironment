@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author Kaitlyn Fong
  */
-
+import javafx.scene.control.*;
 import boardgamekit.BoardGameController;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
@@ -66,6 +66,9 @@ public class MemoryController extends BoardGameController {
     @FXML
     private Button  button6;
 
+    @FXML
+    private List<Button> buttonList;
+    
     @FXML
     private void handleCardOne() {
         cardFlipped(1);
@@ -144,17 +147,29 @@ public class MemoryController extends BoardGameController {
         button6.setVisible(true);
     }
 
+    
 
     private Memory game;
+    /*
+    @FXML
+    public void initialize() {
+        for (int i = 0; i < buttonList.size(); i++) {
+            final int buttonNum = i;
+            final Button button = buttonList.get(i);
+            buttonList.get(i).setOnMouseClicked(event -> cardFlipped(buttonNum));
+        }
+    }
+    */
     
     public void initializeGameModel() {
+    	
         game = new Memory(player1,player2,3);
         player1name.setText("Player 1: " + game.getPlayerOne().getUsername());
         player2name.setText("Player 2: " + game.getPlayerTwo().getUsername());
     }
 
     public void startTurn() {
-        statusLabel.setText("Turn: Player " + game.getPlayerString());
+        statusLabel.setText("Turn: Player " + game.getCurrentPlayer().getUsername());
         player1Score.setText("Score: " + game.playerOneScore);
         player2Score.setText("Score: " + game.playerTwoScore);
 
@@ -227,6 +242,7 @@ public class MemoryController extends BoardGameController {
                     }
                     if (game.gameIsWon()) {
                         statusLabel.setText("Game Over: Player " + game.whoWon() + " wins!");
+                        game.setWinner("memory", game.forCurrentPlayer());
                         return;
                     }
                     else

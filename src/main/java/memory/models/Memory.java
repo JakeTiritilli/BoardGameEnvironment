@@ -42,13 +42,14 @@ public class Memory extends BoardGame{
 
     }
 
+    
     public String getPlayerString(){
         if (currentPlayer == playerOne)
             return "One";
         else
             return "Two";
     }
-
+	
 
     //Change the current player
     public void switchCurrentPlayer(){
@@ -59,10 +60,8 @@ public class Memory extends BoardGame{
 
     //CARD MATCH
     public boolean cardMatch(){
-        if (cardIndex[currentPlayerPick[0]] == cardIndex[currentPlayerPick[1]])
-            return true;
-        else
-            return false;
+        return (cardIndex[currentPlayerPick[0]] == cardIndex[currentPlayerPick[1]]);
+            
     }
 
     @Override
@@ -94,6 +93,11 @@ public class Memory extends BoardGame{
             }
         }
     }
+    
+    public Player getCurrentPlayer()
+    {
+    	return currentPlayer;
+    }
 
     public Player getPlayerOne()
     {
@@ -113,6 +117,18 @@ public class Memory extends BoardGame{
         else
             return "Two";
 
+    }
+    public boolean forCurrentPlayer()
+    {
+    	if (currentPlayer == playerOne)
+    	{
+    		return (whoWon() == "One");
+    			
+    	}
+    	else
+    	{
+    		return (whoWon() == "Two");
+    	}
     }
 
 }

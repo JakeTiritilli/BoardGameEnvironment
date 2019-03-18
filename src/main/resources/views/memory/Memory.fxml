@@ -77,6 +77,8 @@
                      </image>
                   </ImageView>
                   <Button fx:id="button6" mnemonicParsing="false" onAction="#handleCardSix" prefHeight="188.0" prefWidth="316.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  
+      
                </children>
             </GridPane>
          </children></StackPane>
