@@ -14,16 +14,16 @@ import boardgamekit.utility.*;
  */
 public abstract class BoardGame {
 
-    private Player player1;
+    protected Player player1;
 
-    private GamePiece player1GamePiece;
+    protected GamePiece player1GamePiece;
 
     protected int player1Score = 0;
 
     
-    private Player player2;
+    protected Player player2;
     
-    private GamePiece player2GamePiece;
+    protected GamePiece player2GamePiece;
 
     protected int player2Score = 0;
 
