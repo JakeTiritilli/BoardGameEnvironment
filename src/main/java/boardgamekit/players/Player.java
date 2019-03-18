@@ -73,6 +73,9 @@ public class Player {
      * @param game the board game to return the score for
      */
     public int getScoreFor(String game) {
+        if (!scoreBreakdown.has(game)) {
+            scoreBreakdown.put(game, 0);
+        }
         return scoreBreakdown.getInt(game);
     }
 
