@@ -69,6 +69,7 @@ public class ValidMoveFinder {
                     if (!(Othello.getBoard()[row + dir[0]][col + dir[1]].color.equals(turn))) {
                         while (inBoundNext(row, col, dir)) {
                             if (Othello.getBoard()[row + dir[0]][col + dir[1]] == null) {
+                                System.out.println("reach empy space, no flips can occur");
                                 potentialFlips.clear();
                                 break;
                             }
@@ -84,6 +85,7 @@ public class ValidMoveFinder {
                             row += dir[0];
                             col += dir[1];
                         }
+                        potentialFlips.clear();
                     }
                 }
                 catch (NullPointerException e){

@@ -29,6 +29,8 @@ public class Othello extends BoardGame {
     public Othello(Player p1, Player p2, int row, int col)
     {
         super(p1,p2,row,col);
+        player1 = p1;
+        player2 = p2;
         currentTurn = OthelloPlayer.BLACK; // black goes first
         initializeBoard();
     }
@@ -143,7 +145,7 @@ public class Othello extends BoardGame {
         return currentTurn;
     }
 
-    public void setCurrentPlayer(OthelloPlayer currentTurn) {
+    public void setCurrentTurn(OthelloPlayer currentTurn) {
         this.currentTurn = currentTurn;
     }
 

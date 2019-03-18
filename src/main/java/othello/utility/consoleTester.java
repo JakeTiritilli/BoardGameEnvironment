@@ -35,7 +35,7 @@ public class consoleTester {
                     }
                 }
             }
-            else game.setCurrentPlayer(game.getCurrentTurn().getOppositeColor());
+            else game.setCurrentTurn(game.getCurrentTurn().getOppositeColor());
         }
 
     }
