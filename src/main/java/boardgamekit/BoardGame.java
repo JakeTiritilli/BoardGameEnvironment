@@ -150,4 +150,8 @@ public abstract class BoardGame {
     public Player getCurrentPlayer() {
         return currentPlayer;
     }
+    public void setCurrentPlayer(Player p)
+    {
+    	currentPlayer = p;
+    }
 }

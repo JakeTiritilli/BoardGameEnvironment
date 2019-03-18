@@ -12,7 +12,7 @@ import boardgamekit.utility.InvalidMoveException;
  */
 public class Memory extends BoardGame{
 
-    private int currentPlayer;
+    private Player currentPlayer;
     public int[] currentPlayerPick = new int[2];
     public Player playerOne;
     public int playerOneScore;
@@ -24,7 +24,8 @@ public class Memory extends BoardGame{
     public Memory(Player p1, Player p2, int d) {
        super(p1, p2, 3);
         
-
+       playerOne = p1;
+       playerTwo = p2;
         //SET UP VALUE OF CARDS
         cardIndex[1] = 1;
         cardIndex[2] = 2;
@@ -33,14 +34,14 @@ public class Memory extends BoardGame{
         cardIndex[5] = 3;
         cardIndex[6] = 3;
 
-        currentPlayer = 1;
+        currentPlayer = playerOne;
         currentPlayerPick[0] = 0;
         currentPlayerPick[1] = 0;
 
     }
 
     public String getPlayerString(){
-        if (currentPlayer == 1)
+        if (currentPlayer == playerOne)
             return "One";
         else
             return "Two";
@@ -48,11 +49,8 @@ public class Memory extends BoardGame{
 
 
     //Change the current player
-    public void changePlayer(){
-        if (currentPlayer == 1)
-            currentPlayer = 2;
-        else
-            currentPlayer = 1;
+    public void switchCurrentPlayer(){
+    	currentPlayer = (currentPlayer == playerOne) ? playerTwo : playerOne;
         currentPlayerPick[0] = 0;
         currentPlayerPick[1] = 0;
     }
@@ -84,7 +82,7 @@ public class Memory extends BoardGame{
             }
             else {
                 //IS A CARD MATCH
-                if (currentPlayer == 1)
+                if (currentPlayer == playerOne)
                    playerOneScore++;
                 else
                     playerTwoScore ++;
