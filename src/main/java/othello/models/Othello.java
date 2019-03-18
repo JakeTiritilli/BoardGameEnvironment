@@ -9,7 +9,6 @@ import java.util.ArrayList;
 
 public class Othello {
 
-
     private OthelloPlayer currentPlayer;
 
     private static Integer turn;

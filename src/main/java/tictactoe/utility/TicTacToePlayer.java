@@ -1,7 +1,5 @@
 package tictactoe.utility;
 
-import boardgamekit.utility.GamePiece;
-
 /**
  * Represents a Tic Tac Toe player as either the "X" player
  * or the "O" player. This enum was declared to make
@@ -10,6 +8,10 @@ import boardgamekit.utility.GamePiece;
  * 
  * @author Jacob Tiritilli
  */
-public enum TicTacToePlayer implements GamePiece {
-    X, O
+public enum TicTacToePlayer {
+    X, O;
+
+    public TicTacToePlayer getOpposite() {
+        return (this == X) ? O : X;
+    }
 }
