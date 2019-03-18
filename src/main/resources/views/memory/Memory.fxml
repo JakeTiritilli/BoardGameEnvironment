@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
+<?import java.util.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
@@ -46,37 +47,65 @@
                         <Image url="@../../images/bulldog.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="button1" mnemonicParsing="false" onAction="#handleCardOne" prefHeight="188.0" prefWidth="316.0" />
+                  <Button fx:id="button1" mnemonicParsing="false"  prefHeight="188.0" prefWidth="316.0" />
                   <ImageView fx:id="iv2" fitHeight="147.0" fitWidth="355.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
                      <image>
                         <Image url="@../../images/perch.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="button2" mnemonicParsing="false" onMouseClicked="#handleCardTwo" prefHeight="188.0" prefWidth="316.0" GridPane.columnIndex="1" />
+                  <Button fx:id="button2" mnemonicParsing="false"  prefHeight="188.0" prefWidth="316.0" GridPane.columnIndex="1" />
                   <ImageView fx:id="iv3" fitHeight="147.0" fitWidth="355.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                      <image>
                         <Image url="@../../images/perch.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="button3" mnemonicParsing="false" onMouseClicked="#handleCardThree" prefHeight="188.0" prefWidth="316.0" GridPane.rowIndex="1" />
+                  <Button fx:id="button3" mnemonicParsing="false"  prefHeight="188.0" prefWidth="316.0" GridPane.rowIndex="1" />
                   <ImageView fx:id="iv4" fitHeight="147.0" fitWidth="355.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <image>
                         <Image url="@../../images/bulldog.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="button4" mnemonicParsing="false" onMouseClicked="#handleCardFour" prefHeight="188.0" prefWidth="316.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Button fx:id="button4" mnemonicParsing="false"  prefHeight="188.0" prefWidth="316.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <ImageView fx:id="iv5" fitHeight="147.0" fitWidth="355.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
                      <image>
                         <Image url="@../../images/fox.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="button5" mnemonicParsing="false" onAction="#handleCardFive" prefHeight="188.0" prefWidth="316.0" GridPane.rowIndex="2" />
+                  <Button fx:id="button5" mnemonicParsing="false"  prefHeight="188.0" prefWidth="316.0" GridPane.rowIndex="2" />
                   <ImageView fx:id="iv6" fitHeight="147.0" fitWidth="355.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <image>
                         <Image url="@../../images/fox.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="button6" mnemonicParsing="false" onAction="#handleCardSix" prefHeight="188.0" prefWidth="316.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Button fx:id="button6" mnemonicParsing="false"  prefHeight="188.0" prefWidth="316.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <fx:define>
+           <ArrayList fx:id="ivList" >
+               <fx:reference source="iv1"/>
+               <fx:reference source="iv2"/>
+               <fx:reference source="iv3"/>
+               <fx:reference source="iv4"/>
+               <fx:reference source="iv5"/>
+               <fx:reference source="iv6"/>
+              
+           </ArrayList>
+           </fx:define>
+           
+                   <fx:define>
+           <ArrayList fx:id="buttonList" >
+               <fx:reference source="button1"/>
+               <fx:reference source="button2"/>
+               <fx:reference source="button3"/>
+               <fx:reference source="button4"/>
+               <fx:reference source="button5"/>
+               <fx:reference source="button6"/>
+              
+           </ArrayList>
+           </fx:define>
+           
+           
+           
+          
+      
                </children>
             </GridPane>
          </children></StackPane>

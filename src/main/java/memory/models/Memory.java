@@ -14,18 +14,13 @@ public class Memory extends BoardGame{
 
     private Player currentPlayer;
     public int[] currentPlayerPick = new int[2];
-    public Player playerOne;
-    public int playerOneScore;
-    public Player playerTwo;
-    public int playerTwoScore;
+    
     private int[] cardIndex = new int[7];
     public int numMatches = 0;
 
     public Memory(Player p1, Player p2, int d) {
        super(p1, p2, 3);
-        
-       playerOne = p1;
-       playerTwo = p2;
+
         //SET UP VALUE OF CARDS
         cardIndex[1] = 1;
         cardIndex[2] = 2;
@@ -33,34 +28,26 @@ public class Memory extends BoardGame{
         cardIndex[4] = 1;
         cardIndex[5] = 3;
         cardIndex[6] = 3;
-
-        currentPlayer = playerOne;
+               
+        currentPlayer = p1;
         currentPlayerPick[0] = 0;
         currentPlayerPick[1] = 0;
 
     }
-
-    public String getPlayerString(){
-        if (currentPlayer == playerOne)
-            return "One";
-        else
-            return "Two";
-    }
-
+    
+	
 
     //Change the current player
     public void switchCurrentPlayer(){
-    	currentPlayer = (currentPlayer == playerOne) ? playerTwo : playerOne;
+        currentPlayer = (currentPlayer == player1)? player2 : player1;
         currentPlayerPick[0] = 0;
         currentPlayerPick[1] = 0;
     }
 
     //CARD MATCH
     public boolean cardMatch(){
-        if (cardIndex[currentPlayerPick[0]] == cardIndex[currentPlayerPick[1]])
-            return true;
-        else
-            return false;
+        return (cardIndex[currentPlayerPick[0]] == cardIndex[currentPlayerPick[1]]);
+            
     }
 
     @Override
@@ -82,27 +69,45 @@ public class Memory extends BoardGame{
             }
             else {
                 //IS A CARD MATCH
-                if (currentPlayer == playerOne)
-                   playerOneScore++;
+                if (currentPlayer == player1)
+                	incPlayer1Score();
                 else
-                    playerTwoScore ++;
+                	incPlayer2Score();
                 numMatches ++;
                 //changePlayer();
                 return 3; //CASE 3: SHOW IMAGE AND KEEP BOTH IMAGES SHOWING
             }
         }
     }
+    
+    public Player getCurrentPlayer()
+    {
+    	return currentPlayer;
+    }
 
-    public boolean gameIsWon(){
+    public Player getPlayerOne()
+    {
+    	return player1;
+    }
+    public Player getPlayerTwo()
+    {
+    	return player2;
+    }
+    public boolean gameIsWon()
+    {
         return numMatches == 3;
     }
 
     public String whoWon() {
-        if (playerOneScore > playerTwoScore)
-            return "One";
-        else
-            return "Two";
-
+        return (player1Score > player2Score)? "One" :"Two";          
+    }
+    public boolean forCurrentPlayer()
+    {
+    	if (currentPlayer == player1)
+    	 	return (whoWon() == "One");   			
+    	else
+      		return (whoWon() == "Two");
+    	
     }
 
 }
