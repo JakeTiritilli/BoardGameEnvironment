@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import java.io.IOException;
-import java.util.*;
 
 /**
  * Serves as a controller for the player login page
@@ -89,14 +88,7 @@ public class PlayerLoginController {
         if (playerLoader == null) { return null; }
 
         try {
-            ArrayList<String> players = playerLoader.getPlayers();
-
-            if (players.contains(player)) {
-                return playerLoader.loadData(player);
-            }
-            
-            return Player.createDefault(player);
-
+            return playerLoader.loadData(player);
         } catch (IOException error) {
             statusLabel.setText("Error loading player data.");
             return null;
