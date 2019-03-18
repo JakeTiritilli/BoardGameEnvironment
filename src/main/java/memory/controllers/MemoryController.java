@@ -172,7 +172,7 @@ public class MemoryController extends BoardGameController {
    }
    
    @FXML
-   public void startNewGame(ActionEvent event)
+   public void startNewGame()
    {
    	game = new Memory(player1, player2, 3);
   	shuffle();
