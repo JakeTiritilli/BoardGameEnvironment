@@ -14,16 +14,15 @@ public class Memory extends BoardGame{
 
     private int currentPlayer;
     public int[] currentPlayerPick = new int[2];
-    public Player playerOne;
     public int playerOneScore;
-    public Player playerTwo;
     public int playerTwoScore;
     private int[] cardIndex = new int[7];
     public int numMatches = 0;
 
     public Memory(Player p1, Player p2, int d) {
        super(p1, p2, 3);
-        
+        playerOneScore = 0;
+        playerTwoScore = 0;
 
         //SET UP VALUE OF CARDS
         cardIndex[1] = 1;
@@ -85,7 +84,7 @@ public class Memory extends BoardGame{
             else {
                 //IS A CARD MATCH
                 if (currentPlayer == 1)
-                   playerOneScore++;
+                    playerOneScore ++;
                 else
                     playerTwoScore ++;
                 numMatches ++;
