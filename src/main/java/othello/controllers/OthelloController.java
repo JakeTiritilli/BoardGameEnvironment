@@ -310,7 +310,6 @@ public class OthelloController extends BoardGameController {
         }
     }
 
-    @Override
     public void startNewGame()
     {
         try {
