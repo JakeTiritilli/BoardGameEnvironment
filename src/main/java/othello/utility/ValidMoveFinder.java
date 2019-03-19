@@ -63,23 +63,23 @@ public class ValidMoveFinder {
         for (Integer[] dir: Directions.getDirections()) {
             int row = r;
             int col = c;
-            System.out.println("Direction: "+dir[0]+" "+dir[1]);
+//            System.out.println("Direction: "+dir[0]+" "+dir[1]);
             if (inBoundNext(row,col,dir)) {
                 try {
                     if (!(Othello.getBoard()[row + dir[0]][col + dir[1]].color.equals(turn))) {
                         while (inBoundNext(row, col, dir)) {
                             if (Othello.getBoard()[row + dir[0]][col + dir[1]] == null) {
-                                System.out.println("reach empy space, no flips can occur");
+//                                System.out.println("reach empy space, no flips can occur");
                                 potentialFlips.clear();
                                 break;
                             }
                             if (Othello.getBoard()[row + dir[0]][col + dir[1]].color.equals(turn.getOppositeColor())) {
-                                System.out.println("Adding Potential Flip");
+//                                System.out.println("Adding Potential Flip");
                                 potentialFlips.add(new Integer[]{row + dir[0], col + dir[1]});
                             } else if (Othello.getBoard()[row + dir[0]][col + dir[1]].color.equals(turn)) {
                                 flips.addAll(potentialFlips);
                                 potentialFlips.clear();
-                                System.out.println("Clearing and adding to Flip");
+//                                System.out.println("Clearing and adding to Flip");
                                 break;
                             }
                             row += dir[0];
