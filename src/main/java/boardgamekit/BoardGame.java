@@ -95,7 +95,12 @@ public abstract class BoardGame {
      * the winner. Otherwise, the other player will be set as the winner.
      */
     public void setWinner(String gameType, boolean forCurrentPlayer) {
-        Player winner = (currentPlayer == player1) ? player1 : player1;
+        Player winner = currentPlayer;
+        
+        if (!forCurrentPlayer) {
+            winner = (currentPlayer == player1) ? player2 : player1;
+        }
+        
         int currentScore = winner.getScoreFor(gameType);
         winner.setScoreFor(gameType, currentScore + 1);
 
