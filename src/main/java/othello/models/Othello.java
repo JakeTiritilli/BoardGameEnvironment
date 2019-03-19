@@ -71,37 +71,31 @@ public class Othello extends BoardGame {
     public void makeMove(int row, int column)
     {
         if (!endGame()) {
-            System.out.println("Making Move");
+//            System.out.println("Making Move");
             gameboard[row][column] = new OthelloPiece(currentTurn);
-            System.out.println("Piece set");
+//            System.out.println("Piece set");
             ArrayList<Integer[]> flips = ValidMoveFinder.getFlips(row, column, currentTurn);
             for (Integer[] flip : flips) {
                 gameboard[flip[0]][flip[1]].color = currentTurn;
             }
-            System.out.println("Pieces flipped");
+//            System.out.println("Pieces flipped");
             updateScore();
             currentTurn = currentTurn.getOppositeColor();
         }
         else{
-            System.out.println("invalid: game has ended");
+//            System.out.println("invalid: game has ended");
         }
     }
 
 
     public void endGameProcedure(){
         if (p1Score > p2Score){
-            setCurrentTurn(OthelloPlayer.BLACK);
+            setWinner(game,true);
         }
         else {
-            setCurrentTurn(OthelloPlayer.WHITE);
+            setWinner(game,false);
         }
 
-        if ((currentTurn == OthelloPlayer.BLACK && getCurrentPlayer() == player1) || (currentTurn == OthelloPlayer.WHITE && getCurrentPlayer() == player2)){
-            setWinner(game, true);
-        }
-        else if((currentTurn == OthelloPlayer.BLACK && getCurrentPlayer() == player2) || (currentTurn == OthelloPlayer.WHITE && getCurrentPlayer() == player1)){
-            setWinner(game, false);
-        }
     }
     public boolean boardIsFull()
     {
@@ -126,13 +120,13 @@ public class Othello extends BoardGame {
     public boolean endGame() // game ends if no players have moves left or if the game board is full
     {
         if(boardIsFull()) {
-            System.out.println("GAME OVER");
+//            System.out.println("GAME OVER");
             return true;
         }
 
         else if(playerHasMoves(OthelloPlayer.WHITE)==false && playerHasMoves(OthelloPlayer.BLACK)== false)
         {
-            System.out.println("GAME OVER");
+//            System.out.println("GAME OVER");
             return true;
         }
         return false;

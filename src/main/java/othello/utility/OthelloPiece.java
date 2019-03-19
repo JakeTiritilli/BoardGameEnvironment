@@ -10,11 +10,6 @@ public class OthelloPiece extends GamePiece {
     }
 
     public String toString(){
-        if(color == OthelloPlayer.WHITE){
-            return " W ";
-        }
-        else{
-            return " B ";
-        }
+        return color == OthelloPlayer.WHITE ? "W" : "B";
     }
 }
