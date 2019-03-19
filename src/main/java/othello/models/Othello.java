@@ -191,7 +191,5 @@ public class Othello extends BoardGame {
                 }
             }
         }
-        player1.setScoreFor(game, p1Score);
-        player2.setScoreFor(game, p2Score);
     }
 }

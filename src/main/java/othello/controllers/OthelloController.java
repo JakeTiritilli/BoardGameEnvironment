@@ -1,21 +1,19 @@
 package othello.controllers;
 
 import boardgamekit.players.Player;
-import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Paint;
-import javafx.scene.shape.Circle;
-import javafx.stage.Stage;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import othello.models.Othello;
-import othello.utility.*;
-import java.lang.Integer;
+import othello.utility.OthelloPiece;
+import othello.utility.OthelloPlayer;
+import othello.utility.ValidMoveFinder;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -89,10 +87,10 @@ public class OthelloController {
         }
 
         infoLabel.setText("");
-        if(!game.playerHasMoves(game.getCurrentPlayer()))
+        if(!game.playerHasMoves(game.getCurrentTurn()))
         {
 
-            game.setCurrentPlayer(game.getCurrentPlayer().getOppositeColor()); // switches turn if no moves available
+            game.setCurrentTurn(game.getCurrentTurn().getOppositeColor()); // switches turn if no moves available
             // add graphic for no moves / skipped turn
             infoLabel.setText("No moves available, Turn Skipped!");
         }
@@ -126,7 +124,7 @@ public class OthelloController {
 
     private boolean makeMove(int row, int col)
     {
-        ArrayList<Integer[]> validMoves = ValidMoveFinder.getValidMoves(game.getCurrentPlayer());
+        ArrayList<Integer[]> validMoves = ValidMoveFinder.getValidMoves(game.getCurrentTurn());
 
 
         for (Integer[] move : validMoves) {
@@ -265,7 +263,7 @@ public class OthelloController {
         this.blackPlayerTurnPane.getChildren().clear();
         this.whitePlayerTurnPane.getChildren().clear();
 
-        ArrayList<Integer[]> moves = ValidMoveFinder.getValidMoves(game.getCurrentPlayer());
+        ArrayList<Integer[]> moves = ValidMoveFinder.getValidMoves(game.getCurrentTurn());
         System.out.println("Available Moves Found");
             System.out.println("Valid Moves:");
             for (Integer[] move : moves) {
@@ -276,7 +274,7 @@ public class OthelloController {
             AnchorPane currentTurnArrow = FXMLLoader.load(getClass().getResource("/views/othello/CurrentTurnArrow.fxml"));
             StackPane.setAlignment(currentTurnArrow, Pos.CENTER);
 
-            if (this.game.getCurrentPlayer() == OthelloPlayer.BLACK) {
+            if (this.game.getCurrentTurn() == OthelloPlayer.BLACK) {
                 this.blackPlayerTurnPane.getChildren().add(currentTurnArrow);
             }
             else {
