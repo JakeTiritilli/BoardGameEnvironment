@@ -11,6 +11,20 @@ Informatics 122 (Winter 2019) Final Project
 
 - Othello
 
+## Plug-in Packages
+
+- `application`
+
+- `checkers`
+
+- `memory`
+
+- `othello`
+
+- `tictactoe`
+
+- `resources`
+
 ## Team
 
 - Jacob Tiritilli
