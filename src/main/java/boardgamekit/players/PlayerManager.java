@@ -23,6 +23,12 @@ public class PlayerManager {
     
     // File path to the FXML file of the login screen
     private final String loginViewPath;
+
+    private final String leaderboardViewPath;
+
+    private final String gameName;
+
+    private PlayerLoader playerLoader;
     
     // Used to store the scene for reuse
     // once it has been created by the login
@@ -39,9 +45,21 @@ public class PlayerManager {
      * @param gameViewPath file path to the FXML file of the game screen
      * @param loginViewPath file path to the FXML file of the login screen
      */
-    public PlayerManager(String gameViewPath, String loginViewPath) {
+    public PlayerManager(String gameViewPath, String loginViewPath, String leaderboardViewPath,
+                         String jsonPath, String gameName) {
+
         this.gameViewPath = gameViewPath;
         this.loginViewPath = loginViewPath;
+        this.leaderboardViewPath = leaderboardViewPath;
+        this.gameName = gameName;
+
+        try {
+            playerLoader = new PlayerLoader(jsonPath);
+        } catch (IOException error) {
+            System.out.println("Error occurred loading the game scene.");
+            System.out.println(error);
+            error.printStackTrace();
+        }
     }
 
     /**
@@ -52,6 +70,14 @@ public class PlayerManager {
     public void setPlayers(Player p1, Player p2) {
         player1 = p1;
         player2 = p2;
+    }
+
+    public String getGameName() {
+        return gameName;
+    }
+
+    public PlayerLoader getPlayerLoader() {
+        return playerLoader;
     }
 
     /**
@@ -69,9 +95,6 @@ public class PlayerManager {
             
             Object gameController = fxmlLoader.getController();
             
-            // This if statement is only there temporarily because some
-            // of the games have extended BoardGameController and some have not.
-            // **REMOVE ONCE ALL GAMES USE BOARDGAMEKIT**
             if (gameController instanceof BoardGameController) {
                 BoardGameController boardGameController = (BoardGameController) gameController;
                 boardGameController.setPlayers(player1, player2);
@@ -98,7 +121,7 @@ public class PlayerManager {
      * @param height the height of the scene
      * @param title the title to be placed at the top of the window bar
      */
-    private void createNewStage(Parent pane, int width, int height, String title) {
+    public void createNewStage(Parent pane, int width, int height, String title) {
         Stage stage = new Stage();
         stage.setTitle(title);
         stage.setResizable(false);
@@ -120,6 +143,23 @@ public class PlayerManager {
             PlayerLoginController loginController = fxmlLoader.getController();
             createNewStage(loginPane, 800, 690, "Board Game Environment");
             loginController.initGameController(this);
+        } catch (IOException error) {
+            System.out.println("Error occurred loading the login scene.");
+            System.out.println(error);
+            error.printStackTrace();
+        }
+    }
+
+    /**
+     * Loads the leaderboard table in a new window.
+     */
+    public void loadLeaderboard() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(leaderboardViewPath));
+            Parent leaderboardPane = fxmlLoader.load();
+            LeaderboardController loginController = fxmlLoader.getController();
+            createNewStage(leaderboardPane, 600, 600, "Board Game Environment");
+            loginController.initLeaderboardController(this);
         } catch (IOException error) {
             System.out.println("Error occurred loading the login scene.");
             System.out.println(error);
