@@ -146,6 +146,7 @@ public abstract class BoardGame {
         return (currentPlayer == player1) ? player1GamePiece : player2GamePiece;
     }
 
+    
     /**
      * Switches the current player to the other player.
      */
