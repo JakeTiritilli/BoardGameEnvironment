@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -9,11 +10,11 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
-<?import java.util.*?>
 
-<AnchorPane prefHeight="750.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="othello.controllers.OthelloController">
+<?import java.util.ArrayList?>
+<AnchorPane fx:id="board" prefHeight="750.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="othello.controllers.OthelloController">
    <children>
-      <StackPane layoutX="129.0" layoutY="40.0" prefHeight="500.0" prefWidth="500.0">
+      <StackPane layoutX="125.0" layoutY="14.0" prefHeight="500.0" prefWidth="500.0">
          <children>
             <GridPane style="-fx-border-color: grey; -fx-border-width: 3px 3px 3px 3px;">
               <columnConstraints>
@@ -105,46 +106,64 @@
             </GridPane>
          </children>
       </StackPane>
-      <Label alignment="CENTER" layoutX="110.0" layoutY="580.0" prefHeight="50.0" prefWidth="50.0" text="0">
+      <Label fx:id="player1Score" alignment="CENTER_RIGHT" layoutX="100.0" layoutY="575.0" prefHeight="50.0" prefWidth="50.0" text="0">
          <font>
             <Font size="27.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="591.0" layoutY="575.0" prefHeight="50.0" prefWidth="50.0" text="0">
+      <Label fx:id="player2Score" contentDisplay="CENTER" layoutX="600.0" layoutY="575.0" prefHeight="50.0" prefWidth="50.0" text="0">
          <font>
             <Font size="27.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="31.0" layoutY="526.0" prefHeight="25.0" prefWidth="75.0" text="Player 1">
+      <Label alignment="CENTER" layoutX="37.0" layoutY="526.0" prefHeight="25.0" prefWidth="75.0" text="Black">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="651.0" layoutY="520.0" prefHeight="25.0" prefWidth="75.0" text="Player 2">
+      <Label alignment="CENTER" layoutX="639.0" layoutY="526.0" prefHeight="25.0" prefWidth="75.0" text="White">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
-      <ImageView fitHeight="76.0" fitWidth="125.0" layoutX="31.0" layoutY="560.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="76.0" fitWidth="125.0" layoutX="37.0" layoutY="552.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/user.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="76.0" fitWidth="125.0" layoutX="647.0" layoutY="555.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="76.0" fitWidth="125.0" layoutX="639.0" layoutY="552.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/user.png" />
          </image>
       </ImageView>
-      <Label alignment="CENTER" layoutX="99.0" layoutY="606.0" prefHeight="50.0" prefWidth="75.0" text="Score">
+      <Label alignment="CENTER_RIGHT" layoutX="87.0" layoutY="606.0" prefHeight="50.0" prefWidth="75.0" text="Score">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="581.0" layoutY="598.0" prefHeight="50.0" prefWidth="75.0" text="Score">
+      <Label layoutX="581.0" layoutY="606.0" prefHeight="50.0" prefWidth="75.0" text="Score">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
+      <StackPane fx:id="blackPlayerTurnPane" layoutX="25.0" layoutY="426.0" prefHeight="100.0" prefWidth="100.0" />
+      <StackPane fx:id="whitePlayerTurnPane" layoutX="639.0" layoutY="426.0" prefHeight="100.0" prefWidth="100.0" />
+      <Label fx:id="statusLabel" alignment="CENTER" layoutX="171.0" layoutY="560.0" prefHeight="89.0" prefWidth="407.0">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Label>
+      <Label fx:id="player1Name" layoutX="50.0" layoutY="649.0" prefHeight="50.0" prefWidth="149.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="player2Name" alignment="CENTER_RIGHT" layoutX="548.0" layoutY="649.0" prefHeight="50.0" prefWidth="149.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Button fx:id="resetButton" layoutX="349.0" layoutY="645.0" mnemonicParsing="false" style="-fx-background-color: darkgrey; -fx-background-radius: 18;" text="Reset" textFill="WHITE" />
    </children>
 
     <fx:define>
