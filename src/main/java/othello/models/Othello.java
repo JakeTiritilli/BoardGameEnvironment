@@ -16,12 +16,8 @@ public class Othello extends BoardGame {
 
     final Integer boardWidth = 8;
     final Integer boardLength= 8;
-    int p1Score = 0;
-    int p2Score = 0;
 
     // GameBoardKit's player object used only to update score for the Username associated
-    Player player1;
-    Player player2;
 
     static public OthelloPiece[][] gameboard;
 
@@ -29,8 +25,6 @@ public class Othello extends BoardGame {
     public Othello(Player p1, Player p2, int row, int col)
     {
         super(p1,p2,row,col);
-        player1 = p1;
-        player2 = p2;
         currentTurn = OthelloPlayer.BLACK; // black goes first
         initializeBoard();
     }
@@ -55,8 +49,8 @@ public class Othello extends BoardGame {
         gameboard[3][4] = new OthelloPiece(OthelloPlayer.BLACK);
         gameboard[4][3] = new OthelloPiece(OthelloPlayer.BLACK);
 
-        p1Score = 2;
-        p2Score = 2;
+        player1Score = 2;
+        player2Score = 2;
     }
 
     /**
@@ -89,7 +83,7 @@ public class Othello extends BoardGame {
 
 
     public void endGameProcedure(){
-        if (p1Score > p2Score){
+        if (player1Score > player2Score){
             setCurrentTurn(OthelloPlayer.BLACK);
         }
         else {
@@ -163,27 +157,18 @@ public class Othello extends BoardGame {
         this.currentTurn = currentTurn;
     }
 
-    public int getP1Score()
-    {
-        return this.p1Score;
-    }
-
-    public int getP2Score()
-    {
-        return this.p2Score;
-    }
 
     public void updateScore(){
-        p1Score = 0;
-        p2Score = 0;
 
+        player1Score = 0;
+        player2Score = 0;
         for (int i = 0; i < boardLength; i++){
             for (int j = 0; j < boardWidth; j++){
                 try {
                     if (gameboard[i][j].color == OthelloPlayer.WHITE) {
-                        p2Score++;
+                        incPlayer2Score();
                     } else if (gameboard[i][j].color == OthelloPlayer.BLACK) {
-                        p1Score++;
+                        incPlayer1Score();
                     }
                 }
                 catch (NullPointerException e){
