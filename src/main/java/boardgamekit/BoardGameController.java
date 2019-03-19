@@ -74,5 +74,7 @@ public abstract class BoardGameController {
 
     public abstract void startTurn();
 
+    public abstract void startNewGame();
+
     public void makeMove() {};
 }

@@ -1,6 +1,5 @@
 package tictactoe.controllers;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
@@ -101,9 +100,10 @@ public class TicTacToeController extends BoardGameController {
      * Begins a new Tic Tac Toe game and updates the view to clear the board and
      * status label.
      */
-    public void startNewGame(ActionEvent actionEvent) {
+    @FXML
+     public void startNewGame() {
         game = new TicTacToe(player1, player2);
-        statusLabel.setText("Turn: " + game.getCurrentPlayerPiece().toString());
+        startTurn();
 
         for (Label cell : cellList) {
             cell.setText("");
