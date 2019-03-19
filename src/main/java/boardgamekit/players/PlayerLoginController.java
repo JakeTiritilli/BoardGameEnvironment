@@ -89,6 +89,7 @@ public class PlayerLoginController {
         try {
             return playerLoader.loadData(player);
         } catch (IOException error) {
+            error.printStackTrace();
             statusLabel.setText("Error loading player data.");
             return null;
         }

@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 
 import org.json.JSONObject;
@@ -25,7 +28,19 @@ public class PlayerLoader {
      * @throws IOException if the file was not found
      */
     public PlayerLoader(String fileName) throws IOException {
-        jsonFile = new File(fileName).getAbsoluteFile();
+        Path currentRelativePath = Paths.get("");
+        String currentPath = currentRelativePath.toAbsolutePath().toString();
+        File check = new File (currentPath + "/UserData.json");
+        if (check.exists()) {
+            jsonFile = check.getAbsoluteFile();
+        }
+        else {
+            check.createNewFile();
+            FileWriter writer = new FileWriter(check);
+            writer.write("{}");
+            writer.close();
+            jsonFile = check.getAbsoluteFile();
+        }
     }
     
     /**
