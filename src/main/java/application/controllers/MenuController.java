@@ -33,8 +33,11 @@ public class MenuController extends ViewInitializer {
         Button gameButton = (Button) actionEvent.getSource();
         int gameNumber = gameButtons.indexOf(gameButton);
         String loginPath = ViewInitializer.LOGIN;
+        String leaderboardPath = ViewInitializer.LEADERBOARD;
+        String jsonPath = ViewInitializer.PLAYER_DATA;
         String gamePath = gamesURL[gameNumber];
-        PlayerManager playerManager = new PlayerManager(gamePath, loginPath);
+        String gameName = gameNames[gameNumber];
+        PlayerManager playerManager = new PlayerManager(gamePath, loginPath, leaderboardPath, jsonPath, gameName);
         playerManager.loadLogin();
     }
 }

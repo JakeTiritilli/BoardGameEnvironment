@@ -19,11 +19,16 @@ public class ViewInitializer {
 	final static String TICTACTOE = "/views/tictactoe/TicTacToe.fxml";
 	
 	final static String LOGIN = "/views/boardgamekit/PlayerLogin.fxml";
+	final static String LEADERBOARD = "/views/boardgamekit/Leaderboard.fxml";
+
+	final static String PLAYER_DATA = "src/main/resources/json/UserData.json";
 	
 	/* Array of view intializers for each game.
     The order must match the order of buttons
     in {@code gameButtons}. */
 	protected String[] gamesURL = { CHECKERS, OTHELLO, TICTACTOE, MEMORY };
+
+	protected String[] gameNames = { "checkers", "othello", "tictactoe", "memory" };
     
 	/**
 	 * Loads a JavaFX Pane from a given FXML file
