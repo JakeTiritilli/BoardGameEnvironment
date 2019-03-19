@@ -1,27 +1,32 @@
 package othello.controllers;
 
-import boardgamekit.BoardGameController;
 import boardgamekit.players.Player;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import othello.models.Othello;
-import othello.utility.*;
-import java.lang.Integer;
+import othello.utility.OthelloPiece;
+import othello.utility.OthelloPlayer;
+import othello.utility.ValidMoveFinder;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 
-public class OthelloController extends BoardGameController {
+public class OthelloController {
 
     @FXML
     private ArrayList<ArrayList<StackPane>> gameboard;
+
+    @FXML
+    private Pane board;
+
 
     @FXML
     private Pane blackPlayerTurnPane;
@@ -30,47 +35,25 @@ public class OthelloController extends BoardGameController {
     private Pane whitePlayerTurnPane;
 
     @FXML
-    private Button resetButton;
+    private Label infoLabel;
 
-//    @FXML
-//    private Label player1Name;
-//
-//    @FXML
-//    private Label player2Name;
+    @FXML
+    private Label blackScoreCard;
 
-//    @FXML
-//    private Label infoLabel; --->     protected Label statusLabel;
-
-//    @FXML
-//    private Label blackScoreCard; --> player1Score
-
-//    @FXML
-//    private Label whiteScoreCard; --> player2Score
-
-
-    //
+    @FXML
+    private Label whiteScoreCard;
 
     private Othello game;
 
 
-    @Override
-    public void initializeGameModel()
-    {
-        game = new Othello(this.player1,this.player2, 8, 8);
-    }
+    @FXML
+    public void initialize() {
 
-
-
-    // initialize the game model, reset button, mouse click event on cells, set starting scores, and starts the turn
-    public void initialize()
-    {
-
-        initializeGameModel();
+        game = new Othello(Player.createDefault(""), Player.createDefault(""), 8, 8);
 
         try {
-            setResetButton();
+            initializeBoard();
             addMouseClickEvent();
-            updateGameBoard();
             updateScore();
             startTurn();
         }
@@ -81,56 +64,41 @@ public class OthelloController extends BoardGameController {
 
     }
 
-    public void setResetButton(){
-        resetButton.setOnAction(new EventHandler<ActionEvent>(){
-            @Override
-            public void handle(ActionEvent event2)
-            {
-                startNewGame();
-            }
-        });
+    private void initializeBoard() throws IOException {
+        initializeBlackStartingPieces();
+        initializeWhiteStartingPieces();
 
     }
 
-
-    // checks if the model has reached end game state first
-    @Override
-    public void startTurn()
+    private void startTurn()
     {
 
         if(game.endGame())
         {
-            this.updateScore();
-            game.endGameProcedure();
             if(game.getP1Score() > game.getP2Score())
             {
-                this.updateStatus("Black Won!");
-                // update player 1 score profile
-            }
-            else if(game.getP1Score() < game.getP2Score())
-            {
-                this.updateStatus("White Won!");
-                //update player 2 score profile
+                infoLabel.setText("Black Won!");
             }
             else
-                this.updateStatus("Tie Game!");
-        }
-        else {
-
-            this.updateStatus("");
-            if (!game.playerHasMoves(game.getCurrentTurn())) {
-
-                game.setCurrentTurn(game.getCurrentTurn().getOppositeColor()); // switches turn if no moves available
-                // add graphic for no moves / skipped turn
-                this.updateStatus("No moves available, Turn Skipped!");
+            {
+                infoLabel.setText("White Won!");
             }
-
-            displayCurrentTurn();
+            return;
         }
+
+        infoLabel.setText("");
+        if(!game.playerHasMoves(game.getCurrentTurn()))
+        {
+
+            game.setCurrentTurn(game.getCurrentTurn().getOppositeColor()); // switches turn if no moves available
+            // add graphic for no moves / skipped turn
+            infoLabel.setText("No moves available, Turn Skipped!");
+        }
+
+        displayCurrentTurn();
     }
 
-
-    public void addMouseClickEvent()
+    private void addMouseClickEvent()
     {
         for(int i =0; i < gameboard.size(); ++i)
         {
@@ -142,18 +110,19 @@ public class OthelloController extends BoardGameController {
 //                        System.out.println("mouse click detected! " + mouseEvent.getSource());
 
                         String cellPressed = mouseEvent.getSource().toString();
+                        System.out.println(cellPressed);
                         int row = Integer.parseInt(cellPressed.substring(18,19));
                         int col = Integer.parseInt(cellPressed.substring(20,21));
 
 
-//                        System.out.println(makeMove(row,col));
+                        System.out.println(makeMove(row,col));
                     }
                 });
             }
         }
     }
 
-    public boolean makeMove(int row, int col)
+    private boolean makeMove(int row, int col)
     {
         ArrayList<Integer[]> validMoves = ValidMoveFinder.getValidMoves(game.getCurrentTurn());
 
@@ -165,6 +134,7 @@ public class OthelloController extends BoardGameController {
                         game.makeMove(row, col);
                         this.updateGameBoard();
                         this.updateScore();
+                        // update score
 
                         startTurn();
                         return true;
@@ -178,12 +148,13 @@ public class OthelloController extends BoardGameController {
         }
 
         // If move is not valid
-        this.updateStatus("Invalid Move");
+        infoLabel.setText("Invalid Move");
         return false;
 
 
 
     }
+
 
     private void updateGameBoard() throws IOException
     {
@@ -194,17 +165,17 @@ public class OthelloController extends BoardGameController {
         {
             for(int j = 0; j < updatedBoard[i].length; ++j)
             {
-                this.gameboard.get(i).get(j).getChildren().clear();
+                gameboard.get(i).get(j).getChildren().clear();
                 if(updatedBoard[i][j] == null)
                 {
                    continue;
                 }
                 else
                 {
-                    if(updatedBoard[i][j].toString().equals("W"))
+                    if(updatedBoard[i][j].toString().equals(" W "))
                     {
 
-//                        System.out.println("found White");
+                        System.out.println("found White");
                         pieceFile = "/views/othello/WhiteOthelloPiece.fxml";
                         AnchorPane whiteOthelloPiece = FXMLLoader.load(getClass().getResource(pieceFile));
 
@@ -233,8 +204,9 @@ public class OthelloController extends BoardGameController {
 
     private void updateScore()
     {
-        setPlayer1Score(Integer.toString(game.getP1Score()));
-        setPlayer2Score(Integer.toString(game.getP2Score()));
+
+        blackScoreCard.setText(Integer.toString(game.getP1Score()));
+        whiteScoreCard.setText(Integer.toString(game.getP2Score()));
     }
 
 
@@ -256,6 +228,10 @@ public class OthelloController extends BoardGameController {
 
         }
 
+        // Set user data which stores pos and event handler refs
+//        GameboardNodeInfo cellInfo = (GameboardNodeInfo) cell.getUserData();
+//        GameboardNodeInfo checkerPieceInfo = new GameboardNodeInfo(cellInfo.boardPosition);
+//        redCheckerPiece.setUserData(checkerPieceInfo);
 
     }
 
@@ -282,17 +258,17 @@ public class OthelloController extends BoardGameController {
 
     }
 
-    public void displayCurrentTurn() {
+    private void displayCurrentTurn() {
         // Clear the current turn arrow from previous turn
         this.blackPlayerTurnPane.getChildren().clear();
         this.whitePlayerTurnPane.getChildren().clear();
 
-//        ArrayList<Integer[]> moves = ValidMoveFinder.getValidMoves(game.getCurrentTurn());
-//        System.out.println("Available Moves Found");
-//            System.out.println("Valid Moves:");
-//            for (Integer[] move : moves) {
-//                System.out.println(move[0] +"  "+move[1]);
-//            }
+        ArrayList<Integer[]> moves = ValidMoveFinder.getValidMoves(game.getCurrentTurn());
+        System.out.println("Available Moves Found");
+            System.out.println("Valid Moves:");
+            for (Integer[] move : moves) {
+                System.out.println(move[0] +"  "+move[1]);
+            }
 
         try {
             AnchorPane currentTurnArrow = FXMLLoader.load(getClass().getResource("/views/othello/CurrentTurnArrow.fxml"));
@@ -306,23 +282,6 @@ public class OthelloController extends BoardGameController {
             }
         }
         catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void startNewGame()
-    {
-        try {
-            this.initializeGameModel();
-            this.updateStatus("New Game");
-            this.updateScore();
-            this.updateGameBoard();
-            this.startTurn();
-        }
-
-        catch(IOException e)
-        {
             e.printStackTrace();
         }
     }

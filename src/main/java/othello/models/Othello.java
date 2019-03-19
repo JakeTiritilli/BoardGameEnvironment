@@ -16,12 +16,8 @@ public class Othello extends BoardGame {
 
     final Integer boardWidth = 8;
     final Integer boardLength= 8;
-    int p1Score = 0;
-    int p2Score = 0;
 
     // GameBoardKit's player object used only to update score for the Username associated
-    Player player1;
-    Player player2;
 
     static public OthelloPiece[][] gameboard;
 
@@ -29,8 +25,6 @@ public class Othello extends BoardGame {
     public Othello(Player p1, Player p2, int row, int col)
     {
         super(p1,p2,row,col);
-        player1 = p1;
-        player2 = p2;
         currentTurn = OthelloPlayer.BLACK; // black goes first
         initializeBoard();
     }
@@ -55,8 +49,8 @@ public class Othello extends BoardGame {
         gameboard[3][4] = new OthelloPiece(OthelloPlayer.BLACK);
         gameboard[4][3] = new OthelloPiece(OthelloPlayer.BLACK);
 
-        p1Score = 2;
-        p2Score = 2;
+        player1Score = 2;
+        player2Score = 2;
     }
 
     /**
@@ -71,31 +65,37 @@ public class Othello extends BoardGame {
     public void makeMove(int row, int column)
     {
         if (!endGame()) {
-//            System.out.println("Making Move");
+            System.out.println("Making Move");
             gameboard[row][column] = new OthelloPiece(currentTurn);
-//            System.out.println("Piece set");
+            System.out.println("Piece set");
             ArrayList<Integer[]> flips = ValidMoveFinder.getFlips(row, column, currentTurn);
             for (Integer[] flip : flips) {
                 gameboard[flip[0]][flip[1]].color = currentTurn;
             }
-//            System.out.println("Pieces flipped");
+            System.out.println("Pieces flipped");
             updateScore();
             currentTurn = currentTurn.getOppositeColor();
         }
         else{
-//            System.out.println("invalid: game has ended");
+            System.out.println("invalid: game has ended");
         }
     }
 
 
     public void endGameProcedure(){
-        if (p1Score > p2Score){
-            setWinner(game,true);
+        if (player1Score > player2Score){
+            setCurrentTurn(OthelloPlayer.BLACK);
         }
         else {
-            setWinner(game,false);
+            setCurrentTurn(OthelloPlayer.WHITE);
         }
 
+        if ((currentTurn == OthelloPlayer.BLACK && getCurrentPlayer() == player1) || (currentTurn == OthelloPlayer.WHITE && getCurrentPlayer() == player2)){
+            setWinner(game, true);
+        }
+        else if((currentTurn == OthelloPlayer.BLACK && getCurrentPlayer() == player2) || (currentTurn == OthelloPlayer.WHITE && getCurrentPlayer() == player1)){
+            setWinner(game, false);
+        }
     }
     public boolean boardIsFull()
     {
@@ -120,13 +120,13 @@ public class Othello extends BoardGame {
     public boolean endGame() // game ends if no players have moves left or if the game board is full
     {
         if(boardIsFull()) {
-//            System.out.println("GAME OVER");
+            System.out.println("GAME OVER");
             return true;
         }
 
         else if(playerHasMoves(OthelloPlayer.WHITE)==false && playerHasMoves(OthelloPlayer.BLACK)== false)
         {
-//            System.out.println("GAME OVER");
+            System.out.println("GAME OVER");
             return true;
         }
         return false;
@@ -157,27 +157,18 @@ public class Othello extends BoardGame {
         this.currentTurn = currentTurn;
     }
 
-    public int getP1Score()
-    {
-        return this.p1Score;
-    }
-
-    public int getP2Score()
-    {
-        return this.p2Score;
-    }
 
     public void updateScore(){
-        p1Score = 0;
-        p2Score = 0;
 
+        player1Score = 0;
+        player2Score = 0;
         for (int i = 0; i < boardLength; i++){
             for (int j = 0; j < boardWidth; j++){
                 try {
                     if (gameboard[i][j].color == OthelloPlayer.WHITE) {
-                        p2Score++;
+                        incPlayer2Score();
                     } else if (gameboard[i][j].color == OthelloPlayer.BLACK) {
-                        p1Score++;
+                        incPlayer1Score();
                     }
                 }
                 catch (NullPointerException e){
@@ -185,7 +176,5 @@ public class Othello extends BoardGame {
                 }
             }
         }
-        player1.setScoreFor(game, p1Score);
-        player2.setScoreFor(game, p2Score);
     }
 }
