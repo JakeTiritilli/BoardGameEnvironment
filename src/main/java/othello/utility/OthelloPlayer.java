@@ -1,6 +1,6 @@
 package othello.utility;
 
-public enum OthelloPlayer {
+public enum OthelloPlayer  {
     BLACK, WHITE;
 
     private OthelloPlayer opposite;
