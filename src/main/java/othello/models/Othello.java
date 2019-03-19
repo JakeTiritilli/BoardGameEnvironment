@@ -88,7 +88,21 @@ public class Othello extends BoardGame {
     }
 
 
+    public void endGameProcedure(){
+        if (p1Score > p2Score){
+            setCurrentTurn(OthelloPlayer.BLACK);
+        }
+        else {
+            setCurrentTurn(OthelloPlayer.WHITE);
+        }
 
+        if ((currentTurn == OthelloPlayer.BLACK && getCurrentPlayer() == player1) || (currentTurn == OthelloPlayer.WHITE && getCurrentPlayer() == player2)){
+            setWinner(game, true);
+        }
+        else if((currentTurn == OthelloPlayer.BLACK && getCurrentPlayer() == player2) || (currentTurn == OthelloPlayer.WHITE && getCurrentPlayer() == player1)){
+            setWinner(game, false);
+        }
+    }
     public boolean boardIsFull()
     {
         for(Integer i = 0; i < boardWidth; ++i)
