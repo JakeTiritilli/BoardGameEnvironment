@@ -1,17 +1,16 @@
 package checkers.controllers;
 
+import boardgamekit.BoardGameController;
 import checkers.models.Checkers;
+import checkers.utility.CheckerColor;
 import checkers.utility.CheckerPiece;
-import checkers.utility.CheckerPlayer;
 import checkers.utility.GameboardNodeInfo;
 import boardgamekit.utility.*;
-import javafx.collections.ObservableList;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -26,8 +25,8 @@ import java.util.ArrayList;
 
 // TODO: Handle king state on view (put a crown on piece)
 
-public class CheckerboardController {
-    private Checkers game = new Checkers();
+public class CheckerboardController extends BoardGameController {
+    private Checkers game;
     private AnchorPane currentlySelectedCheckerPiece = null;
 
     // These array lists are stored in order to remove the event handlers each turn
@@ -53,6 +52,11 @@ public class CheckerboardController {
     @FXML
     StackPane boardStackPane;
 
+    @Override
+    public void initializeGameModel() {
+        this.game = new Checkers(player1, player2);
+    }
+
     /**
      * Initializes the user data for gameboard which places a GameboardNodeInfo object
      * into each cell Node. This is used in order to derive game data so that it can
@@ -61,6 +65,7 @@ public class CheckerboardController {
      */
     @FXML
     public void initialize() {
+        this.initializeGameModel();
         this.initializeUserDataForGameboard();
         this.initializeGamePieces();
         this.updateDisplayedScore();
@@ -71,6 +76,7 @@ public class CheckerboardController {
      * Clears the board of the previous turn artifacts and sets up the board to show
      * the new valid moves for the current turn.
      */
+    @Override
     public void startTurn() {
         // Cleans the board and sets it up for the next turn/move
         this.clearEventHandlersAndIndicators();
@@ -85,13 +91,28 @@ public class CheckerboardController {
         displayMovableCheckerPieces();
     }
 
+    public void startNewGame() {
+        this.clearEventHandlersAndIndicators();
+        this.clearBoard();
+        this.clearWinScreen();
+        this.initialize();
+    }
+
+    private void clearWinScreen() {
+        // Removes the win label and new game button
+        this.boardStackPane.getChildren().remove(1,3);
+
+        // Resets the checkerboard opacity
+        this.boardGridPane.setOpacity(1);
+    }
+
     /**
      * Checks for a win condition. The win condition is if one side does not have any more
      * checker pieces left.
      */
     private boolean checkForWinCondition() {
-        CheckerPlayer winner = this.game.getWinConditionStatus();
-
+        CheckerColor winner = this.game.getWinConditionStatus();
+//        CheckerColor winner = CheckerColor.BLACK;
         if (winner != null) {
             this.displayWinner(winner);
             return true;
@@ -103,13 +124,26 @@ public class CheckerboardController {
      * Displays the end game messages for the winner.
      * @param winner the player who won
      */
-    private void displayWinner(CheckerPlayer winner) {
+    private void displayWinner(CheckerColor winner) {
         boardGridPane.setOpacity(0.1);
+
+        // Creates win label
         Label winnerLabel = new Label(winner.toString() + " Player Wins!");
         winnerLabel.setStyle("-fx-font: 55 arial;");
         StackPane.setAlignment(winnerLabel, Pos.CENTER);
 
+        // Creates new game button
+        Button newGameButton = new Button("New Game");
+        newGameButton.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                startNewGame();
+            }
+        });
+        StackPane.setAlignment(newGameButton, Pos.BOTTOM_CENTER);
+
         boardStackPane.getChildren().add(winnerLabel);
+        boardStackPane.getChildren().add(newGameButton);
     }
 
     /**
@@ -124,7 +158,9 @@ public class CheckerboardController {
             AnchorPane currentTurnArrow = FXMLLoader.load(getClass().getResource("/views/checkers/CurrentTurnArrow.fxml"));
             StackPane.setAlignment(currentTurnArrow, Pos.CENTER);
 
-            if (this.game.getCurrentPlayer() == CheckerPlayer.BLACK) {
+            CheckerPiece currentPlayerPiece = (CheckerPiece) this.game.getCurrentPlayerPiece();
+
+            if (currentPlayerPiece.color == CheckerColor.BLACK) {
                 this.blackPlayerTurnPane.getChildren().add(currentTurnArrow);
             }
             else {
@@ -155,7 +191,7 @@ public class CheckerboardController {
             this.addCheckerClickListener(checker);
 
             // Add the indicators and click listeners for the valid moves
-            for(PosTuple validMove : checker.validMoves) {
+            for(PosTuple validMove : checker.getValidMoves()) {
                 this.displayValidMove(validMove);
             }
         }
@@ -166,7 +202,7 @@ public class CheckerboardController {
      * @param checker Holds the position of the checkerpiece on the GUI board.
      */
     private void addCheckerClickListener(CheckerPiece checker) {
-        StackPane targetCell = this.gameboard.get(checker.position.row).get(checker.position.col);
+        StackPane targetCell = this.gameboard.get(checker.getPiecePos().row).get(checker.getPiecePos().col);
 
         // Get the checker piece node on the cell
         AnchorPane targetCheckerPiece = (AnchorPane) targetCell.getChildren().get(0);
@@ -374,8 +410,8 @@ public class CheckerboardController {
      * pieces they have left on the board.
      */
     private void updateDisplayedScore() {
-        this.blackPlayerScoreLabel.setText(Integer.toString(this.game.getScoreForPlayer(CheckerPlayer.BLACK)));
-        this.redPlayerScoreLabel.setText(Integer.toString(this.game.getScoreForPlayer(CheckerPlayer.RED)));
+        this.blackPlayerScoreLabel.setText(Integer.toString(this.game.getScoreForPlayerColor(CheckerColor.BLACK)));
+        this.redPlayerScoreLabel.setText(Integer.toString(this.game.getScoreForPlayerColor(CheckerColor.RED)));
     }
 
     /**
@@ -385,7 +421,19 @@ public class CheckerboardController {
      * @param newPosition
      */
     private void updateModelForMove(PosTuple oldPosition, PosTuple newPosition) {
-        this.game.makeMove(oldPosition, newPosition);
+//        this.game.makeMove(oldPosition, newPosition);
+        GameboardNodeInfo currentlySelectedPieceInfo = (GameboardNodeInfo) this.currentlySelectedCheckerPiece.getUserData();
+
+        // update the currentPlayerPiece in the model
+        if (this.game.getCurrentPlayerColor() == CheckerColor.BLACK) {
+            this.game.setPlayer1GamePiece(this.game.getCheckerPieceAtPos(currentlySelectedPieceInfo.boardPosition));
+        }
+        else {
+            this.game.setPlayer2GamePiece(this.game.getCheckerPieceAtPos(currentlySelectedPieceInfo.boardPosition));
+        }
+
+        // update the model board with the new move
+        this.game.makeMove(newPosition.row, newPosition.col);
         this.game.clearValidMovesForAllCheckerPieces();
     }
 
@@ -413,6 +461,14 @@ public class CheckerboardController {
      */
     private StackPane getCellAtPos(int row, int col) {
         return this.gameboard.get(row).get(col);
+    }
+
+    private void clearBoard() {
+        for(int i = 0; i < 8; i++) {
+            for(int j = 0; j < 8; j++) {
+                this.gameboard.get(i).get(j).getChildren().clear();
+            }
+        }
     }
 
     /**

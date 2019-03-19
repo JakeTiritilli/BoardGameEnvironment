@@ -10,17 +10,14 @@ import boardgamekit.utility.*;
  * @author Tyler Vu
  */
 
-public class CheckerPiece {
-    public PosTuple position;
-    public CheckerPlayer color;
-    public ArrayList<PosTuple> validMoves;
+public class CheckerPiece extends GamePiece{
+    public CheckerColor color;
     public boolean isKing;
 
-    public CheckerPiece(int row, int col, CheckerPlayer color) {
-        this.position = new PosTuple(row, col);
+    public CheckerPiece(int row, int col, CheckerColor color) {
+        this.setPos(new PosTuple(row,col));
         this.color = color;
         this.isKing = false;
-        this.validMoves = new ArrayList();
     }
 
     /**
@@ -30,11 +27,8 @@ public class CheckerPiece {
         this.isKing = true;
     }
 
-    public void clearValidMoves() {
-        this.validMoves = new ArrayList();
-    }
-
-    public void updatePosition(int row, int col) {
-        this.position = new PosTuple(row, col);
+    @Override
+    public String toString() {
+        return color.toString() + " -> (" + this.getRowNum() + ", " + this.getColNum() + ")";
     }
 }

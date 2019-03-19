@@ -9,7 +9,7 @@ package checkers.utility;
  * @author Tyler Vu
  */
 
-public enum CheckerPlayer {
+public enum CheckerColor {
     BLACK {
         public String toString() {
             return "Black";
