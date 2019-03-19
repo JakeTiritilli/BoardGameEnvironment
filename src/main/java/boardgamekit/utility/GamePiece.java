@@ -12,7 +12,9 @@ import java.util.ArrayList;
 public abstract class GamePiece {
 
     // Holds the position of the pieces.
-    private PosTuple piecePos;
+    // Instantiates with a placeholder object. Make sure to update
+    // if using the piecePos variable.
+    private PosTuple piecePos = new PosTuple(-1,-1);
 
     // Holds all of the valid moves that the piece could make.
     private ArrayList<PosTuple> validMoves = new ArrayList<>();
@@ -33,6 +35,10 @@ public abstract class GamePiece {
         piecePos.col = colNum;
     }
 
+    public void setPos(PosTuple pos) {
+        this.piecePos = pos;
+    }
+
     public PosTuple getPiecePos() {
         return piecePos;
     }
@@ -48,6 +54,10 @@ public abstract class GamePiece {
 
     public void addValidMove(int row, int col) {
         validMoves.add(new PosTuple(row, col));
+    }
+
+    public void setValidMoves(ArrayList<PosTuple> validMoves) {
+        this.validMoves = validMoves;
     }
 
     public ArrayList<PosTuple> getValidMoves() {

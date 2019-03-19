@@ -47,6 +47,12 @@ public class PlayerLoader {
         return Player.create(userName, player);
     }
 
+    public JSONObject dumpData() throws IOException {
+        JSONTokener fileContent = new JSONTokener(new FileReader(jsonFile));
+        JSONObject json = new JSONObject(fileContent);
+        return json;
+    }
+
     /**
      * Writes a {@code Player} object as JSON into the JSON file of
      * all user scores.
