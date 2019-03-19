@@ -1,5 +1,6 @@
 package boardgamekit.players;
 
+import javafx.event.EventHandler;
 import javafx.scene.*;
 
 import java.io.IOException;
@@ -7,6 +8,7 @@ import java.io.IOException;
 import boardgamekit.BoardGameController;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 /**
  * Provides the functionality to make
@@ -100,12 +102,9 @@ public class PlayerManager {
                 boardGameController.setPlayers(player1, player2);
                 boardGameController.initializeGameModel();
             }
-            
-            if (baseScene == null) {
-                createNewStage(gamePane, 800, 690, "Board Game Environment");
-            } else {
-                baseScene.setRoot(gamePane);
-            }
+
+            // Replace the login view with the game view
+            baseScene.setRoot(gamePane);
 
         } catch (IOException error) {
             System.out.println("Error occurred loading the game scene.");
@@ -121,13 +120,19 @@ public class PlayerManager {
      * @param height the height of the scene
      * @param title the title to be placed at the top of the window bar
      */
-    public void createNewStage(Parent pane, int width, int height, String title) {
+    public void createNewStage(Parent pane, int width, int height, String title, Boolean setAsBase) {
         Stage stage = new Stage();
         stage.setTitle(title);
         stage.setResizable(false);
         Scene newScene = new Scene(pane, width, height);
         stage.setScene(newScene);
-        baseScene = newScene;
+
+        // If replacing the base view (login view), then change setAsBase to true.
+        // (e.g. Changing login view to game view)
+        if (setAsBase) {
+            baseScene = newScene;
+        }
+
         stage.show();
     }
 
@@ -141,7 +146,7 @@ public class PlayerManager {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(loginViewPath));
             Parent loginPane = fxmlLoader.load();
             PlayerLoginController loginController = fxmlLoader.getController();
-            createNewStage(loginPane, 800, 690, "Board Game Environment");
+            createNewStage(loginPane, 800, 690, "Board Game Environment", true);
             loginController.initGameController(this);
         } catch (IOException error) {
             System.out.println("Error occurred loading the login scene.");
@@ -158,7 +163,7 @@ public class PlayerManager {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(leaderboardViewPath));
             Parent leaderboardPane = fxmlLoader.load();
             LeaderboardController loginController = fxmlLoader.getController();
-            createNewStage(leaderboardPane, 600, 600, "Board Game Environment");
+            createNewStage(leaderboardPane, 600, 600, "Board Game Environment", false);
             loginController.initLeaderboardController(this);
         } catch (IOException error) {
             System.out.println("Error occurred loading the login scene.");
