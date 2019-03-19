@@ -16,8 +16,8 @@ public class TicTacToe extends BoardGame {
 
     public TicTacToe(Player p1, Player p2) {
         super(p1, p2, 9);
-        setPlayer1GamePiece(TicTacToePlayer.X);
-        setPlayer2GamePiece(TicTacToePlayer.O);
+        setPlayer1GamePiece(TicTacToePiece.X());
+        setPlayer2GamePiece(TicTacToePiece.O());
     }
 
     public void makeMove(int row, int column) throws InvalidMoveException {
@@ -65,7 +65,11 @@ public class TicTacToe extends BoardGame {
      */
     public boolean gameIsWon() {
         GamePiece[] tictactoeBoard = gameBoard[0];
-        return horizontalWin(tictactoeBoard) || verticalWin(tictactoeBoard) || diagonalWin(tictactoeBoard);
+        boolean isWon = horizontalWin(tictactoeBoard) || verticalWin(tictactoeBoard) || diagonalWin(tictactoeBoard);
+        if (isWon) {
+            setWinner("tictactoe", true);
+        }
+        return isWon;
     }
 
     private boolean horizontalWin(GamePiece[] board) {

@@ -4,7 +4,7 @@ import checkers.models.Checkers;
 import checkers.utility.CheckerPiece;
 import checkers.utility.CheckerPlayer;
 import checkers.utility.GameboardNodeInfo;
-import checkers.utility.PosTuple;
+import boardgamekit.utility.*;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.event.EventHandler;

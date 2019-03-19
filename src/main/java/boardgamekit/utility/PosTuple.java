@@ -1,4 +1,4 @@
-package checkers.utility;
+package boardgamekit.utility;
 
 public class PosTuple {
     @Override

@@ -1,7 +1,7 @@
 package application;
 
-import application.utility.*;
 import javafx.scene.Parent;
+import application.controllers.ViewInitializer;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -10,12 +10,12 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = new RootVI().getPane();
+        Parent root = new ViewInitializer().getPane(ViewInitializer.MAINMENU);
 
         // Setting up stage and shows it
         primaryStage.setTitle("Board Game Environment");
         primaryStage.setResizable(false);
-        primaryStage.setScene(new Scene(root, 1000, 700));
+        primaryStage.setScene(new Scene(root, 700, 700));
         primaryStage.show();
     }
 

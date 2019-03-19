@@ -2,7 +2,7 @@ package checkers.models;
 
 import checkers.utility.CheckerPiece;
 import checkers.utility.CheckerPlayer;
-import checkers.utility.PosTuple;
+import boardgamekit.utility.*;
 import java.util.ArrayList;
 
 /**
