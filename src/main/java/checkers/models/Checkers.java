@@ -1,30 +1,47 @@
 package checkers.models;
 
+import boardgamekit.BoardGame;
+import boardgamekit.players.Player;
+import checkers.utility.CheckerColor;
 import checkers.utility.CheckerPiece;
-import checkers.utility.CheckerPlayer;
 import boardgamekit.utility.*;
+
 import java.util.ArrayList;
 
 /**
  * Represents the model of the game checkers. Serves as an engine in order
  * to run the logic of the game
- *
+ *d
  * @author Tyler Vu
  */
 
-public class Checkers {
-    private CheckerPiece[][] gameBoard = new CheckerPiece[8][8];
+public class Checkers extends BoardGame {
     private ArrayList<CheckerPiece> blackCheckerPieceRefs = new ArrayList<>();
     private ArrayList<CheckerPiece> redCheckerPieceRefs = new ArrayList<>();
 
     // Variables for turn execution
-    private CheckerPlayer currentPlayer;
     private boolean jumping = false;
     private CheckerPiece jumpingCheckerPiece = null;
 
 
-    public Checkers() {
+    public Checkers(Player player1, Player player2) {
+        super(player1, player2, 8, 8);
         this.initializeGame();
+    }
+
+    @Override
+    public boolean gameIsWon() {
+        return getWinConditionStatus() != null;
+    }
+
+    @Override
+    public void makeMove(int row, int col) {
+        PosTuple oldPosition = this.getCurrentPlayerPiece().getPiecePos().copy();
+        PosTuple newPosition = new PosTuple(row, col);
+
+        this.moveCheck(oldPosition, newPosition);
+        this.handleMoveConditions(oldPosition, newPosition);
+        this.updateModelForMove(oldPosition, newPosition);
     }
 
     /**
@@ -33,42 +50,69 @@ public class Checkers {
      * @return ArrayList of checker pieces that are able to make a valid move.
      */
     public ArrayList<CheckerPiece> getMovableCheckerPiecesForActivePlayer() {
-        if (this.currentPlayer == CheckerPlayer.BLACK) {
+        // Have to do this because the gameboardkit does not support holding CheckerColor's
+        // Used to derive the color of the player
+        CheckerPiece currentPlayerCheckerPlaceholder = (CheckerPiece) this.getCurrentPlayerPiece();
+
+        if (currentPlayerCheckerPlaceholder.color == CheckerColor.BLACK) {
             return this.getMovableCheckerPieces(this.blackCheckerPieceRefs);
         }
         return this.getMovableCheckerPieces(this.redCheckerPieceRefs);
     }
 
     /**
+     * Gets the win condition status for the game state. If the size of one of
+     * the checker piece reference lists is 0, that means that the player has lost.
+     * @return CheckerColor.RED, CheckerColor.BLACK, or null
+     */
+    public CheckerColor getWinConditionStatus() {
+        if (this.blackCheckerPieceRefs.size() == 0) {
+            return CheckerColor.RED;
+        }
+        else if (this.redCheckerPieceRefs.size() == 0) {
+            return CheckerColor.BLACK;
+        }
+        else {
+            return null;
+        }
+    }
+
+    /**
      * Returns the score for each player. Score is derived from the checker color reference lists.
-     * @param player Player score to return
+     * @param playerColor Player score to return
      * @return score
      */
-    public int getScoreForPlayer(CheckerPlayer player) {
-        return player == CheckerPlayer.BLACK ? this.blackCheckerPieceRefs.size() : this.redCheckerPieceRefs.size();
+    public int getScoreForPlayerColor(CheckerColor playerColor) {
+        return playerColor == CheckerColor.BLACK ? this.blackCheckerPieceRefs.size() : this.redCheckerPieceRefs.size();
     }
 
     /**
-     * Getter for current player.
-     * @return CheckerPlayer
+     * Getter for current player color.
+     * @return CheckerColor
      */
-    public CheckerPlayer getCurrentPlayer() {
-        return this.currentPlayer;
+    public CheckerColor getCurrentPlayerColor() {
+        // Have to do this because the gameboardkit does not support holding CheckerColor's
+        // Used to derive the color of the player
+        CheckerPiece currentPlayerCheckerPlaceholder = (CheckerPiece) this.getCurrentPlayerPiece();
+
+        CheckerColor currentCheckerColor = currentPlayerCheckerPlaceholder.color;
+        return currentCheckerColor;
     }
 
-    /**
-     * Checks to make sure the move is valid and then performs the move. It will set
-     * the checker to be placed into the new cell. If it was a single row move, it will
-     * change the player turn. Else, it will keep the same player and delete the checker
-     * that got jumped over.
-     * @param oldPosition
-     * @param newPosition
-     */
-    public void makeMove(PosTuple oldPosition, PosTuple newPosition) {
-        this.moveCheck(oldPosition, newPosition);
-        this.handleMoveConditions(oldPosition, newPosition);
-        this.updateModelForMove(oldPosition, newPosition);
-    }
+//    /**
+//     * Checks to make sure the move is valid and then performs the move. It will set
+//     * the checker to be placed into the new cell. If it was a single row move, it will
+//     * change the player turn. Else, it will keep the same player and delete the checker
+//     * that got jumped over.
+//     * @param oldPosition
+//     * @param newPosition
+//     */
+//    public void makeMoveWrapper(PosTuple oldPosition, PosTuple newPosition) {
+//        this.makeMove(newPosition.row, newPosition.col);
+//        this.moveCheck(oldPosition, newPosition);
+//        this.handleMoveConditions(oldPosition, newPosition);
+//        this.updateModelForMove(oldPosition, newPosition);
+//    }
 
     /**
      * Goes into each checker piece and clears the valid moves stored
@@ -84,7 +128,14 @@ public class Checkers {
      * @return CheckerPiece at pos
      */
     public CheckerPiece getCheckerPieceAtPos(PosTuple pos) {
-        return this.gameBoard[pos.row][pos.col];
+        CheckerPiece checkerToReturn = null;
+        try {
+            checkerToReturn = (CheckerPiece) this.returnPieceAt(pos.row, pos.col);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return checkerToReturn;
     }
 
     /**
@@ -95,7 +146,6 @@ public class Checkers {
         return this.jumping;
     }
 
-    // TODO: Handle King
     /**
      * Checks if the checker can make the move to the position. This takes into account whether it is a king or not.
      * If the position is 2 rows away, it will check to see if there is an enemy checker in the intermediate cell.
@@ -105,7 +155,7 @@ public class Checkers {
      */
     public boolean isValidMoveForChecker(CheckerPiece checker, PosTuple pos) {
         // if pos is only 1 row away, check if it is a valid move for the color
-        if (Math.abs(checker.position.row - pos.row) == 1) {
+        if (Math.abs(checker.getPiecePos().row - pos.row) == 1) {
             // If the checker is jumping, don't allow single row moves.
             // The checker is only allowed to perform multiple jumps after
             // the first jump.
@@ -124,7 +174,7 @@ public class Checkers {
      * Toggles the current player.
      */
     private void changeTurn() {
-        this.currentPlayer = this.currentPlayer == CheckerPlayer.BLACK ? CheckerPlayer.RED : CheckerPlayer.BLACK;
+        this.switchCurrentPlayer();
     }
 
     /**
@@ -138,9 +188,9 @@ public class Checkers {
     private boolean moveCheck(PosTuple oldPosition, PosTuple newPosition) {
         // (Check to make sure that the old pos has a checker there and the new pos
         // does not have a checker there) and (make sure both positions are on the board).
-        if ((gameBoard[oldPosition.row][oldPosition.col] == null ||
-                gameBoard[newPosition.row][newPosition.col] != null) &&
-                (isValidPos(oldPosition) && isValidPos(newPosition))) {
+        if (gameBoard[oldPosition.row][oldPosition.col] == null ||
+                gameBoard[newPosition.row][newPosition.col] != null ||
+                !isValidPos(oldPosition) || !isValidPos(newPosition)) {
             throw new IllegalArgumentException("The position parameters in makeMove were not valid moves");
         }
         return true;
@@ -169,8 +219,32 @@ public class Checkers {
 
             // Set the jump rules to the checker jumping
             // The model hasn't been updated yet so it is still at old position
-            this.setJumpRules(this.gameBoard[oldPosition.row][oldPosition.col]);
+            this.setJumpRules((CheckerPiece) this.getCheckerPieceAtPos(oldPosition));
         }
+
+        // Check for king state
+        if (this.checkKingCondition(oldPosition, newPosition)) {
+            // make the checker piece a king if in king state
+            this.getCheckerPieceAtPos(oldPosition).makeKing();
+        }
+    }
+
+    /**
+     * Checks to see if the checker piece is in the right condition to become a king
+     * @param newPosition position the checker is moving to
+     * @return true if the piece is in king condition, false if
+     */
+    private boolean checkKingCondition(PosTuple oldPosition, PosTuple newPosition) {
+        CheckerPiece checkerToCheck = this.getCheckerPieceAtPos(oldPosition);
+
+        // if piece is already a king
+        if (checkerToCheck.isKing) {
+            return true;
+        }
+
+        // Return the boolean result of whether the king condition is true
+        return (checkerToCheck.color == CheckerColor.BLACK && newPosition.row == 0) ||
+                (checkerToCheck.color == CheckerColor.RED && newPosition.row == 7);
     }
 
     /**
@@ -181,8 +255,8 @@ public class Checkers {
      */
     private void updateModelForMove(PosTuple oldPosition, PosTuple newPosition) {
         // Update position value within CheckerPiece object
-        CheckerPiece checkerToUpdate = gameBoard[oldPosition.row][oldPosition.col];
-        checkerToUpdate.updatePosition(newPosition.row, newPosition.col);
+        CheckerPiece checkerToUpdate = this.getCheckerPieceAtPos(oldPosition);
+        checkerToUpdate.updatePiecePos(newPosition.row, newPosition.col);
 
         // Update gameboard model to reflect move
         gameBoard[newPosition.row][newPosition.col] = checkerToUpdate;
@@ -207,10 +281,10 @@ public class Checkers {
      * @param col of piece to delete
      */
     private void deleteCheckerPiece(int row, int col) {
-        CheckerPiece checkerToDelete = this.gameBoard[row][col];
-        CheckerPlayer enemyColor = checkerToDelete.color;
+        CheckerPiece checkerToDelete = (CheckerPiece) this.gameBoard[row][col];
+        CheckerColor enemyColor = checkerToDelete.color;
 
-        if(enemyColor == CheckerPlayer.BLACK) {
+        if(enemyColor == CheckerColor.BLACK) {
             this.blackCheckerPieceRefs.remove(this.blackCheckerPieceRefs.indexOf(checkerToDelete));
         }
         else {
@@ -292,7 +366,7 @@ public class Checkers {
         }
 
         // Sets the array of valid moves in the CheckerPiece object
-        checker.validMoves = validMoves;
+        checker.setValidMoves(validMoves);
         return validMoves;
     }
 
@@ -304,14 +378,15 @@ public class Checkers {
      * @return Returns true if the single row move is valid
      */
     private boolean isSingleRowMoveValid(CheckerPiece checker, PosTuple pos) {
-        // TODO: handle King state
         // Gets the row delta that would be valid for the color
-        int rowDelta = checker.color == CheckerPlayer.BLACK ? checker.position.row - 1 : checker.position.row + 1;
+        int rowDelta = checker.color == CheckerColor.BLACK ? checker.getPiecePos().row - 1 : checker.getPiecePos().row + 1;
 
-        // if the pos being checked has a valid row delta, then check if cell is empty and if the col
+        // if the pos being checked has a valid row delta or if the checker
+        // is a king (if king, row deleta doesnt matter),
+        // then check if cell is empty and if the col
         // delta is valid (single row move should only be moving 1 column away).
-        if (pos.row == rowDelta) {
-            return this.gameBoard[pos.row][pos.col] == null && Math.abs(pos.col - checker.position.col) == 1;
+        if (pos.row == rowDelta || checker.isKing) {
+            return this.gameBoard[pos.row][pos.col] == null && Math.abs(pos.col - checker.getPiecePos().col) == 1;
         }
         return false;
     }
@@ -328,25 +403,23 @@ public class Checkers {
         int enemyRow;
         int enemyCol;
 
-        // TODO: handle King state
         // sets the row delta that would be valid for the color
         // sets the row that an enemy could possibly be on for the jump
-        if (checker.color == CheckerPlayer.BLACK) {
-            rowDelta = checker.position.row - 2;
-            enemyRow = checker.position.row -1;
-
+        if (checker.color == CheckerColor.BLACK) {
+            rowDelta = checker.getPiecePos().row - 2;
         }
         else {
-            rowDelta = checker.position.row + 2;
-            enemyRow = checker.position.row + 1;
+            rowDelta = checker.getPiecePos().row + 2;
         }
 
-        // sets the var to the intermediate cell between the checker and final pos
-        enemyCol = (checker.position.col + pos.col) / 2;
+        // sets the enemy row and col to the intermediate cell between the checker and final pos
+        enemyCol = (checker.getPiecePos().col + pos.col) / 2;
+        enemyRow = (checker.getPiecePos().row + pos.row) / 2;
 
-        // if the pos being checked is a valid move for that color, check for enemy and check the position
+        // if the pos being checked is a valid move for that color or the checker is a king,
+        // check for enemy and check that the position
         // that the checker is jumping to is empty
-        if (pos.row == rowDelta) {
+        if (pos.row == rowDelta || checker.isKing) {
             return this.hasEnemy(checker, enemyRow, enemyCol) && this.gameBoard[pos.row][pos.col] == null;
         }
         return false;
@@ -360,8 +433,8 @@ public class Checkers {
      * @return If there is an enemy there, return true
      */
     private boolean hasEnemy(CheckerPiece checker, int enemyRow, int enemyCol) {
-        CheckerPlayer colorToCheckFor = checker.color == CheckerPlayer.BLACK ? CheckerPlayer.RED : CheckerPlayer.BLACK;
-        CheckerPiece cellToCheck = this.gameBoard[enemyRow][enemyCol];
+        CheckerColor colorToCheckFor = checker.color == CheckerColor.BLACK ? CheckerColor.RED : CheckerColor.BLACK;
+        CheckerPiece cellToCheck = (CheckerPiece) this.gameBoard[enemyRow][enemyCol];
 
         return cellToCheck != null && cellToCheck.color == colorToCheckFor;
     }
@@ -379,14 +452,14 @@ public class Checkers {
         // Create PosTuples for every direction from the checker position.
         // Includes cells that would be playable if there was a valid jump available.
         ArrayList<PosTuple> directionsToCheck = new ArrayList<PosTuple>() {{
-            add(new PosTuple(checker.position.row + 1, checker.position.col - 1));
-            add(new PosTuple(checker.position.row + 1, checker.position.col + 1));
-            add(new PosTuple(checker.position.row - 1, checker.position.col - 1));
-            add(new PosTuple(checker.position.row - 1, checker.position.col + 1));
-            add(new PosTuple(checker.position.row + 2, checker.position.col - 2));
-            add(new PosTuple(checker.position.row + 2, checker.position.col + 2));
-            add(new PosTuple(checker.position.row - 2, checker.position.col - 2));
-            add(new PosTuple(checker.position.row - 2, checker.position.col + 2));
+            add(new PosTuple(checker.getPiecePos().row + 1, checker.getPiecePos().col - 1));
+            add(new PosTuple(checker.getPiecePos().row + 1, checker.getPiecePos().col + 1));
+            add(new PosTuple(checker.getPiecePos().row - 1, checker.getPiecePos().col - 1));
+            add(new PosTuple(checker.getPiecePos().row - 1, checker.getPiecePos().col + 1));
+            add(new PosTuple(checker.getPiecePos().row + 2, checker.getPiecePos().col - 2));
+            add(new PosTuple(checker.getPiecePos().row + 2, checker.getPiecePos().col + 2));
+            add(new PosTuple(checker.getPiecePos().row - 2, checker.getPiecePos().col - 2));
+            add(new PosTuple(checker.getPiecePos().row - 2, checker.getPiecePos().col + 2));
         }};
 
         for (PosTuple pos : directionsToCheck) {
@@ -409,11 +482,14 @@ public class Checkers {
 
     /**
      * Sets the current player as black because the black player always goes first.
-     * Populates the gameBoard private variable with null values and the CheckerPlayer
+     * Populates the gameBoard private variable with null values and the CheckerColor
      * enums based on the positions.
      */
     private void initializeGame() {
-        this.currentPlayer = CheckerPlayer.BLACK; // Black always goes first
+        //Sets placeholder checker pieces to mark the color of the player
+        this.setPlayer1GamePiece(new CheckerPiece(-1,-1, CheckerColor.BLACK)); // Black always goes first
+        this.setPlayer2GamePiece(new CheckerPiece(-1, -1, CheckerColor.RED));
+
         this.initializeGameBoard();
         this.initializeGamePieces();
     }
@@ -431,7 +507,7 @@ public class Checkers {
     }
 
     /**
-     * Inserts CheckerPlayer.RED and CheckerPlayer.BLACK in the
+     * Inserts CheckerColor.RED and CheckerColor.BLACK in the
      * correct cells.
      */
     private void initializeGamePieces() {
@@ -449,7 +525,7 @@ public class Checkers {
             for(int j = 0; j < 8; j++) {
                 // Places the red enum on the correct cells and adds it to reference list
                 if ((i % 2 == 0 && j % 2 == 1) || (i % 2 == 1 && j % 2 == 0)) {
-                    CheckerPiece pieceToInsert = new CheckerPiece(i, j, CheckerPlayer.RED);
+                    CheckerPiece pieceToInsert = new CheckerPiece(i, j, CheckerColor.RED);
                     gameBoard[i][j] = pieceToInsert;
                     this.redCheckerPieceRefs.add(pieceToInsert);
                 }
@@ -467,7 +543,7 @@ public class Checkers {
             for(int j = 0; j < 8; j++) {
                 // Places the black enum on the correct cells and adds it to reference list
                 if ((i % 2 == 0 && j % 2 == 1) || (i % 2 == 1 && j % 2 == 0)) {
-                    CheckerPiece pieceToInsert = new CheckerPiece(i, j, CheckerPlayer.BLACK);
+                    CheckerPiece pieceToInsert = new CheckerPiece(i, j, CheckerColor.BLACK);
                     gameBoard[i][j] = pieceToInsert;
                     this.blackCheckerPieceRefs.add(pieceToInsert);
                 }

@@ -2,7 +2,6 @@ package boardgamekit.players;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-
 import java.io.IOException;
 
 /**
@@ -31,13 +30,7 @@ public class PlayerLoginController {
     private Button loginButton;
 
     @FXML
-    public void initialize() {
-        try {
-            playerLoader = new PlayerLoader("src/main/resources/json/UserData.json");
-        } catch (IOException error) {
-            statusLabel.setText("Error: Failed to find player profiles file.");
-        }
-    }
+    private Button leaderboardButton;
 
     /**
      * Initializes the controller by setting the action
@@ -56,6 +49,12 @@ public class PlayerLoginController {
                 playerManager.loadGame();
             }
         );
+
+        leaderboardButton.setOnAction(
+            (event) -> { playerManager.loadLeaderboard(); }
+        );
+
+        playerLoader = playerManager.getPlayerLoader();
     }
 
     /**

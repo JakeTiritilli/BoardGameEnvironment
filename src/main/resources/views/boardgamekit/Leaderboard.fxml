@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boardgamekit.players.LeaderboardController">
+   <children>
+      <TableView fx:id="playerData" layoutX="48.0" layoutY="167.0" prefHeight="358.0" prefWidth="505.0">
+        <columns>
+          <TableColumn id="playerNameCol" fx:id="playerNameCol" prefWidth="326.0" text="Player Name" />
+          <TableColumn id="gamesWonCol" fx:id="gamesWonCol" prefWidth="178.0" text="Games Won" />
+        </columns>
+      </TableView>
+      <Label id="leaderBoardTitle" fx:id="leaderboardTitle" alignment="CENTER" contentDisplay="CENTER" layoutX="114.0" layoutY="84.0" prefHeight="49.0" prefWidth="373.0" textAlignment="CENTER">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

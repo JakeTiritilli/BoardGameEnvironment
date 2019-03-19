@@ -33,4 +33,8 @@ public class PosTuple {
         this.row = row;
         this.col = col;
     }
+
+    public PosTuple copy() {
+    	return new PosTuple(this.row, this.col);
+	}
 }
