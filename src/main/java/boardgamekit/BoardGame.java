@@ -1,3 +1,4 @@
+
 package boardgamekit;
 
 import java.io.IOException;
@@ -216,3 +217,4 @@ public abstract class BoardGame {
         return player2Score;
     }
 }
+

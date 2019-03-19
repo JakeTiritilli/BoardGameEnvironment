@@ -1,3 +1,4 @@
+
 package boardgamekit;
 
 import java.util.ArrayList;
@@ -73,8 +74,6 @@ public abstract class BoardGameController {
     public abstract void initializeGameModel();
 
     public abstract void startTurn();
-
-    public abstract void startNewGame();
 
     public void makeMove() {};
 }
