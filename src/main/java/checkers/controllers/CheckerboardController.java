@@ -112,8 +112,9 @@ public class CheckerboardController extends BoardGameController {
      */
     private boolean checkForWinCondition() {
         CheckerColor winner = this.game.getWinConditionStatus();
-//        CheckerColor winner = CheckerColor.BLACK;
+
         if (winner != null) {
+            this.game.setWinner("checkers", true);
             this.displayWinner(winner);
             return true;
         }

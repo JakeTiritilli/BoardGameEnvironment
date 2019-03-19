@@ -5,7 +5,6 @@ import boardgamekit.players.Player;
 import checkers.utility.CheckerColor;
 import checkers.utility.CheckerPiece;
 import boardgamekit.utility.*;
-import com.sun.tools.doclint.Checker;
 
 import java.util.ArrayList;
 
