@@ -11,29 +11,19 @@ Informatics 122 (Winter 2019) Final Project
 
 - Othello
 
-## Getting Started
+## Plug-in Packages
 
-*Add instructions on how to run program here.*
+- `application`
 
-## Documentation
+- `checkers`
 
-### Elements Common to Board Games
+- `memory`
 
-- Two players
+- `othello`
 
-- A winning state
+- `tictactoe`
 
-- A game board
-
-- Pieces on a game board
-
-- Make a move on the game board
-
-- Switching of turns
-
-- Score
-
-- Player stats
+- `resources`
 
 ## Team
 
