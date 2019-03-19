@@ -31,7 +31,6 @@ public class MemoryController extends BoardGameController {
 
 	@FXML
 	public Button reset;	
-
 	@FXML
 	private Label player1name;
 	@FXML
@@ -174,19 +173,8 @@ public class MemoryController extends BoardGameController {
 				}
 			}
 			ivList.get(i).setImage(imageList.get(i));
-		}
-		for (int i = 1; i <= 6; i++)
-		{
-			System.out.println("Card index " + "[" + i + "] = " + Memory.cardIndex[i]);
-		}
-		/*
-		ivList.get(0).setImage(imageList.get(0));
-		ivList.get(3).setImage(imageList.get(1));
-		ivList.get(1).setImage(imageList.get(2));
-		ivList.get(2).setImage(imageList.get(3));
-		ivList.get(4).setImage(imageList.get(4));
-		ivList.get(5).setImage(imageList.get(5));*/
-
+		}	
+		
 		for (int i = 0; i < buttonList.size(); i++)            
 			buttonList.get(i).setVisible(true);    
 	}

@@ -1,3 +1,4 @@
+
 package boardgamekit;
 
 import java.io.IOException;
@@ -95,7 +96,12 @@ public abstract class BoardGame {
      * the winner. Otherwise, the other player will be set as the winner.
      */
     public void setWinner(String gameType, boolean forCurrentPlayer) {
-        Player winner = (currentPlayer == player1) ? player1 : player1;
+        Player winner = currentPlayer;
+        
+        if (!forCurrentPlayer) {
+            winner = (currentPlayer == player1) ? player2 : player1;
+        }
+        
         int currentScore = winner.getScoreFor(gameType);
         winner.setScoreFor(gameType, currentScore + 1);
 
@@ -121,7 +127,7 @@ public abstract class BoardGame {
      * Returns a piece at a given location on a 2D game board.
      * @param row the row numberon the game board
      * @param column the column number on the game board
-     * @throws GameBoardException if the indices were out of bounds
+     * @throws InvalidMoveException if the indices were out of bounds
      */
     public GamePiece returnPieceAt(int row, int column) throws InvalidMoveException {
         if (row >= gameBoard.length || column >= gameBoard[0].length) {
@@ -146,7 +152,6 @@ public abstract class BoardGame {
         return (currentPlayer == player1) ? player1GamePiece : player2GamePiece;
     }
 
-    
     /**
      * Switches the current player to the other player.
      */
@@ -212,3 +217,4 @@ public abstract class BoardGame {
         return player2Score;
     }
 }
+
